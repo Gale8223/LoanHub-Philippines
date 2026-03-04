@@ -241,11 +241,67 @@
 
   @media (max-width:768px) {
     .nav-links { display:none; }
-    .calc-wrapper, .apply-wrapper, .notify-wrapper { grid-template-columns:1fr; gap:2rem; }
-    .stats-bar { flex-direction:column; gap:1.5rem; padding:1.5rem; }
+    .nav-links.open { display:flex; flex-direction:column; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(6,11,24,0.98); backdrop-filter:blur(20px); z-index:200; justify-content:center; align-items:center; gap:2.5rem; padding:2rem; }
+    .nav-links.open a { font-size:1.4rem; color:var(--white); }
+    .hamburger { display:flex; flex-direction:column; gap:5px; cursor:pointer; z-index:300; background:none; border:none; padding:4px; }
+    .hamburger span { display:block; width:24px; height:2px; background:var(--white); border-radius:2px; transition:all 0.3s; }
+    .hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity:0; }
+    .hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+
+    section { padding: 4rem 5%; }
+    .hero { padding: 7rem 5% 4rem; min-height:auto; }
+    h1 { font-size: clamp(2.2rem, 10vw, 3.2rem); }
+    .hero-sub { font-size:1rem; }
+    .hero-actions { flex-direction:column; }
+    .hero-actions .btn-primary, .hero-actions .btn-secondary { width:100%; text-align:center; }
+
+    .stats-bar { flex-direction:column; gap:1.5rem; padding:1.5rem; margin-top:2.5rem; }
     .stat-divider { height:1px; width:100%; }
+
+    .features-grid { grid-template-columns:1fr; }
+
+    .steps { grid-template-columns:1fr 1fr; gap:2rem; }
     .steps::before { display:none; }
+    .step-num { width:60px; height:60px; font-size:1.2rem; }
+
+    .notify-wrapper { grid-template-columns:1fr; gap:2rem; }
+
+    .loans-grid { grid-template-columns:1fr 1fr; gap:1rem; }
+
+    .apply-wrapper { grid-template-columns:1fr; gap:2rem; }
     .form-row { grid-template-columns:1fr; }
+    .form-box { padding:1.5rem; }
+
+    .calc-wrapper { grid-template-columns:1fr; gap:2rem; }
+    .result-amount { font-size:2.8rem; }
+
+    .testi-grid { grid-template-columns:1fr; }
+
+    footer { flex-direction:column; text-align:center; gap:1.2rem; padding:2rem 5%; }
+    .footer-links { flex-wrap:wrap; justify-content:center; gap:1rem; }
+
+    .modal { padding:1.8rem 1.4rem; border-radius:20px; max-height:88vh; overflow-y:auto; }
+    .modal-overlay { align-items:flex-end; padding:0; }
+    .modal { border-bottom-left-radius:0; border-bottom-right-radius:0; max-width:100%; }
+    .modal-title { font-size:1.3rem; }
+  }
+
+  @media (max-width:480px) {
+    .steps { grid-template-columns:1fr; }
+    .loans-grid { grid-template-columns:1fr 1fr; }
+    .result-breakdown { flex-direction:column; gap:1rem; }
+    .nav-cta { padding:0.55rem 1.1rem; font-size:0.82rem; }
+    .badge { font-size:0.72rem; }
+  }
+
+  @media (min-width:769px) {
+    .hamburger { display:none; }
+  }
+
+  @media (min-width:1200px) {
+    .features-grid { grid-template-columns: repeat(3, 1fr); }
+    .loans-grid { grid-template-columns: repeat(5, 1fr); }
   }
   .reveal { opacity:0; transform:translateY(30px); transition:opacity 0.6s ease, transform 0.6s ease; }
   .reveal.visible { opacity:1; transform:translateY(0); }
@@ -255,14 +311,19 @@
 
 <nav>
   <div class="logo">LoanHub <span>Philippines</span></div>
-  <ul class="nav-links">
-    <li><a href="#features">Why Us</a></li>
-    <li><a href="#how">How It Works</a></li>
-    <li><a href="#loans">Loan Types</a></li>
-    <li><a href="#calculator">Calculator</a></li>
-    <li><a href="#faq">FAQ</a></li>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#features" onclick="closeNav()">Why Us</a></li>
+    <li><a href="#how" onclick="closeNav()">How It Works</a></li>
+    <li><a href="#loans" onclick="closeNav()">Loan Types</a></li>
+    <li><a href="#calculator" onclick="closeNav()">Calculator</a></li>
+    <li><a href="#faq" onclick="closeNav()">FAQ</a></li>
   </ul>
-  <button class="nav-cta" onclick="document.getElementById('apply').scrollIntoView({behavior:'smooth'})">Apply Now</button>
+  <div style="display:flex;align-items:center;gap:1rem;">
+    <button class="nav-cta" onclick="document.getElementById('apply').scrollIntoView({behavior:'smooth'})">Apply Now</button>
+    <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -613,6 +674,22 @@
 </footer>
 
 <script>
+  function toggleNav() {
+    const nav = document.getElementById('navLinks');
+    const btn = document.getElementById('hamburger');
+    nav.classList.toggle('open');
+    btn.classList.toggle('open');
+    document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+  }
+
+  function closeNav() {
+    const nav = document.getElementById('navLinks');
+    const btn = document.getElementById('hamburger');
+    nav.classList.remove('open');
+    btn.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
   const loanData = {
     'Home Loan': {
       icon: '🏠', subtitle: 'Up to ₱5M | As low as 5.5% p.a.',
