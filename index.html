@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LoanHub Philippines — Fast & Reliable Loan Assistance</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0a0f1e; --deep: #060b18; --gold: #f5c842; --gold-light: #fde97a;
+    --teal: #00c2a8; --white: #f8f9ff; --muted: #8892a4;
+    --card-bg: rgba(255,255,255,0.04); --border: rgba(255,255,255,0.08);
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--deep); color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 16px; overflow-x: hidden; }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999; opacity: 0.4;
+  }
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 5%; background: rgba(6,11,24,0.85);
+    backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+  }
+  .logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.2rem; letter-spacing: -0.02em; }
+  .logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta {
+    background: var(--gold); color: var(--navy); border: none; padding: 0.65rem 1.6rem;
+    border-radius: 50px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem;
+    cursor: pointer; transition: transform 0.2s, background 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  /* HERO */
+  .hero { min-height: 100vh; display: flex; align-items: center; padding: 8rem 5% 5rem; position: relative; overflow: hidden; }
+  .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.25; animation: float 8s ease-in-out infinite; }
+  .orb-1 { width: 600px; height: 600px; background: var(--teal); top: -200px; right: -100px; animation-delay: 0s; }
+  .orb-2 { width: 400px; height: 400px; background: var(--gold); bottom: -100px; left: -50px; animation-delay: -3s; }
+  .orb-3 { width: 300px; height: 300px; background: #4a90d9; top: 50%; left: 40%; animation-delay: -5s; }
+  @keyframes float { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-40px) scale(1.05)} }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(245,200,66,0.05) 1px,transparent 1px), linear-gradient(90deg,rgba(245,200,66,0.05) 1px,transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black, transparent);
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 760px; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(245,200,66,0.12); border: 1px solid rgba(245,200,66,0.3);
+    border-radius: 50px; padding: 0.4rem 1rem; font-size: 0.8rem; font-weight: 500;
+    color: var(--gold); margin-bottom: 2rem; animation: fadeUp 0.6s ease both;
+  }
+  .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  h1 {
+    font-family: 'Syne', sans-serif; font-size: clamp(2.8rem,6vw,5.5rem);
+    font-weight: 800; line-height: 1.0; letter-spacing: -0.03em; margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  h1 em { font-style: normal; color: var(--gold); }
+  h1 .teal { color: var(--teal); }
+  .hero-sub { font-size: 1.15rem; color: var(--muted); line-height: 1.7; max-width: 560px; margin-bottom: 2.5rem; font-weight: 300; animation: fadeUp 0.6s 0.2s ease both; }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.6s 0.3s ease both; }
+  .btn-primary {
+    background: var(--gold); color: var(--navy); border: none; padding: 1rem 2.2rem;
+    border-radius: 50px; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem;
+    cursor: pointer; transition: all 0.25s; box-shadow: 0 8px 30px rgba(245,200,66,0.35);
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(245,200,66,0.45); }
+  .btn-secondary {
+    background: transparent; color: var(--white); border: 1px solid var(--border); padding: 1rem 2.2rem;
+    border-radius: 50px; font-family: 'Syne', sans-serif; font-weight: 600; font-size: 1rem;
+    cursor: pointer; transition: all 0.25s;
+  }
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.3); background: var(--card-bg); transform: translateY(-3px); }
+  .stats-bar {
+    background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px;
+    padding: 2rem 3rem; display: flex; gap: 0; justify-content: space-around;
+    max-width: 900px; margin: 4rem auto 0; animation: fadeUp 0.6s 0.4s ease both; position: relative; z-index: 2;
+  }
+  .stat { text-align: center; }
+  .stat-num { font-family: 'Syne', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--gold); }
+  .stat-label { color: var(--muted); font-size: 0.85rem; margin-top: 0.2rem; }
+  .stat-divider { width: 1px; background: var(--border); align-self: stretch; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+  /* SECTIONS */
+  section { padding: 6rem 5%; }
+  .section-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--teal); font-weight: 600; margin-bottom: 1rem; }
+  .section-title { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem,3.5vw,3rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1.2rem; }
+  .section-title em { font-style: normal; color: var(--gold); }
+  .section-sub { color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 480px; }
+
+  /* FEATURES */
+  .features { background: var(--navy); }
+  .features-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(280px,1fr)); gap: 1.5rem; margin-top: 3.5rem; }
+  .feat-card {
+    background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 2rem;
+    transition: border-color 0.3s, transform 0.3s; position: relative; overflow: hidden;
+  }
+  .feat-card::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(245,200,66,0.05),transparent); opacity:0; transition:opacity 0.3s; }
+  .feat-card:hover { border-color: rgba(245,200,66,0.3); transform: translateY(-5px); }
+  .feat-card:hover::before { opacity: 1; }
+  .feat-icon { width:52px; height:52px; background:rgba(245,200,66,0.12); border:1px solid rgba(245,200,66,0.2); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.5rem; margin-bottom:1.3rem; }
+  .feat-card h3 { font-family:'Syne',sans-serif; font-weight:700; font-size:1.1rem; margin-bottom:0.6rem; }
+  .feat-card p { color:var(--muted); font-size:0.9rem; line-height:1.65; }
+
+  /* HOW IT WORKS */
+  .how { position: relative; }
+  .steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:0; margin-top:4rem; position:relative; }
+  .steps::before { content:''; position:absolute; top:40px; left:10%; right:10%; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); }
+  .step { text-align:center; padding:0 1.5rem; }
+  .step-num { width:80px; height:80px; margin:0 auto 1.5rem; background:var(--gold); color:var(--navy); border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Syne',sans-serif; font-size:1.5rem; font-weight:800; box-shadow:0 0 40px rgba(245,200,66,0.4); }
+  .step h3 { font-family:'Syne',sans-serif; font-size:1.05rem; font-weight:700; margin-bottom:0.6rem; }
+  .step p { color:var(--muted); font-size:0.88rem; line-height:1.6; }
+
+  /* NOTIFICATION SECTION */
+  .notify-section { background: var(--navy); }
+  .notify-wrapper { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; margin-top:3rem; }
+  .notify-visual { background:var(--card-bg); border:1px solid var(--border); border-radius:20px; padding:2rem; }
+  .notif-card {
+    background:var(--navy); border:1px solid rgba(0,194,168,0.3); border-radius:14px;
+    padding:1.2rem 1.5rem; display:flex; align-items:flex-start; gap:1rem; margin-bottom:1rem;
+    animation:slideIn 0.5s ease both;
+  }
+  .notif-card:nth-child(2) { animation-delay:0.2s; border-color:rgba(245,200,66,0.3); }
+  .notif-card:nth-child(3) { animation-delay:0.4s; border-color:rgba(74,144,217,0.3); }
+  @keyframes slideIn { from{opacity:0;transform:translateX(-20px)} to{opacity:1;transform:translateX(0)} }
+  .notif-icon { font-size:1.5rem; flex-shrink:0; margin-top:0.1rem; }
+  .notif-title { font-family:'Syne',sans-serif; font-weight:700; font-size:0.9rem; margin-bottom:0.2rem; }
+  .notif-msg { color:var(--muted); font-size:0.82rem; line-height:1.5; }
+  .notif-time { color:var(--teal); font-size:0.75rem; margin-top:0.3rem; }
+  .notify-text ul { list-style:none; margin-top:1.5rem; }
+  .notify-text ul li { display:flex; align-items:flex-start; gap:0.8rem; color:var(--muted); font-size:0.92rem; line-height:1.6; margin-bottom:1rem; }
+  .notify-text ul li .check { color:var(--teal); font-size:1.1rem; flex-shrink:0; margin-top:0.1rem; }
+
+  /* LOAN TYPES */
+  .loans { background: var(--deep); }
+  .loans-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1.2rem; margin-top:3rem; }
+  .loan-card { background:linear-gradient(135deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01)); border:1px solid var(--border); border-radius:16px; padding:1.8rem 1.5rem; text-align:center; transition:all 0.3s; cursor:pointer; }
+  .loan-card:hover { border-color:var(--teal); transform:translateY(-4px); }
+  .loan-card .icon { font-size:2.2rem; margin-bottom:1rem; }
+  .loan-card h4 { font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; margin-bottom:0.4rem; }
+  .loan-card p { color:var(--muted); font-size:0.82rem; }
+
+  /* APPLY FORM */
+  .apply-section { background: var(--navy); }
+  .apply-wrapper { display:grid; grid-template-columns:1fr 1.2fr; gap:4rem; align-items:start; margin-top:3rem; }
+  .apply-info p { color:var(--muted); font-size:0.92rem; line-height:1.7; margin-bottom:1.5rem; }
+  .apply-checklist { list-style:none; margin-top:1rem; }
+  .apply-checklist li { display:flex; align-items:center; gap:0.7rem; color:var(--muted); font-size:0.9rem; margin-bottom:0.8rem; }
+  .apply-checklist li .check { color:var(--gold); font-size:1rem; }
+  .form-box { background:var(--card-bg); border:1px solid var(--border); border-radius:20px; padding:2.5rem; }
+  .form-box h3 { font-family:'Syne',sans-serif; font-weight:700; font-size:1.2rem; margin-bottom:1.8rem; padding-bottom:1rem; border-bottom:1px solid var(--border); }
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+  .form-field { margin-bottom:1.2rem; }
+  .form-field label { display:block; font-size:0.82rem; font-weight:500; color:var(--muted); margin-bottom:0.4rem; }
+  .form-field input, .form-field select, .form-field textarea { width:100%; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:10px; padding:0.8rem 1rem; color:var(--white); font-family:'DM Sans',sans-serif; font-size:0.95rem; transition:border-color 0.2s; }
+  .form-field input:focus, .form-field select:focus, .form-field textarea:focus { outline:none; border-color:var(--gold); }
+  .form-field select option { background:var(--navy); }
+  .form-field textarea { resize:vertical; min-height:80px; }
+  .form-note { color:var(--muted); font-size:0.8rem; margin-bottom:1.5rem; line-height:1.6; }
+
+  /* CALCULATOR */
+  .calculator-section { background: var(--deep); }
+  .calc-wrapper { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; margin-top:3rem; }
+  .calc-box { background:var(--card-bg); border:1px solid var(--border); border-radius:20px; padding:2.5rem; }
+  .calc-field { margin-bottom:1.5rem; }
+  .calc-field label { display:block; font-size:0.85rem; font-weight:500; color:var(--muted); margin-bottom:0.5rem; }
+  .calc-field input, .calc-field select { width:100%; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:10px; padding:0.8rem 1rem; color:var(--white); font-family:'DM Sans',sans-serif; font-size:1rem; transition:border-color 0.2s; }
+  .calc-field input:focus, .calc-field select:focus { outline:none; border-color:var(--gold); }
+  .calc-field select option { background:var(--navy); }
+  .range-wrap input[type=range] { width:100%; -webkit-appearance:none; appearance:none; height:4px; border-radius:2px; background:linear-gradient(90deg,var(--gold) var(--pct,50%),rgba(255,255,255,0.1) var(--pct,50%)); border:none; padding:0; cursor:pointer; }
+  .range-wrap input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:18px; height:18px; border-radius:50%; background:var(--gold); box-shadow:0 0 10px rgba(245,200,66,0.5); }
+  .calc-result { text-align:center; background:linear-gradient(135deg,rgba(0,194,168,0.08),rgba(245,200,66,0.05)); border:1px solid rgba(0,194,168,0.2); border-radius:20px; padding:2.5rem; }
+  .result-label { color:var(--muted); font-size:0.9rem; margin-bottom:0.5rem; }
+  .result-amount { font-family:'Syne',sans-serif; font-size:3.5rem; font-weight:800; color:var(--teal); line-height:1; margin-bottom:0.3rem; }
+  .result-period { color:var(--muted); font-size:0.85rem; margin-bottom:2rem; }
+  .result-breakdown { display:flex; justify-content:space-between; background:rgba(255,255,255,0.04); border-radius:12px; padding:1rem 1.5rem; margin-bottom:1.5rem; }
+  .breakdown-item { text-align:center; }
+  .breakdown-val { font-family:'Syne',sans-serif; font-weight:700; font-size:1.1rem; }
+  .breakdown-key { color:var(--muted); font-size:0.75rem; margin-top:0.2rem; }
+
+  /* TESTIMONIALS */
+  .testimonials { background: var(--navy); }
+  .testi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; margin-top:3rem; }
+  .testi-card { background:var(--card-bg); border:1px solid var(--border); border-radius:16px; padding:2rem; }
+  .stars { color:var(--gold); font-size:1rem; margin-bottom:1rem; }
+  .testi-text { color:var(--muted); font-size:0.92rem; line-height:1.7; font-style:italic; margin-bottom:1.5rem; }
+  .testi-author { display:flex; align-items:center; gap:0.8rem; }
+  .avatar { width:42px; height:42px; border-radius:50%; background:linear-gradient(135deg,var(--gold),var(--teal)); display:flex; align-items:center; justify-content:center; font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; color:var(--navy); }
+  .author-info strong { display:block; font-size:0.9rem; font-weight:600; }
+  .author-info span { color:var(--muted); font-size:0.8rem; }
+
+  /* FAQ */
+  .faq { background: var(--deep); }
+  .faq-list { max-width:720px; margin:3rem auto 0; }
+  .faq-item { border-bottom:1px solid var(--border); padding:1.5rem 0; }
+  .faq-q { display:flex; justify-content:space-between; align-items:center; cursor:pointer; font-weight:600; font-family:'Syne',sans-serif; }
+  .faq-q .arrow { transition:transform 0.3s; color:var(--gold); font-size:1.2rem; }
+  .faq-item.open .faq-q .arrow { transform:rotate(45deg); }
+  .faq-a { color:var(--muted); font-size:0.92rem; line-height:1.7; max-height:0; overflow:hidden; transition:max-height 0.3s ease, padding 0.3s; }
+  .faq-item.open .faq-a { max-height:200px; padding-top:1rem; }
+
+  /* FOOTER */
+  footer { background:var(--navy); border-top:1px solid var(--border); padding:3rem 5% 2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
+  .footer-logo { font-family:'Syne',sans-serif; font-weight:800; font-size:1.2rem; }
+  .footer-logo span { color:var(--gold); }
+  footer p { color:var(--muted); font-size:0.82rem; }
+  .footer-links { display:flex; gap:1.5rem; }
+  .footer-links a { color:var(--muted); text-decoration:none; font-size:0.85rem; transition:color 0.2s; }
+  .footer-links a:hover { color:var(--gold); }
+
+  @media (max-width:768px) {
+    .nav-links { display:none; }
+    .calc-wrapper, .apply-wrapper, .notify-wrapper { grid-template-columns:1fr; gap:2rem; }
+    .stats-bar { flex-direction:column; gap:1.5rem; padding:1.5rem; }
+    .stat-divider { height:1px; width:100%; }
+    .steps::before { display:none; }
+    .form-row { grid-template-columns:1fr; }
+  }
+  .reveal { opacity:0; transform:translateY(30px); transition:opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">LoanHub <span>Philippines</span></div>
+  <ul class="nav-links">
+    <li><a href="#features">Why Us</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#loans">Loan Types</a></li>
+    <li><a href="#calculator">Calculator</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('apply').scrollIntoView({behavior:'smooth'})">Apply Now</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div>
+    <div class="hero-content">
+      <div class="badge"><span class="badge-dot"></span> Simple Process. Fast Response. Trusted Service.</div>
+      <h1>Your Trusted <em>Loan Partner</em> in the <span class="teal">Philippines</span></h1>
+      <p class="hero-sub">Fill out our simple online form and a dedicated loan specialist will personally review your application and reach out to you right away — straightforward, transparent, and hassle-free.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="document.getElementById('apply').scrollIntoView({behavior:'smooth'})">Apply Now — It's Free →</button>
+        <button class="btn-secondary" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">See How It Works</button>
+      </div>
+    </div>
+    <div class="stats-bar">
+      <div class="stat"><div class="stat-num">₱2.4B+</div><div class="stat-label">Total Loans Disbursed</div></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><div class="stat-num">18k+</div><div class="stat-label">Borrowers Assisted</div></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><div class="stat-num">97%</div><div class="stat-label">Client Satisfaction</div></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><div class="stat-num">&lt; 1hr</div><div class="stat-label">Response Time</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="section-label">Why Choose Us</div>
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;">
+    <div><h2 class="section-title">A Team That <em>Goes the Extra Mile</em><br>For Your Application</h2></div>
+    <p class="section-sub">Every application is carefully reviewed by our loan specialists — a dedicated team that understands your situation and works with you from start to finish.</p>
+  </div>
+  <div class="features-grid reveal">
+    <div class="feat-card">
+      <div class="feat-icon">👨‍💼</div>
+      <h3>Dedicated Loan Specialist</h3>
+      <p>Every applicant is assigned a dedicated loan specialist who carefully reviews your details and guides you through the entire process — from application to approval.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">⚡</div>
+      <h3>Fast Response Time</h3>
+      <p>Submit your form and expect a call or message from our team within the hour. We never let applications sit waiting.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📋</div>
+      <h3>Simple Requirements</h3>
+      <p>We keep requirements minimal — a valid ID, proof of income, and a filled-out form is all you need to get started.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🔒</div>
+      <h3>Safe & Confidential</h3>
+      <p>Your personal information is handled with the highest level of privacy and is never shared without your consent.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">💳</div>
+      <h3>Flexible Repayment</h3>
+      <p>Our specialists work with you to find a repayment schedule that fits your income — weekly, semi-monthly, or monthly.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📞</div>
+      <h3>Always Reachable</h3>
+      <p>Have questions? Our team is available via call, SMS, or Facebook Messenger to assist you every step of the way.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div style="text-align:center">
+    <div class="section-label">The Process</div>
+    <h2 class="section-title">Simple Steps to Get <em>Funded</em></h2>
+  </div>
+  <div class="steps reveal">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Fill Out the Form</h3>
+      <p>Complete our simple online application form. Takes only 3 minutes. No branch visit needed.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>Team Gets Notified</h3>
+      <p>Our team receives your application instantly and a loan specialist is assigned to your case right away.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Specialist Reviews</h3>
+      <p>Your assigned loan specialist carefully reviews your application and contacts you to discuss your options and requirements.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h3>Receive Your Funds</h3>
+      <p>Once approved, funds are released to your account. Our team stays with you throughout the whole process.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NOTIFICATION SECTION -->
+<section class="notify-section reveal">
+  <div class="notify-wrapper">
+    <div class="notify-visual">
+      <p style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;color:var(--muted);margin-bottom:1.2rem;text-transform:uppercase;letter-spacing:0.1em;">How We Process Your Application</p>
+      <div class="notif-card">
+        <div class="notif-icon">📩</div>
+        <div>
+          <div class="notif-title">New Application Received</div>
+          <div class="notif-msg">Juan Dela Cruz submitted a Personal Loan application for ₱150,000.</div>
+          <div class="notif-time">Just now — Team notified immediately</div>
+        </div>
+      </div>
+      <div class="notif-card">
+        <div class="notif-icon">👤</div>
+        <div>
+          <div class="notif-title">Specialist Assigned</div>
+          <div class="notif-msg">A loan specialist is now reviewing the application and will contact the applicant.</div>
+          <div class="notif-time">2 minutes ago</div>
+        </div>
+      </div>
+      <div class="notif-card">
+        <div class="notif-icon">✅</div>
+        <div>
+          <div class="notif-title">Application Approved</div>
+          <div class="notif-msg">Application reviewed and approved by specialist. Funds released to borrower's account.</div>
+          <div class="notif-time">45 minutes ago</div>
+        </div>
+      </div>
+    </div>
+    <div class="notify-text">
+      <div class="section-label">Always In the Loop</div>
+      <h2 class="section-title">Your Application, <em>Handled Promptly</em> by Our Team</h2>
+      <p class="section-sub">The moment you hit submit, our team is on it. No waiting, no getting lost in a pile of forms.</p>
+      <ul>
+        <li><span class="check">✔</span> Our team receives an instant notification the second your form is submitted</li>
+        <li><span class="check">✔</span> A loan specialist is personally assigned to review your application</li>
+        <li><span class="check">✔</span> You receive a call or message from us within the hour</li>
+        <li><span class="check">✔</span> Our team guides you through every document and requirement</li>
+        <li><span class="check">✔</span> We consider your full situation — not just numbers on a form</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- LOAN TYPES -->
+<section class="loans" id="loans">
+  <div class="section-label">What We Offer</div>
+  <h2 class="section-title">Loan Products for <em>Every Need</em></h2>
+  <div class="loans-grid reveal">
+    <div class="loan-card"><div class="icon">🏠</div><h4>Home Loan</h4><p>Up to ₱5M | As low as 5.5% p.a.</p></div>
+    <div class="loan-card"><div class="icon">🚗</div><h4>Auto Loan</h4><p>Up to ₱2M | 12–60 months</p></div>
+    <div class="loan-card"><div class="icon">💼</div><h4>Business Loan</h4><p>Up to ₱3M | Fast processing</p></div>
+    <div class="loan-card"><div class="icon">💊</div><h4>Medical Loan</h4><p>Up to ₱500K | Emergency-ready</p></div>
+    <div class="loan-card"><div class="icon">🎓</div><h4>Education Loan</h4><p>Up to ₱300K | Low interest</p></div>
+    <div class="loan-card"><div class="icon">💵</div><h4>Personal Loan</h4><p>Up to ₱1M | Flexible use</p></div>
+  </div>
+</section>
+
+<!-- APPLY FORM -->
+<section class="apply-section" id="apply">
+  <div class="apply-wrapper">
+    <div class="apply-info">
+      <div class="section-label">Apply Today</div>
+      <h2 class="section-title">Start Your <em>Application</em></h2>
+      <p>Fill out the form and one of our loan specialists will personally get in touch with you — usually within the hour.</p>
+      <p>We review every single application with care and thoroughness. Your case gets full attention — no shortcuts, no shortcuts.</p>
+      <ul class="apply-checklist">
+        <li><span class="check">✔</span> Valid Government-Issued ID</li>
+        <li><span class="check">✔</span> Proof of Income (Payslip or ITR)</li>
+        <li><span class="check">✔</span> Active Bank Account or E-Wallet</li>
+        <li><span class="check">✔</span> Contact Number so our specialist can reach you</li>
+      </ul>
+    </div>
+    <div class="form-box">
+      <h3>📋 Loan Application Form</h3>
+      <div class="form-row">
+        <div class="form-field"><label>First Name *</label><input type="text" placeholder="Juan"></div>
+        <div class="form-field"><label>Last Name *</label><input type="text" placeholder="Dela Cruz"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-field"><label>Mobile Number *</label><input type="tel" placeholder="09XX XXX XXXX"></div>
+        <div class="form-field"><label>Email Address</label><input type="email" placeholder="juan@email.com"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>Loan Type *</label>
+          <select>
+            <option value="">Select loan type</option>
+            <option>Personal Loan</option><option>Business Loan</option>
+            <option>Home Loan</option><option>Auto Loan</option>
+            <option>Medical Loan</option><option>Education Loan</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Loan Amount Needed *</label>
+          <select>
+            <option value="">Select amount</option>
+            <option>₱10,000 – ₱50,000</option><option>₱50,000 – ₱100,000</option>
+            <option>₱100,000 – ₱300,000</option><option>₱300,000 – ₱500,000</option>
+            <option>₱500,000 – ₱1,000,000</option><option>Above ₱1,000,000</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>Employment Status *</label>
+          <select>
+            <option value="">Select status</option>
+            <option>Employed (Private)</option><option>Employed (Government)</option>
+            <option>Self-Employed</option><option>Business Owner</option>
+            <option>OFW</option><option>Freelancer</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Monthly Income *</label>
+          <select>
+            <option value="">Select range</option>
+            <option>Below ₱10,000</option><option>₱10,000 – ₱20,000</option>
+            <option>₱20,000 – ₱40,000</option><option>₱40,000 – ₱80,000</option>
+            <option>Above ₱80,000</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Additional Message (Optional)</label>
+        <textarea placeholder="Tell us more about your situation or why you need this loan..."></textarea>
+      </div>
+      <p class="form-note">🔒 Your information is safe with us. By submitting, you agree to be contacted by a LoanHub Philippines loan specialist regarding your application.</p>
+      <button class="btn-primary" style="width:100%;font-size:1rem;padding:1rem" onclick="handleSubmit()">Submit My Application →</button>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section class="calculator-section" id="calculator">
+  <div class="section-label">Loan Calculator</div>
+  <h2 class="section-title">Estimate Your <em>Monthly Payment</em></h2>
+  <p style="color:var(--muted);font-size:0.88rem;margin-top:0.5rem">This is just an estimate. Your actual rate and terms will be confirmed by your loan specialist.</p>
+  <div class="calc-wrapper">
+    <div class="calc-box">
+      <div class="calc-field">
+        <label>Loan Amount (₱)</label>
+        <div class="range-wrap"><input type="range" id="loanAmount" min="10000" max="1000000" value="200000" step="10000"></div>
+        <input type="number" id="loanAmountVal" value="200000" style="margin-top:0.5rem">
+      </div>
+      <div class="calc-field">
+        <label>Loan Term</label>
+        <select id="loanTerm">
+          <option value="6">6 months</option><option value="12" selected>12 months</option>
+          <option value="24">24 months</option><option value="36">36 months</option>
+          <option value="48">48 months</option><option value="60">60 months</option>
+        </select>
+      </div>
+      <div class="calc-field">
+        <label>Interest Rate: <span id="rateLabel">12%</span> per annum</label>
+        <div class="range-wrap"><input type="range" id="loanRate" min="5" max="30" value="12" step="0.5"></div>
+      </div>
+    </div>
+    <div class="calc-result">
+      <div class="result-label">Estimated Monthly Payment</div>
+      <div class="result-amount" id="monthly">₱17,865</div>
+      <div class="result-period">per month for <span id="termLabel">12 months</span></div>
+      <div class="result-breakdown">
+        <div class="breakdown-item"><div class="breakdown-val" id="totalPay">₱214,380</div><div class="breakdown-key">Total Payment</div></div>
+        <div class="breakdown-item"><div class="breakdown-val" id="totalInt">₱14,380</div><div class="breakdown-key">Total Interest</div></div>
+        <div class="breakdown-item"><div class="breakdown-val" id="effRate">12%</div><div class="breakdown-key">Annual Rate</div></div>
+      </div>
+      <button class="btn-primary" style="width:100%" onclick="document.getElementById('apply').scrollIntoView({behavior:'smooth'})">Apply for This Loan →</button>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-label">What Clients Say</div>
+  <h2 class="section-title">Real People, <em>Real Stories</em></h2>
+  <div class="testi-grid reveal">
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">"I filled out the form in the morning and a specialist called me within 30 minutes. She explained everything clearly and my loan was approved the same day. Sobrang bilis!"</p>
+      <div class="testi-author"><div class="avatar">JR</div><div class="author-info"><strong>Jose Reyes</strong><span>Business Owner, Cebu</span></div></div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">"What I love is that my application was reviewed thoroughly. They understood my situation as a freelancer and helped me get approved when banks kept saying no."</p>
+      <div class="testi-author"><div class="avatar">MC</div><div class="author-info"><strong>Maria Cruz</strong><span>Freelance Designer, Manila</span></div></div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">"Hindi ka parang numero lang dito — they really take time to understand your needs. The specialist was patient and guided me through every step. Highly recommend!"</p>
+      <div class="testi-author"><div class="avatar">BT</div><div class="author-info"><strong>Ben Torres</strong><span>OFW, Dubai</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div style="text-align:center;margin-bottom:1rem">
+    <div class="section-label">Common Questions</div>
+    <h2 class="section-title">Frequently Asked <em>Questions</em></h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q">What happens after I submit the form? <span class="arrow">+</span></div>
+      <div class="faq-a">As soon as you submit, our team is notified immediately. A loan specialist will be assigned to review your application and contact you via call or SMS — usually within the hour during business hours.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How is my application reviewed? <span class="arrow">+</span></div>
+      <div class="faq-a">Every application at LoanHub Philippines is carefully reviewed by one of our trained loan specialists. We take a thorough approach — looking at your full situation to find the best loan option for your needs.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What are the basic requirements? <span class="arrow">+</span></div>
+      <div class="faq-a">You need a valid government-issued ID, proof of income (payslip, ITR, or bank statement), and an active contact number. Your loan specialist will guide you on any additional documents needed.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How long does the approval process take? <span class="arrow">+</span></div>
+      <div class="faq-a">Our team typically responds within 1 hour of receiving your application. Full approval and fund release can happen within the same day for most loan types, depending on how quickly documents are submitted.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Is there a fee to apply? <span class="arrow">+</span></div>
+      <div class="faq-a">Absolutely none. Applying is completely free. All fees and charges will only be clearly explained to you by your loan specialist before you agree to anything — no surprises, no hidden costs.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">LoanHub <span>Philippines</span></div>
+  <p>© 2025 LoanHub Philippines. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms of Service</a>
+    <a href="#">Contact Us</a>
+    <a href="https://web.facebook.com/profile.php?id=61571991519338" target="_blank">Facebook</a>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+
+  function calcLoan() {
+    const P = parseFloat(document.getElementById('loanAmountVal').value) || 200000;
+    const n = parseInt(document.getElementById('loanTerm').value);
+    const r = parseFloat(document.getElementById('loanRate').value) / 100 / 12;
+    const monthly = P * r * Math.pow(1+r,n) / (Math.pow(1+r,n) - 1);
+    const total = monthly * n;
+    const interest = total - P;
+    const fmt = v => '₱' + Math.round(v).toLocaleString('en-PH');
+    document.getElementById('monthly').textContent = fmt(monthly);
+    document.getElementById('totalPay').textContent = fmt(total);
+    document.getElementById('totalInt').textContent = fmt(interest);
+    document.getElementById('effRate').textContent = document.getElementById('loanRate').value + '%';
+    document.getElementById('termLabel').textContent = n + ' months';
+  }
+
+  document.getElementById('loanAmount').addEventListener('input', function() {
+    document.getElementById('loanAmountVal').value = this.value;
+    const pct = (this.value - this.min) / (this.max - this.min) * 100;
+    this.style.setProperty('--pct', pct + '%');
+    calcLoan();
+  });
+  document.getElementById('loanAmountVal').addEventListener('input', function() {
+    document.getElementById('loanAmount').value = this.value;
+    calcLoan();
+  });
+  document.getElementById('loanTerm').addEventListener('change', calcLoan);
+  document.getElementById('loanRate').addEventListener('input', function() {
+    document.getElementById('rateLabel').textContent = this.value + '%';
+    const pct = (this.value - this.min) / (this.max - this.min) * 100;
+    this.style.setProperty('--pct', pct + '%');
+    calcLoan();
+  });
+  calcLoan();
+
+  function handleSubmit() {
+    alert('Thank you for applying! 🎉\n\nOur loan specialist will personally contact you within the hour to assist you with your application.\n\nYou can also reach us directly on Facebook Messenger.');
+  }
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
