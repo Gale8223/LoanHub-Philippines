@@ -144,11 +144,32 @@
   /* LOAN TYPES */
   .loans { background: var(--deep); }
   .loans-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1.2rem; margin-top:3rem; }
-  .loan-card { background:linear-gradient(135deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01)); border:1px solid var(--border); border-radius:16px; padding:1.8rem 1.5rem; text-align:center; transition:all 0.3s; cursor:pointer; }
-  .loan-card:hover { border-color:var(--teal); transform:translateY(-4px); }
+  .loan-card { background:linear-gradient(135deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01)); border:1px solid var(--border); border-radius:16px; padding:1.8rem 1.5rem; text-align:center; transition:all 0.3s; cursor:pointer; text-decoration:none; display:block; color:inherit; }
+  .loan-card:hover { border-color:var(--teal); transform:translateY(-4px); box-shadow: 0 8px 30px rgba(0,194,168,0.15); }
   .loan-card .icon { font-size:2.2rem; margin-bottom:1rem; }
   .loan-card h4 { font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; margin-bottom:0.4rem; }
   .loan-card p { color:var(--muted); font-size:0.82rem; }
+  .loan-card .apply-hint { display:inline-block; margin-top:0.9rem; font-size:0.78rem; color:var(--teal); font-weight:600; opacity:0; transform:translateY(4px); transition:opacity 0.2s, transform 0.2s; }
+  .loan-card:hover .apply-hint { opacity:1; transform:translateY(0); }
+
+  /* LOAN MODAL */
+  .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.75); backdrop-filter:blur(6px); z-index:999; display:flex; align-items:center; justify-content:center; padding:1.5rem; opacity:0; pointer-events:none; transition:opacity 0.25s; }
+  .modal-overlay.active { opacity:1; pointer-events:all; }
+  .modal { background:linear-gradient(160deg,#0d1428,#0a0f1e); border:1px solid rgba(255,255,255,0.1); border-radius:24px; padding:2.5rem; max-width:520px; width:100%; position:relative; transform:translateY(24px) scale(0.97); transition:transform 0.3s; box-shadow:0 30px 80px rgba(0,0,0,0.6); }
+  .modal-overlay.active .modal { transform:translateY(0) scale(1); }
+  .modal-close { position:absolute; top:1.2rem; right:1.4rem; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.1); color:var(--white); width:34px; height:34px; border-radius:50%; font-size:1.1rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.2s; }
+  .modal-close:hover { background:rgba(255,255,255,0.15); }
+  .modal-icon { font-size:2.8rem; margin-bottom:0.8rem; }
+  .modal-title { font-family:'Syne',sans-serif; font-size:1.5rem; font-weight:800; margin-bottom:0.3rem; }
+  .modal-subtitle { color:var(--muted); font-size:0.88rem; margin-bottom:1.8rem; }
+  .modal-tag { display:inline-block; background:rgba(0,194,168,0.12); border:1px solid rgba(0,194,168,0.25); color:var(--teal); border-radius:50px; padding:0.25rem 0.85rem; font-size:0.78rem; font-weight:600; margin-bottom:1.6rem; }
+  .req-section { margin-bottom:1.4rem; }
+  .req-section-title { font-family:'Syne',sans-serif; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--gold); font-weight:700; margin-bottom:0.8rem; }
+  .req-list { list-style:none; }
+  .req-list li { display:flex; align-items:flex-start; gap:0.7rem; color:rgba(248,249,255,0.82); font-size:0.9rem; line-height:1.55; margin-bottom:0.6rem; }
+  .req-list li::before { content:'✔'; color:var(--teal); font-size:0.85rem; flex-shrink:0; margin-top:0.1rem; }
+  .modal-divider { height:1px; background:var(--border); margin:1.2rem 0; }
+  .modal-cta { width:100%; margin-top:1.6rem; }
 
   /* APPLY FORM */
   .apply-section { background: var(--navy); }
@@ -392,12 +413,11 @@
   <div class="section-label">What We Offer</div>
   <h2 class="section-title">Loan Products for <em>Every Need</em></h2>
   <div class="loans-grid reveal">
-    <div class="loan-card"><div class="icon">🏠</div><h4>Home Loan</h4><p>Up to ₱5M | As low as 5.5% p.a.</p></div>
-    <div class="loan-card"><div class="icon">🚗</div><h4>Auto Loan</h4><p>Up to ₱2M | 12–60 months</p></div>
-    <div class="loan-card"><div class="icon">💼</div><h4>Business Loan</h4><p>Up to ₱3M | Fast processing</p></div>
-    <div class="loan-card"><div class="icon">💊</div><h4>Medical Loan</h4><p>Up to ₱500K | Emergency-ready</p></div>
-    <div class="loan-card"><div class="icon">🎓</div><h4>Education Loan</h4><p>Up to ₱300K | Low interest</p></div>
-    <div class="loan-card"><div class="icon">💵</div><h4>Personal Loan</h4><p>Up to ₱1M | Flexible use</p></div>
+    <a class="loan-card" onclick="selectLoan('Home Loan')"><div class="icon">🏠</div><h4>Home Loan</h4><p>Up to ₱5M | As low as 5.5% p.a.</p></a>
+    <a class="loan-card" onclick="selectLoan('Auto Loan')"><div class="icon">🚗</div><h4>Auto Loan</h4><p>Up to ₱2M | 12–60 months</p></a>
+    <a class="loan-card" onclick="selectLoan('Business Loan')"><div class="icon">💼</div><h4>Business Loan</h4><p>Up to ₱3M | Fast processing</p></a>
+    <a class="loan-card" onclick="selectLoan('Medical Loan')"><div class="icon">💊</div><h4>Medical Loan</h4><p>Up to ₱500K | Emergency-ready</p></a>
+    <a class="loan-card" onclick="selectLoan('Personal Loan')"><div class="icon">💵</div><h4>Personal Loan</h4><p>Up to ₱1M | Flexible use</p></a>
   </div>
 </section>
 
@@ -433,7 +453,7 @@
             <option value="">Select loan type</option>
             <option>Personal Loan</option><option>Business Loan</option>
             <option>Home Loan</option><option>Auto Loan</option>
-            <option>Medical Loan</option><option>Education Loan</option>
+            <option>Medical Loan</option>
           </select>
         </div>
         <div class="form-field">
@@ -568,6 +588,19 @@
   </div>
 </section>
 
+<!-- LOAN REQUIREMENTS MODAL -->
+<div class="modal-overlay" id="loanModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-icon" id="modalIcon">🏠</div>
+    <div class="modal-title" id="modalTitle">Home Loan</div>
+    <div class="modal-subtitle" id="modalSubtitle">Up to ₱5M | As low as 5.5% p.a.</div>
+    <div class="modal-tag" id="modalTag">Requirements Checklist</div>
+    <div id="modalBody"></div>
+    <button class="btn-primary modal-cta" id="modalApplyBtn">Apply for This Loan →</button>
+  </div>
+</div>
+
 <footer>
   <div class="footer-logo">LoanHub <span>Philippines</span></div>
   <p>© 2025 LoanHub Philippines. All rights reserved.</p>
@@ -580,6 +613,82 @@
 </footer>
 
 <script>
+  const loanData = {
+    'Home Loan': {
+      icon: '🏠', subtitle: 'Up to ₱5M | As low as 5.5% p.a.',
+      sections: [
+        { title: 'Basic Requirements', items: ['Valid Government-Issued ID (2 valid IDs)', 'Proof of Billing Address (utility bill within 3 months)', 'Duly accomplished application form', 'Taxpayer Identification Number (TIN)'] },
+        { title: 'Proof of Income', items: ['Latest 3 months payslips (for employed)', 'Certificate of Employment with compensation', 'Latest ITR (BIR Form 2316 or 1701)', 'Bank statements for the last 6 months'] },
+        { title: 'Property Documents', items: ['Certified True Copy of Transfer Certificate of Title (TCT)', 'Tax Declaration of the property', 'Location map / vicinity map of the property', 'Contract to Sell (for new purchases)'] }
+      ]
+    },
+    'Auto Loan': {
+      icon: '🚗', subtitle: 'Up to ₱2M | 12–60 months',
+      sections: [
+        { title: 'Basic Requirements', items: ['Valid Government-Issued ID (2 valid IDs)', 'Proof of Billing Address (utility bill within 3 months)', 'Duly accomplished application form', 'Taxpayer Identification Number (TIN)'] },
+        { title: 'Proof of Income', items: ['Latest 3 months payslips (for employed)', 'Certificate of Employment with compensation', 'Latest ITR (BIR Form 2316 or 1701)', 'Bank statements for the last 3–6 months'] },
+        { title: 'Vehicle Documents', items: ['Quotation or Proforma Invoice from dealership', 'Chosen vehicle details (make, model, year, variant)', 'Down payment receipt (if applicable)'] }
+      ]
+    },
+    'Business Loan': {
+      icon: '💼', subtitle: 'Up to ₱3M | Fast processing',
+      sections: [
+        { title: 'Basic Requirements', items: ['Valid Government-Issued ID (2 valid IDs)', 'Proof of Billing Address (utility bill within 3 months)', 'Duly accomplished application form', 'Taxpayer Identification Number (TIN)'] },
+        { title: 'Business Documents', items: ['DTI Registration or SEC Certificate of Registration', 'Business Permit / Mayor\'s Permit (latest)', 'Articles of Incorporation or Partnership (if corporation)', 'List of officers and stockholders'] },
+        { title: 'Financial Documents', items: ['Latest 2 years Audited Financial Statements', 'Latest ITR with BIR stamp (1701 or 1702)', 'Bank statements for the last 6 months', 'Business profile or company background'] }
+      ]
+    },
+    'Medical Loan': {
+      icon: '💊', subtitle: 'Up to ₱500K | Emergency-ready',
+      sections: [
+        { title: 'Basic Requirements', items: ['Valid Government-Issued ID (2 valid IDs)', 'Proof of Billing Address (utility bill within 3 months)', 'Duly accomplished application form', 'Taxpayer Identification Number (TIN)'] },
+        { title: 'Proof of Income', items: ['Latest 3 months payslips (for employed)', 'Certificate of Employment with compensation', 'Latest ITR or bank statements (for self-employed)', 'Active bank account details'] },
+        { title: 'Medical Documents', items: ['Medical certificate or hospital billing statement', 'Doctor\'s prescription or treatment plan (if available)', 'PhilHealth / HMO coverage documents (if applicable)'] }
+      ]
+    },
+    'Personal Loan': {
+      icon: '💵', subtitle: 'Up to ₱1M | Flexible use',
+      sections: [
+        { title: 'Basic Requirements', items: ['Valid Government-Issued ID (2 valid IDs)', 'Proof of Billing Address (utility bill within 3 months)', 'Duly accomplished application form', 'Taxpayer Identification Number (TIN)'] },
+        { title: 'Proof of Income', items: ['Latest 3 months payslips (for employed)', 'Certificate of Employment with compensation', 'Latest ITR (BIR Form 2316 or 1701)', 'Bank statements for the last 3 months'] },
+        { title: 'For Self-Employed / Freelancers', items: ['Business / DTI registration (if applicable)', 'Bank statements for the last 6 months', 'Proof of remittance or client contracts (for freelancers)', 'OFW document / POEA contract (for OFWs)'] }
+      ]
+    }
+  };
+
+  function selectLoan(type) {
+    const data = loanData[type];
+    document.getElementById('modalIcon').textContent = data.icon;
+    document.getElementById('modalTitle').textContent = type;
+    document.getElementById('modalSubtitle').textContent = data.subtitle;
+    let html = '';
+    data.sections.forEach((sec, i) => {
+      if (i > 0) html += '<div class="modal-divider"></div>';
+      html += `<div class="req-section"><div class="req-section-title">${sec.title}</div><ul class="req-list">`;
+      sec.items.forEach(item => { html += `<li>${item}</li>`; });
+      html += '</ul></div>';
+    });
+    document.getElementById('modalBody').innerHTML = html;
+    document.getElementById('modalApplyBtn').onclick = () => {
+      closeModal();
+      const select = document.querySelector('#apply select');
+      for (let opt of select.options) { if (opt.text === type) { opt.selected = true; break; } }
+      document.getElementById('apply').scrollIntoView({behavior:'smooth'});
+    };
+    document.getElementById('loanModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('loanModal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('loanModal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
   document.querySelectorAll('.faq-q').forEach(q => {
     q.addEventListener('click', () => {
       const item = q.parentElement;
