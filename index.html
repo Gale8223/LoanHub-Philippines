@@ -155,19 +155,29 @@
   /* LOAN MODAL */
   .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.75); backdrop-filter:blur(6px); z-index:999; display:flex; align-items:center; justify-content:center; padding:1.5rem; opacity:0; pointer-events:none; transition:opacity 0.25s; }
   .modal-overlay.active { opacity:1; pointer-events:all; }
-  .modal { background:linear-gradient(160deg,#0d1428,#0a0f1e); border:1px solid rgba(255,255,255,0.1); border-radius:24px; padding:2.5rem; max-width:520px; width:100%; position:relative; transform:translateY(24px) scale(0.97); transition:transform 0.3s; box-shadow:0 30px 80px rgba(0,0,0,0.6); }
+  .modal {
+    background:linear-gradient(160deg,#0d1428,#0a0f1e); border:1px solid rgba(255,255,255,0.1);
+    border-radius:24px; padding:2.5rem; width:100%; max-width:560px;
+    max-height:85vh; overflow-y:auto;
+    position:relative; transform:translateY(24px) scale(0.97);
+    transition:transform 0.3s; box-shadow:0 30px 80px rgba(0,0,0,0.6);
+    scrollbar-width:thin; scrollbar-color:rgba(245,200,66,0.3) transparent;
+  }
+  .modal::-webkit-scrollbar { width:4px; }
+  .modal::-webkit-scrollbar-track { background:transparent; }
+  .modal::-webkit-scrollbar-thumb { background:rgba(245,200,66,0.3); border-radius:2px; }
   .modal-overlay.active .modal { transform:translateY(0) scale(1); }
-  .modal-close { position:absolute; top:1.2rem; right:1.4rem; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.1); color:var(--white); width:34px; height:34px; border-radius:50%; font-size:1.1rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.2s; }
+  .modal-close { position:absolute; top:1.2rem; right:1.4rem; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.1); color:var(--white); width:36px; height:36px; border-radius:50%; font-size:1.1rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.2s; flex-shrink:0; }
   .modal-close:hover { background:rgba(255,255,255,0.15); }
   .modal-icon { font-size:2.8rem; margin-bottom:0.8rem; }
-  .modal-title { font-family:'Syne',sans-serif; font-size:1.5rem; font-weight:800; margin-bottom:0.3rem; }
-  .modal-subtitle { color:var(--muted); font-size:0.88rem; margin-bottom:1.8rem; }
+  .modal-title { font-family:'Syne',sans-serif; font-size:1.6rem; font-weight:800; margin-bottom:0.3rem; padding-right:2.5rem; }
+  .modal-subtitle { color:var(--muted); font-size:0.88rem; margin-bottom:1.4rem; }
   .modal-tag { display:inline-block; background:rgba(0,194,168,0.12); border:1px solid rgba(0,194,168,0.25); color:var(--teal); border-radius:50px; padding:0.25rem 0.85rem; font-size:0.78rem; font-weight:600; margin-bottom:1.6rem; }
   .req-section { margin-bottom:1.4rem; }
   .req-section-title { font-family:'Syne',sans-serif; font-size:0.75rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--gold); font-weight:700; margin-bottom:0.8rem; }
   .req-list { list-style:none; }
-  .req-list li { display:flex; align-items:flex-start; gap:0.7rem; color:rgba(248,249,255,0.82); font-size:0.9rem; line-height:1.55; margin-bottom:0.6rem; }
-  .req-list li::before { content:'✔'; color:var(--teal); font-size:0.85rem; flex-shrink:0; margin-top:0.1rem; }
+  .req-list li { display:flex; align-items:flex-start; gap:0.7rem; color:rgba(248,249,255,0.82); font-size:0.9rem; line-height:1.6; margin-bottom:0.7rem; }
+  .req-list li::before { content:'✔'; color:var(--teal); font-size:0.85rem; flex-shrink:0; margin-top:0.15rem; }
   .modal-divider { height:1px; background:var(--border); margin:1.2rem 0; }
   .modal-cta { width:100%; margin-top:1.6rem; }
 
@@ -281,10 +291,11 @@
     footer { flex-direction:column; text-align:center; gap:1.2rem; padding:2rem 5%; }
     .footer-links { flex-wrap:wrap; justify-content:center; gap:1rem; }
 
-    .modal { padding:1.8rem 1.4rem; border-radius:20px; max-height:88vh; overflow-y:auto; }
-    .modal-overlay { align-items:flex-end; padding:0; }
-    .modal { border-bottom-left-radius:0; border-bottom-right-radius:0; max-width:100%; }
-    .modal-title { font-size:1.3rem; }
+    .modal { padding:1.5rem; border-radius:20px; max-height:90vh; max-width:100%; margin:0; }
+    .modal-overlay { padding:1rem; align-items:center; }
+    .modal-title { font-size:1.25rem; }
+    .req-list li { font-size:0.86rem; }
+    .req-section-title { font-size:0.72rem; }
   }
 
   @media (max-width:480px) {
