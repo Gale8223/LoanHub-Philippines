@@ -248,6 +248,87 @@
   .author-info strong { display:block; font-size:0.9rem; font-weight:600; }
   .author-info span { color:var(--muted); font-size:0.8rem; }
 
+  /* PROMO POSTER SECTION */
+  .promo-section { background: linear-gradient(135deg, #0a0f1e 0%, #060b18 50%, #0d1a2e 100%); position:relative; overflow:hidden; padding:5rem 5%; }
+  .promo-section::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(245,200,66,0.08), transparent); pointer-events:none; }
+  .promo-section::after { content:''; position:absolute; top:-2px; left:0; right:0; height:4px; background:linear-gradient(90deg, var(--gold), var(--teal), var(--gold)); }
+
+  /* POSTER CARD */
+  .poster-card {
+    max-width:860px; margin:0 auto;
+    background: linear-gradient(160deg, #0b1535 0%, #071028 100%);
+    border:2px solid rgba(245,200,66,0.4);
+    border-radius:28px; overflow:hidden;
+    box-shadow: 0 0 0 1px rgba(245,200,66,0.1), 0 40px 80px rgba(0,0,0,0.6), 0 0 60px rgba(245,200,66,0.08);
+    position:relative;
+  }
+  .poster-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:5px;
+    background:linear-gradient(90deg, #f5c842, #fde97a, #f5c842);
+  }
+  .poster-top {
+    background: linear-gradient(135deg, #f5c842 0%, #fde97a 40%, #f0b800 100%);
+    padding:2.5rem 3rem 2rem; text-align:center; position:relative; overflow:hidden;
+  }
+  .poster-top::before { content:'💰'; position:absolute; right:2rem; top:50%; transform:translateY(-50%); font-size:5rem; opacity:0.15; }
+  .poster-top::after { content:'💰'; position:absolute; left:2rem; top:50%; transform:translateY(-50%); font-size:5rem; opacity:0.15; }
+  .poster-eyebrow { font-family:'Outfit',sans-serif; font-size:0.75rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:rgba(10,15,30,0.6); margin-bottom:0.5rem; }
+  .poster-headline { font-family:'Outfit',sans-serif; font-size:clamp(1.8rem,4vw,3rem); font-weight:900; color:#0a0f1e; line-height:1.05; letter-spacing:-0.02em; margin-bottom:0.6rem; }
+  .poster-headline span { color:#1a4d8c; }
+  .poster-subline { font-family:'Outfit',sans-serif; font-size:clamp(0.85rem,1.8vw,1.05rem); font-weight:600; color:rgba(10,15,30,0.65); letter-spacing:0.03em; }
+
+  .poster-middle { padding:2.5rem 3rem; }
+  .poster-amount-badge {
+    text-align:center; background:linear-gradient(135deg,rgba(245,200,66,0.12),rgba(245,200,66,0.04));
+    border:2px solid rgba(245,200,66,0.35); border-radius:20px; padding:1.5rem 2rem; margin-bottom:2rem;
+  }
+  .poster-amount-label { font-size:0.78rem; text-transform:uppercase; letter-spacing:0.15em; color:var(--muted); font-weight:600; margin-bottom:0.4rem; }
+  .poster-amount { font-family:'Outfit',sans-serif; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:900; color:var(--gold); letter-spacing:-0.02em; line-height:1; }
+  .poster-amount-sub { color:var(--muted); font-size:0.85rem; margin-top:0.4rem; }
+
+  .poster-features { display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; margin-bottom:2rem; }
+  .poster-feat { display:flex; align-items:center; gap:0.6rem; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07); border-radius:12px; padding:0.75rem 1rem; font-size:0.88rem; font-weight:500; color:rgba(248,249,255,0.85); transition:border-color 0.2s, background 0.2s; }
+  .poster-feat:hover { border-color:rgba(245,200,66,0.3); background:rgba(245,200,66,0.05); }
+  .poster-feat .fi { font-size:1.1rem; flex-shrink:0; }
+
+  .poster-audiences { display:flex; flex-wrap:wrap; gap:0.6rem; justify-content:center; margin-bottom:2rem; }
+  .poster-tag { display:inline-flex; align-items:center; gap:0.4rem; background:rgba(0,194,168,0.1); border:1px solid rgba(0,194,168,0.25); color:var(--teal); border-radius:50px; padding:0.35rem 0.9rem; font-size:0.8rem; font-weight:600; }
+
+  .poster-cta-box { background:linear-gradient(135deg,#1a4d8c,#0d3060); border-radius:20px; padding:2rem 2.5rem; text-align:center; border:1px solid rgba(255,255,255,0.1); }
+  .poster-cta-title { font-family:'Outfit',sans-serif; font-size:1.4rem; font-weight:800; color:var(--white); margin-bottom:0.4rem; }
+  .poster-cta-sub { color:rgba(255,255,255,0.6); font-size:0.88rem; margin-bottom:1.5rem; }
+  .poster-cta-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+  .poster-btn-gold { background:var(--gold); color:var(--navy); border:none; padding:0.9rem 2rem; border-radius:50px; font-family:'Outfit',sans-serif; font-weight:800; font-size:1rem; cursor:pointer; transition:all 0.25s; box-shadow:0 6px 24px rgba(245,200,66,0.4); text-decoration:none; display:inline-flex; align-items:center; gap:0.5rem; }
+  .poster-btn-gold:hover { transform:translateY(-3px); box-shadow:0 10px 30px rgba(245,200,66,0.5); background:var(--gold-light); }
+  .poster-btn-outline { background:transparent; color:var(--white); border:2px solid rgba(255,255,255,0.3); padding:0.9rem 2rem; border-radius:50px; font-family:'Outfit',sans-serif; font-weight:700; font-size:1rem; cursor:pointer; transition:all 0.25s; display:inline-flex; align-items:center; gap:0.5rem; text-decoration:none; }
+  .poster-btn-outline:hover { border-color:var(--white); background:rgba(255,255,255,0.08); transform:translateY(-3px); }
+
+  .poster-footer-strip { background:rgba(245,200,66,0.07); border-top:1px solid rgba(245,200,66,0.15); padding:1.2rem 3rem; text-align:center; }
+  .poster-footer-strip p { color:rgba(248,249,255,0.5); font-size:0.82rem; font-style:italic; }
+  .poster-footer-strip strong { color:var(--gold); font-style:normal; }
+
+  /* CAPTIONS SECTION */
+  .captions-section { background:var(--navy); padding:5rem 5%; }
+  .captions-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.2rem; margin-top:3rem; }
+  .caption-card { background:var(--card-bg); border:1px solid var(--border); border-radius:16px; padding:1.5rem 1.8rem; position:relative; cursor:pointer; transition:border-color 0.25s, transform 0.25s; }
+  .caption-card:hover { border-color:rgba(245,200,66,0.35); transform:translateY(-4px); }
+  .caption-card:active { transform:translateY(-1px); }
+  .caption-num { font-family:'Outfit',sans-serif; font-size:0.7rem; font-weight:700; letter-spacing:0.12em; color:var(--gold); text-transform:uppercase; margin-bottom:0.6rem; }
+  .caption-text { color:rgba(248,249,255,0.82); font-size:0.9rem; line-height:1.65; }
+  .caption-copy-btn { position:absolute; top:1rem; right:1rem; background:rgba(245,200,66,0.1); border:1px solid rgba(245,200,66,0.2); color:var(--gold); width:30px; height:30px; border-radius:8px; font-size:0.75rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.2s; opacity:0; }
+  .caption-card:hover .caption-copy-btn { opacity:1; }
+  .caption-copy-btn:hover { background:rgba(245,200,66,0.25); }
+
+  /* SALES SCRIPT SECTION */
+  .script-section { background:var(--deep); padding:5rem 5%; }
+  .script-box { max-width:800px; margin:3rem auto 0; background:var(--card-bg); border:1px solid var(--border); border-radius:20px; overflow:hidden; }
+  .script-step { padding:1.8rem 2rem; border-bottom:1px solid var(--border); }
+  .script-step:last-child { border-bottom:none; }
+  .script-step-label { font-family:'Outfit',sans-serif; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; margin-bottom:0.5rem; }
+  .script-step-title { font-family:'Outfit',sans-serif; font-size:1.05rem; font-weight:700; margin-bottom:0.6rem; color:var(--white); }
+  .script-step-text { color:var(--muted); font-size:0.9rem; line-height:1.7; font-style:italic; }
+  .script-step-text strong { color:var(--white); font-style:normal; }
+
   /* FAQ */
   .faq { background: var(--deep); }
   .faq-list { max-width:720px; margin:3rem auto 0; }
@@ -328,6 +409,15 @@
     .partner-logo { min-width:100px; height:52px; padding:0.4rem 0.8rem; }
     .partner-logo img { height:34px; max-width:110px; }
 
+    .poster-top { padding:2rem 1.5rem 1.5rem; }
+    .poster-top::before, .poster-top::after { display:none; }
+    .poster-middle { padding:1.5rem; }
+    .poster-features { grid-template-columns:1fr; gap:0.6rem; }
+    .poster-cta-box { padding:1.5rem; }
+    .poster-footer-strip { padding:1rem 1.5rem; }
+    .poster-cta-btns { flex-direction:column; align-items:center; }
+    .poster-btn-gold, .poster-btn-outline { width:100%; justify-content:center; }
+    .captions-grid { grid-template-columns:1fr; }
     .modal { padding:1.5rem; border-radius:20px; max-height:90vh; max-width:100%; margin:0; }
     .modal-overlay { padding:1rem; align-items:center; }
     .modal-title { font-size:1.25rem; }
@@ -364,6 +454,7 @@
     <li><a href="#how" onclick="closeNav()">How It Works</a></li>
     <li><a href="#loans" onclick="closeNav()">Loan Types</a></li>
     <li><a href="#calculator" onclick="closeNav()">Calculator</a></li>
+    <li><a href="#promo" onclick="closeNav()">Promotions</a></li>
     <li><a href="#faq" onclick="closeNav()">FAQ</a></li>
   </ul>
   <div style="display:flex;align-items:center;gap:1rem;">
@@ -670,6 +761,162 @@
   </div>
 </section>
 
+<!-- PROMO POSTER SECTION -->
+<section class="promo-section" id="promo">
+  <div style="text-align:center;margin-bottom:3rem;position:relative;z-index:2;">
+    <div class="section-label">Marketing Toolkit</div>
+    <h2 class="section-title">Our <em>Loan Promotion</em> Poster</h2>
+    <p style="color:var(--muted);font-size:0.95rem;max-width:500px;margin:0.8rem auto 0;">Designed for Facebook, flyers, tarpaulins, and Reels — built to convert fast.</p>
+  </div>
+  <div class="poster-card reveal">
+    <!-- TOP: Yellow Hero Bar -->
+    <div class="poster-top">
+      <div class="poster-eyebrow">🏆 LoanHub Philippines — Fast & Trusted</div>
+      <div class="poster-headline">NEED CASH <span>TODAY?</span><br>FAST LOAN APPROVAL!</div>
+      <div class="poster-subline">Simple Requirements &nbsp;•&nbsp; Fast Processing &nbsp;•&nbsp; Quick Cash Release</div>
+    </div>
+    <!-- MIDDLE: Blue Content -->
+    <div class="poster-middle">
+      <!-- Amount Badge -->
+      <div class="poster-amount-badge">
+        <div class="poster-amount-label">Borrow Up To</div>
+        <div class="poster-amount">₱5,000 – ₱5,000,000</div>
+        <div class="poster-amount-sub">Flexible terms • Competitive rates • Same-day release possible</div>
+      </div>
+      <!-- Features Grid -->
+      <div class="poster-features">
+        <div class="poster-feat"><span class="fi">⚡</span> Fast Approval</div>
+        <div class="poster-feat"><span class="fi">📉</span> Low Interest Rates</div>
+        <div class="poster-feat"><span class="fi">📅</span> Flexible Payment Terms</div>
+        <div class="poster-feat"><span class="fi">🔒</span> Safe & Reliable Service</div>
+        <div class="poster-feat"><span class="fi">🏠</span> Home & Car Loans</div>
+        <div class="poster-feat"><span class="fi">💼</span> Business & Professional Loans</div>
+      </div>
+      <!-- Who Can Apply Tags -->
+      <div class="poster-audiences">
+        <span class="poster-tag">👨‍💼 Employees</span>
+        <span class="poster-tag">✈️ OFWs</span>
+        <span class="poster-tag">🏪 Small Business Owners</span>
+        <span class="poster-tag">👔 Professionals</span>
+        <span class="poster-tag">🚘 Sangla OR/CR</span>
+      </div>
+      <!-- CTA Box -->
+      <div class="poster-cta-box">
+        <div class="poster-cta-title">🎉 APPLY NOW! GET YOUR CASH TODAY!</div>
+        <div class="poster-cta-sub">Message us now and our loan specialist will reach you within the hour.</div>
+        <div class="poster-cta-btns">
+          <a class="poster-btn-gold" onclick="document.getElementById('apply').scrollIntoView({behavior:'smooth'})">📋 Apply Now — It's Free</a>
+          <a class="poster-btn-outline" href="https://web.facebook.com/profile.php?id=61571991519338" target="_blank">💬 Message Us on Facebook</a>
+        </div>
+      </div>
+    </div>
+    <!-- Footer Strip -->
+    <div class="poster-footer-strip">
+      <p><strong>Trusted Financial Assistance</strong> — Helping You When You Need It Most &nbsp;|&nbsp; LoanHub Philippines</p>
+    </div>
+  </div>
+</section>
+
+<!-- FACEBOOK CAPTIONS SECTION -->
+<section class="captions-section" id="captions">
+  <div class="section-label">Social Media Toolkit</div>
+  <h2 class="section-title">10 Viral Facebook <em>Captions</em></h2>
+  <p style="color:var(--muted);font-size:0.92rem;margin-top:0.5rem;max-width:500px;">Ready-to-post captions for your loan marketing. Click the copy icon to grab any caption.</p>
+  <div class="captions-grid reveal">
+    <div class="caption-card" onclick="copyCaption(this)">
+      <div class="caption-num">Caption 01 · Urgency</div>
+      <div class="caption-text">💸 <strong>Kailangan mo ba ng pera NGAYON?</strong><br><br>Huwag nang mag-alala! Mag-apply na sa LoanHub Philippines at makakuha ng MABILIS na approval!<br><br>✅ Simple requirements<br>✅ Fast cash release<br>✅ Open for employees, OFWs & business owners<br><br>📲 Message us NOW → [Link]<br><br>#LoanHubPhilippines #FastLoan #CashToday</div>
+      <button class="caption-copy-btn" title="Copy caption">📋</button>
+    </div>
+    <div class="caption-card" onclick="copyCaption(this)">
+      <div class="caption-num">Caption 02 · Quick Approval</div>
+      <div class="caption-text">⚡ <strong>Apply Today, Get Cash FAST!</strong><br><br>Hindi mo na kailangang pumunta pa sa bangko. Online lang ang pag-apply — at may tatawag sa iyo sa loob ng 1 oras!<br><br>🏦 Loan amounts: ₱5,000 – ₱5,000,000<br>📋 Simple requirements only<br>💰 Flexible payment terms<br><br>👉 Apply here: [Link]<br><br>#QuickLoan #NoCollateral #LoanPH</div>
+      <button class="caption-copy-btn" title="Copy caption">📋</button>
+    </div>
+    <div class="caption-card" onclick="copyCaption(this)">
+      <div class="caption-num">Caption 03 · Emergency</div>
+      <div class="caption-text">🚨 <strong>Emergency? We've Got You Covered!</strong><br><br>Unexpected bills? Medical emergency? School fees? Don't stress — LoanHub Philippines is here to help!<br><br>✔ Fast approval<br>✔ Low interest rates<br>✔ Disbursed same day (for qualified applicants)<br><br>📩 Send us a message and our specialist will call you TODAY.<br><br>#EmergencyLoan #FastCash #LoanHubPH</div>
+      <button class="caption-copy-btn" title="Copy caption">📋</button>
+    </div>
+    <div class="caption-card" onclick="copyCaption(this)">
+      <div class="caption-num">Caption 04 · OFW Special</div>
+      <div class="caption-text">✈️ <strong>Attn: OFWs & Families!</strong><br><br>Nandoon ka man sa ibang bansa, pwede pa rin kaming tumulong sa inyong pamilya dito sa Pilipinas.<br><br>🌍 OFW Loan — mabilis, maaasahan, at madaling i-proseso<br>📄 SPA accepted for family representatives<br>💵 Up to ₱500,000 available<br><br>Mag-message na ngayon → [Link]<br><br>#OFWLoan #OFWPilipinas #LoanHubPhilippines</div>
+      <button class="caption-copy-btn" title="Copy caption">📋</button>
+    </div>
+    <div class="caption-card" onclick="copyCaption(this)">
+      <div class="caption-num">Caption 05 · Business Owners</div>
+      <div class="caption-text">💼 <strong>Para sa mga Negosyante!</strong><br><br>Gusto mong palakihin ang negosyo mo pero kulang ang puhunan? LoanHub Philippines ang sagot!<br><br>📈 Business Loan up to ₱3,000,000<br>⚡ Fast processing<br>📋 Flexible payment options<br>✅ Open for sole proprietors, partnerships & corporations<br><br>Message us now → [Link]<br><br>#BusinessLoan #NegosyoPH #SMELoan</div>
+      <button class="caption-copy-btn" title="Copy caption">📋</button>
+    </div>
+    <div class="caption-card" onclick="copyCaption(this)">
+      <div class="caption-num">Caption 06 · Sangla OR/CR</div>
+      <div class="caption-text">🚘 <strong>May kotse ka? Gamitin mo bilang collateral!</strong><br><br>Sangla OR/CR — mabilis na paraan para makakuha ng cash gamit ang titulo ng iyong sasakyan.<br><br>💰 Up to ₱500,000<br>🚗 Vehicle stays with you<br>📋 Simple requirements only<br>⚡ Same-day processing available<br><br>Apply now → [Link]<br><br>#SanglaORCR #CarLoan #LoanHubPH</div>
+      <button class="caption-copy-btn" title="Copy caption">📋</button>
+    </div>
+    <div class="caption-card" onclick="copyCaption(this)">
+      <div class="caption-num">Caption 07 · Pain Point</div>
+      <div class="caption-text">😣 <strong>Pag-isipan mo ito…</strong><br><br>Mahirap matulog kung may iniisip kang bayarin. Pero hindi ka nag-iisa.<br><br>Libo-libo na ang natulungan namin sa buong Pilipinas — mula sa simpleng personal na pautang hanggang sa malaking business loan.<br><br>💬 Usap tayo. Libre ang application, walang obligasyon.<br><br>👉 [Link]<br><br>#TulunganTayo #PinoyLoan #FinancialHelp</div>
+      <button class="caption-copy-btn" title="Copy caption">📋</button>
+    </div>
+    <div class="caption-card" onclick="copyCaption(this)">
+      <div class="caption-num">Caption 08 · Professional / Premium</div>
+      <div class="caption-text">👔 <strong>Smart Financial Solutions for Professionals</strong><br><br>Doctor, engineer, lawyer, nurse, or CPA? You deserve a loan that matches your career.<br><br>LoanHub Philippines offers Professional Loans tailored for licensed individuals like you.<br><br>📋 Minimal requirements<br>💰 Up to ₱1,000,000<br>📞 Personal specialist assigned to your account<br><br>Apply online: [Link]<br><br>#ProfessionalLoan #PinoyProfessionals #PRCLoan</div>
+      <button class="caption-copy-btn" title="Copy caption">📋</button>
+    </div>
+    <div class="caption-card" onclick="copyCaption(this)">
+      <div class="caption-num">Caption 09 · Trust Builder</div>
+      <div class="caption-text">⭐⭐⭐⭐⭐ <strong>"Sobrang bilis! Approved agad!"</strong><br><br>Thousands of Filipinos have already trusted LoanHub Philippines for their financial needs — and you can too.<br><br>✅ ₱2.4 Billion+ in loans disbursed<br>✅ 18,000+ borrowers assisted<br>✅ 97% client satisfaction rate<br><br>Ready to join them? Apply for free today → [Link]<br><br>#TrustedLender #LoanHubPH #FastApproval</div>
+      <button class="caption-copy-btn" title="Copy caption">📋</button>
+    </div>
+    <div class="caption-card" onclick="copyCaption(this)">
+      <div class="caption-num">Caption 10 · Home / Car</div>
+      <div class="caption-text">🏠🚗 <strong>Dream Home. Dream Car. Make It Happen!</strong><br><br>Whether it's your first home or your next vehicle — LoanHub Philippines has the right loan for you.<br><br>🏠 Home Loan — up to ₱5,000,000 | 5.5% p.a.<br>🚗 Car Loan — up to ₱2,000,000 | 12–60 months<br><br>Fast approval. Flexible terms. Dedicated specialist.<br><br>Apply now, it's FREE → [Link]<br><br>#HomeLoan #CarLoan #LoanHubPhilippines</div>
+      <button class="caption-copy-btn" title="Copy caption">📋</button>
+    </div>
+  </div>
+</section>
+
+<!-- SALES SCRIPT SECTION -->
+<section class="script-section" id="script">
+  <div style="text-align:center">
+    <div class="section-label">Sales Toolkit</div>
+    <h2 class="section-title">Loan Sales <em>Script</em></h2>
+    <p style="color:var(--muted);font-size:0.92rem;margin-top:0.5rem;">A proven conversation guide to help your specialists close more applications.</p>
+  </div>
+  <div class="script-box reveal">
+    <div class="script-step">
+      <div class="script-step-label" style="color:var(--gold)">Step 1 · Opening</div>
+      <div class="script-step-title">🙋 Warm Greeting</div>
+      <div class="script-step-text">"Hi! Good [morning/afternoon]! Ito po ba si [Name]? Ako po si [Specialist Name] mula sa <strong>LoanHub Philippines</strong>. Nakita namin ang inyong application at gusto lang po naming i-confirm ang ilang detalye para matulungan kayo nang mas mabilis. May ilang minuto po ba kayo?"</div>
+    </div>
+    <div class="script-step">
+      <div class="script-step-label" style="color:var(--teal)">Step 2 · Discovery</div>
+      <div class="script-step-title">🔍 Understand Their Need</div>
+      <div class="script-step-text">"Para makapagbigay kami ng pinakamainam na solusyon para sa inyo — <strong>para saan po nais ninyong gamitin ang loan?</strong> At magkano po ang kailangan ninyo? Okay lang po kahit rough estimate." <br><br><em>(Listen carefully. Let them talk. Don't interrupt. This builds trust.)</em></div>
+    </div>
+    <div class="script-step">
+      <div class="script-step-label" style="color:#4a90d9)">Step 3 · Presentation</div>
+      <div class="script-step-title">💼 Present the Solution</div>
+      <div class="script-step-text">"Okay po, based sa sinabi ninyo — ang <strong>[Loan Type]</strong> ang pinakaangkop para sa inyong sitwasyon. Pwede kayo mag-borrow ng hanggang <strong>[Amount]</strong> at ang monthly payment nyo ay humigit-kumulang <strong>[Estimate]</strong> lamang. Simple lang din ang requirements — kailangan lang po namin ng [ID, payslip, etc.]. Kaya po ba iyan?"</div>
+    </div>
+    <div class="script-step">
+      <div class="script-step-label" style="color:var(--gold)">Step 4 · Handle Objections</div>
+      <div class="script-step-title">🛡️ Address Concerns</div>
+      <div class="script-step-text"><strong>If hesitant about requirements:</strong> <em>"Huwag po kayong mag-alala — gagabayan ko kayo sa bawat hakbang. Hindi kayo mag-iisa sa prosesong ito."</em><br><br><strong>If worried about interest:</strong> <em>"Transparent po kami sa lahat ng fees — wala pong hidden charges. Ipapaliwanag ko po lahat bago kayo mag-sign ng kahit anong papeles."</em><br><br><strong>If unsure about approval:</strong> <em>"Isinasaalang-alang namin ang buong sitwasyon ninyo — hindi lang yung numero. Maraming kliyente kaming natulungan kahit hindi sila naka-qualify sa bangko."</em></div>
+    </div>
+    <div class="script-step">
+      <div class="script-step-label" style="color:var(--teal)">Step 5 · Close</div>
+      <div class="script-step-title">✅ Commit to Next Step</div>
+      <div class="script-step-text">"Para makapagsimula na, kailangan ko lang po ng [requirements]. Pwede po ba ninyong i-send sa akin via Messenger o email? <strong>Aayusin na po namin ang lahat para makuha ninyo ang pera ninyo as soon as possible.</strong> Sige po ba?"</div>
+    </div>
+    <div class="script-step">
+      <div class="script-step-label" style="color:#a855f7">Step 6 · Follow-Up</div>
+      <div class="script-step-title">📞 Follow-Up Message Template</div>
+      <div class="script-step-text"><em>"Hi [Name]! Ito po si [Specialist] mula sa LoanHub Philippines. Gusto ko lang po i-follow up ang inyong loan application. Kumpleto na po ba ang mga requirements? Naandito po ako para tumulong — message or call anytime. Salamat po!"</em></div>
+    </div>
+  </div>
+</section>
+
 <!-- FAQ -->
 <section class="faq" id="faq">
   <div style="text-align:center;margin-bottom:1rem">
@@ -687,7 +934,7 @@
     </div>
     <div class="faq-item">
       <div class="faq-q">What are the basic requirements? <span class="arrow">+</span></div>
-      <div class="faq-a">You need a valid government-issued ID, proof of income (payslip, ITR, or bank statement), and an active contact number. Your loan specialist will guide you on any additional documents needed.</div>
+      <div class="faq-a">You need a valid government-issued ID, proof of income (payslip, ITR, or bank statement), and an active contact number. Your loan specialist will guide you on any additional documents needed based on the loan type you're applying for.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">How long does the approval process take? <span class="arrow">+</span></div>
@@ -696,6 +943,46 @@
     <div class="faq-item">
       <div class="faq-q">Is there a fee to apply? <span class="arrow">+</span></div>
       <div class="faq-a">Absolutely none. Applying is completely free. All fees and charges will only be clearly explained to you by your loan specialist before you agree to anything — no surprises, no hidden costs.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How much can I borrow? <span class="arrow">+</span></div>
+      <div class="faq-a">Loan amounts vary by loan type. Personal and Professional Loans go up to ₱1M, Business Loans up to ₱3M, Home Loans up to ₱5M, Car Loans up to ₱2M, Medical and Sangla OR/CR Loans up to ₱500K, and OFW Loans up to ₱500K. Your specialist will help determine the right amount based on your income and capacity.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What loan types do you offer? <span class="arrow">+</span></div>
+      <div class="faq-a">We offer Home Loans, Car Loans, Business Loans, Medical Loans, Professional Loans, Sangla OR/CR, and OFW Loans. Each product is designed for a specific need — click on any loan card above to see the full requirements checklist for that product.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Can I apply if I'm self-employed or a freelancer? <span class="arrow">+</span></div>
+      <div class="faq-a">Yes! We welcome applications from self-employed individuals, freelancers, and online sellers. You'll need to provide bank statements for the last 6 months, proof of income (client contracts or remittance records), and a government-issued ID. Your specialist will work with you to find the best fit.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Can OFWs apply even if they're abroad? <span class="arrow">+</span></div>
+      <div class="faq-a">Yes! OFWs can apply through a family representative here in the Philippines using a Special Power of Attorney (SPA). The SPA must be notarized or consularized. Our specialists are experienced in handling OFW applications and will guide your representative every step of the way.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What is Sangla OR/CR and how does it work? <span class="arrow">+</span></div>
+      <div class="faq-a">Sangla OR/CR is a type of secured loan where you use your vehicle's Official Receipt (OR) and Certificate of Registration (CR) as collateral. Your vehicle must be fully paid, registered under your name, and not more than 10 years old. You keep your vehicle while the loan is active — you just surrender the OR/CR documents as security.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What are the repayment options? <span class="arrow">+</span></div>
+      <div class="faq-a">We offer flexible repayment terms depending on the loan type — ranging from 6 to 60 months. Payment can be scheduled weekly, semi-monthly, or monthly. Your specialist will work with your income cycle to set up a schedule that's comfortable and manageable for you.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Is my personal information safe? <span class="arrow">+</span></div>
+      <div class="faq-a">Absolutely. We take data privacy seriously and comply with the Data Privacy Act of the Philippines (RA 10173). Your personal information is only used for loan processing purposes and is never shared with third parties without your consent.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What if my application gets declined? <span class="arrow">+</span></div>
+      <div class="faq-a">If your application doesn't qualify for one loan product, our specialist will explore other available options that may be a better fit for your situation. We work with multiple lending partners and we will do our best to find a solution that works for you.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How do I reach your team? <span class="arrow">+</span></div>
+      <div class="faq-a">You can reach us via call, SMS, or Facebook Messenger. Once you submit an application, a specialist will proactively reach out to you. You can also visit our Facebook page directly at fb.com/LoanHubPhilippines for quick assistance.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Do you have partner lending institutions? <span class="arrow">+</span></div>
+      <div class="faq-a">Yes. LoanHub Philippines works with accredited lending partners including Asialink Finance Corporation, Cepat Kredit, Equicom Savings Bank, and CTBC Bank Philippines. Depending on your profile and loan type, your application may be processed through one of these institutions — your specialist will explain which partner is the best match for your needs.</div>
     </div>
   </div>
 </section>
@@ -746,6 +1033,19 @@
 </footer>
 
 <script>
+  function copyCaption(card) {
+    const text = card.querySelector('.caption-text').innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = card.querySelector('.caption-copy-btn');
+      btn.textContent = '✅';
+      setTimeout(() => btn.textContent = '📋', 2000);
+    }).catch(() => {
+      const btn = card.querySelector('.caption-copy-btn');
+      btn.textContent = '✅';
+      setTimeout(() => btn.textContent = '📋', 2000);
+    });
+  }
+
   function toggleNav() {
     const nav = document.getElementById('navLinks');
     const btn = document.getElementById('hamburger');
