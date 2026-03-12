@@ -241,11 +241,32 @@
   .faq-item.open .faq-a { max-height:200px; padding-top:1rem; }
 
   /* FOOTER */
-  footer { background:var(--navy); border-top:1px solid var(--border); padding:3rem 5% 2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
+  footer { background:var(--navy); border-top:1px solid var(--border); padding:0; }
+  .footer-partners { padding:2rem 5%; border-bottom:1px solid var(--border); display:flex; flex-direction:column; align-items:center; gap:1.2rem; }
+  .footer-partners-label { font-size:0.72rem; text-transform:uppercase; letter-spacing:0.15em; color:var(--muted); font-weight:600; }
+  .partner-logos { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:1.2rem; }
+  .partner-logo {
+    display:flex; align-items:center; justify-content:center;
+    padding:0.6rem 1.3rem; border-radius:10px;
+    border:1px solid rgba(255,255,255,0.08);
+    background:rgba(255,255,255,0.03);
+    transition:border-color 0.2s, background 0.2s, transform 0.2s;
+    cursor:pointer; min-width:110px;
+    text-decoration:none;
+  }
+  .partner-logo:hover { border-color:rgba(255,255,255,0.25); background:rgba(255,255,255,0.08); transform:translateY(-3px); box-shadow:0 6px 20px rgba(0,0,0,0.3); }
+  .partner-logo img { height:32px; width:auto; object-fit:contain; filter:brightness(0) invert(1); opacity:0.6; transition:opacity 0.2s; }
+  .partner-logo:hover img { opacity:0.9; }
+  /* Fallback text logos */
+  .partner-logo .logo-text { font-family:'Syne',sans-serif; font-weight:800; font-size:0.82rem; letter-spacing:-0.01em; color:rgba(255,255,255,0.55); transition:color 0.2s; white-space:nowrap; }
+  .partner-logo:hover .logo-text { color:rgba(255,255,255,0.9); }
+  .logo-text .accent { color:var(--gold); opacity:0.7; }
+  .partner-logo:hover .logo-text .accent { opacity:1; }
+  .footer-bottom { padding:1.8rem 5%; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
   .footer-logo { font-family:'Syne',sans-serif; font-weight:800; font-size:1.2rem; }
   .footer-logo span { color:var(--gold); }
   footer p { color:var(--muted); font-size:0.82rem; }
-  .footer-links { display:flex; gap:1.5rem; }
+  .footer-links { display:flex; gap:1.5rem; flex-wrap:wrap; }
   .footer-links a { color:var(--muted); text-decoration:none; font-size:0.85rem; transition:color 0.2s; }
   .footer-links a:hover { color:var(--gold); }
 
@@ -288,8 +309,11 @@
 
     .testi-grid { grid-template-columns:1fr; }
 
-    footer { flex-direction:column; text-align:center; gap:1.2rem; padding:2rem 5%; }
+    .footer-bottom { flex-direction:column; text-align:center; gap:1.2rem; padding:1.5rem 5%; }
     .footer-links { flex-wrap:wrap; justify-content:center; gap:1rem; }
+    .partner-logos { gap:0.8rem; }
+    .partner-logo { min-width:90px; padding:0.5rem 1rem; }
+    .partner-logo .logo-text { font-size:0.75rem; }
 
     .modal { padding:1.5rem; border-radius:20px; max-height:90vh; max-width:100%; margin:0; }
     .modal-overlay { padding:1rem; align-items:center; }
@@ -312,7 +336,7 @@
 
   @media (min-width:1200px) {
     .features-grid { grid-template-columns: repeat(3, 1fr); }
-    .loans-grid { grid-template-columns: repeat(5, 1fr); }
+    .loans-grid { grid-template-columns: repeat(7, 1fr); }
   }
   .reveal { opacity:0; transform:translateY(30px); transition:opacity 0.6s ease, transform 0.6s ease; }
   .reveal.visible { opacity:1; transform:translateY(0); }
@@ -486,10 +510,12 @@
   <h2 class="section-title">Loan Products for <em>Every Need</em></h2>
   <div class="loans-grid reveal">
     <a class="loan-card" onclick="selectLoan('Home Loan')"><div class="icon">🏠</div><h4>Home Loan</h4><p>Up to ₱5M | As low as 5.5% p.a.</p></a>
-    <a class="loan-card" onclick="selectLoan('Auto Loan')"><div class="icon">🚗</div><h4>Auto Loan</h4><p>Up to ₱2M | 12–60 months</p></a>
+    <a class="loan-card" onclick="selectLoan('Car Loan')"><div class="icon">🚗</div><h4>Car Loan</h4><p>Up to ₱2M | 12–60 months</p></a>
     <a class="loan-card" onclick="selectLoan('Business Loan')"><div class="icon">💼</div><h4>Business Loan</h4><p>Up to ₱3M | Fast processing</p></a>
     <a class="loan-card" onclick="selectLoan('Medical Loan')"><div class="icon">💊</div><h4>Medical Loan</h4><p>Up to ₱500K | Emergency-ready</p></a>
-    <a class="loan-card" onclick="selectLoan('Personal Loan')"><div class="icon">💵</div><h4>Personal Loan</h4><p>Up to ₱1M | Flexible use</p></a>
+    <a class="loan-card" onclick="selectLoan('Professional Loan')"><div class="icon">👔</div><h4>Professional Loan</h4><p>Up to ₱1M | For licensed pros</p></a>
+    <a class="loan-card" onclick="selectLoan('Sangla OR/CR')"><div class="icon">🚘</div><h4>Sangla OR/CR</h4><p>Up to ₱500K | Fast cash</p></a>
+    <a class="loan-card" onclick="selectLoan('OFW Loan')"><div class="icon">✈️</div><h4>OFW Loan</h4><p>Up to ₱500K | For OFWs & families</p></a>
   </div>
 </section>
 
@@ -523,9 +549,10 @@
           <label>Loan Type *</label>
           <select>
             <option value="">Select loan type</option>
-            <option>Personal Loan</option><option>Business Loan</option>
-            <option>Home Loan</option><option>Auto Loan</option>
-            <option>Medical Loan</option>
+            <option>Professional Loan</option><option>Business Loan</option>
+            <option>Home Loan</option><option>Car Loan</option>
+            <option>Medical Loan</option><option>Sangla OR/CR</option>
+            <option>OFW Loan</option>
           </select>
         </div>
         <div class="form-field">
@@ -674,13 +701,55 @@
 </div>
 
 <footer>
-  <div class="footer-logo">LoanHub <span>Philippines</span></div>
-  <p>© 2025 LoanHub Philippines. All rights reserved.</p>
-  <div class="footer-links">
-    <a href="#">Privacy Policy</a>
-    <a href="#">Terms of Service</a>
-    <a href="#">Contact Us</a>
-    <a href="https://web.facebook.com/profile.php?id=61571991519338" target="_blank">Facebook</a>
+  <!-- PARTNER LOGOS -->
+  <div class="footer-partners">
+    <div class="footer-partners-label">Our Lending Partners</div>
+    <div class="partner-logos">
+      <!-- Asialink -->
+      <a class="partner-logo" href="https://www.asialink.com.ph" target="_blank" rel="noopener noreferrer" title="Asialink Finance Corporation">
+        <svg width="110" height="32" viewBox="0 0 110 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <text x="0" y="22" font-family="Arial Black, sans-serif" font-weight="900" font-size="13" fill="white" opacity="0.75">ASIA</text>
+          <text x="42" y="22" font-family="Arial Black, sans-serif" font-weight="900" font-size="13" fill="#f5c842" opacity="0.85">LINK</text>
+          <text x="0" y="30" font-family="Arial, sans-serif" font-weight="400" font-size="6.5" fill="white" opacity="0.45" letter-spacing="1.5">FINANCE CORPORATION</text>
+        </svg>
+      </a>
+      <!-- Cepat Kredit -->
+      <a class="partner-logo" href="https://www.cepatkredit.com.ph" target="_blank" rel="noopener noreferrer" title="Cepat Kredit">
+        <svg width="110" height="32" viewBox="0 0 110 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="4" width="6" height="18" rx="3" fill="#00c2a8" opacity="0.8"/>
+          <text x="11" y="18" font-family="Arial Black, sans-serif" font-weight="900" font-size="12" fill="white" opacity="0.75">CEPAT</text>
+          <text x="11" y="29" font-family="Arial, sans-serif" font-weight="700" font-size="9" fill="#00c2a8" opacity="0.8">KREDIT</text>
+        </svg>
+      </a>
+      <!-- Equicom -->
+      <a class="partner-logo" href="https://www.equicomsavingsbank.com" target="_blank" rel="noopener noreferrer" title="Equicom Savings Bank">
+        <svg width="110" height="32" viewBox="0 0 110 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="10" cy="16" r="7" fill="none" stroke="#f5c842" stroke-width="2" opacity="0.75"/>
+          <circle cx="10" cy="16" r="3" fill="#f5c842" opacity="0.75"/>
+          <text x="22" y="21" font-family="Arial Black, sans-serif" font-weight="900" font-size="12.5" fill="white" opacity="0.75">EQUICOM</text>
+        </svg>
+      </a>
+      <!-- CTBC -->
+      <a class="partner-logo" href="https://www.ctbcbank.com.ph" target="_blank" rel="noopener noreferrer" title="CTBC Bank Philippines">
+        <svg width="90" height="32" viewBox="0 0 90 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="5" width="20" height="22" rx="4" fill="#c0392b" opacity="0.8"/>
+          <text x="5" y="21" font-family="Arial Black, sans-serif" font-weight="900" font-size="11" fill="white">CT</text>
+          <text x="24" y="21" font-family="Arial Black, sans-serif" font-weight="900" font-size="14" fill="white" opacity="0.8">CTBC</text>
+          <text x="24" y="30" font-family="Arial, sans-serif" font-weight="400" font-size="6" fill="white" opacity="0.4" letter-spacing="0.8">BANK PHILIPPINES</text>
+        </svg>
+      </a>
+    </div>
+  </div>
+  <!-- FOOTER BOTTOM -->
+  <div class="footer-bottom">
+    <div class="footer-logo">LoanHub <span>Philippines</span></div>
+    <p>© 2025 LoanHub Philippines. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Contact Us</a>
+      <a href="https://web.facebook.com/profile.php?id=61571991519338" target="_blank">Facebook</a>
+    </div>
   </div>
 </footer>
 
@@ -710,7 +779,7 @@
         { title: 'Property Documents', items: ['Certified True Copy of Transfer Certificate of Title (TCT)', 'Tax Declaration of the property', 'Location map / vicinity map of the property', 'Contract to Sell (for new purchases)'] }
       ]
     },
-    'Auto Loan': {
+    'Car Loan': {
       icon: '🚗', subtitle: 'Up to ₱2M | 12–60 months',
       sections: [
         { title: 'Basic Requirements', items: ['Valid Government-Issued ID (2 valid IDs)', 'Proof of Billing Address (utility bill within 3 months)', 'Duly accomplished application form', 'Taxpayer Identification Number (TIN)'] },
@@ -734,12 +803,28 @@
         { title: 'Medical Documents', items: ['Medical certificate or hospital billing statement', 'Doctor\'s prescription or treatment plan (if available)', 'PhilHealth / HMO coverage documents (if applicable)'] }
       ]
     },
-    'Personal Loan': {
-      icon: '💵', subtitle: 'Up to ₱1M | Flexible use',
+    'Professional Loan': {
+      icon: '👔', subtitle: 'Up to ₱1M | For licensed professionals',
       sections: [
         { title: 'Basic Requirements', items: ['Valid Government-Issued ID (2 valid IDs)', 'Proof of Billing Address (utility bill within 3 months)', 'Duly accomplished application form', 'Taxpayer Identification Number (TIN)'] },
         { title: 'Proof of Income', items: ['Latest 3 months payslips (for employed)', 'Certificate of Employment with compensation', 'Latest ITR (BIR Form 2316 or 1701)', 'Bank statements for the last 3 months'] },
-        { title: 'For Self-Employed / Freelancers', items: ['Business / DTI registration (if applicable)', 'Bank statements for the last 6 months', 'Proof of remittance or client contracts (for freelancers)', 'OFW document / POEA contract (for OFWs)'] }
+        { title: 'Professional Documents', items: ['Valid Professional Regulation Commission (PRC) ID', 'Professional License (e.g., doctor, lawyer, engineer, nurse, CPA)', 'Certificate of Good Standing from professional association (if applicable)', 'Clinic or office address proof (for solo practitioners)'] }
+      ]
+    },
+    'Sangla OR/CR': {
+      icon: '🚘', subtitle: 'Up to ₱500K | Fast cash using your vehicle',
+      sections: [
+        { title: 'Basic Requirements', items: ['Valid Government-Issued ID (2 valid IDs)', 'Proof of Billing Address (utility bill within 3 months)', 'Duly accomplished application form', 'Taxpayer Identification Number (TIN)'] },
+        { title: 'Vehicle Documents', items: ['Original Official Receipt (OR) of the vehicle', 'Original Certificate of Registration (CR) of the vehicle', 'Vehicle must be fully paid (no existing chattel mortgage)', 'Vehicle must be under the applicant\'s name'] },
+        { title: 'Additional Requirements', items: ['Latest photos of the vehicle (front, back, sides)', 'Vehicle must not be more than 10 years old', 'Proof of Income (payslip, ITR, or bank statements)', 'Active bank account or e-wallet for fund release'] }
+      ]
+    },
+    'OFW Loan': {
+      icon: '✈️', subtitle: 'Up to ₱500K | Designed for OFWs & their families',
+      sections: [
+        { title: 'Basic Requirements', items: ['Valid Government-Issued ID (2 valid IDs — passport required)', 'Proof of Billing Address in the Philippines', 'Duly accomplished application form', 'Taxpayer Identification Number (TIN)'] },
+        { title: 'OFW Employment Documents', items: ['Valid Overseas Employment Certificate (OEC) or e-OEC', 'POEA-verified Employment Contract', 'Proof of Deployment or Visa (copy of passport with entry stamp)', 'Latest 3–6 months remittance records or bank statements'] },
+        { title: 'For Family Representatives (if OFW is abroad)', items: ['Special Power of Attorney (SPA) — notarized or consularized', 'Valid ID of the authorized representative', 'Proof of relationship to OFW (if required)', 'Contact details of OFW for verification'] }
       ]
     }
   };
