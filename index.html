@@ -163,6 +163,230 @@
   .loan-card .apply-hint { display:inline-block; margin-top:0.9rem; font-size:0.78rem; color:var(--teal); font-weight:600; opacity:0; transform:translateY(4px); transition:opacity 0.2s, transform 0.2s; }
   .loan-card:hover .apply-hint { opacity:1; transform:translateY(0); }
 
+  /* LOAN PRODUCT DETAIL PAGE */
+  .loan-detail-page {
+    display:none; position:fixed; inset:0; z-index:400;
+    background:var(--deep); overflow-y:auto; overflow-x:hidden;
+  }
+  .loan-detail-page.active { display:block; animation:ldpSlide 0.3s ease; }
+  @keyframes ldpSlide { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+  .ldp-topbar {
+    position:sticky; top:0; z-index:20; background:rgba(6,11,24,0.96);
+    backdrop-filter:blur(20px); border-bottom:1px solid var(--border);
+    padding:0.85rem 5%; display:flex; align-items:center; gap:1rem;
+  }
+  .ldp-back {
+    display:inline-flex; align-items:center; gap:0.4rem;
+    background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.13);
+    color:var(--white); padding:0.45rem 1rem; border-radius:50px;
+    font-size:0.82rem; font-weight:600; cursor:pointer; transition:background 0.2s;
+    font-family:'Outfit',sans-serif; white-space:nowrap;
+  }
+  .ldp-back:hover { background:rgba(255,255,255,0.15); }
+  .ldp-topbar-crumb { color:var(--muted); font-size:0.8rem; }
+  .ldp-topbar-crumb strong { color:var(--gold); }
+
+  /* 2-col hero */
+  .ldp-hero {
+    display:grid; grid-template-columns:1fr 1.1fr;
+    gap:2.5rem; padding:2.5rem 5% 2rem;
+    max-width:1320px; margin:0 auto; align-items:start;
+  }
+  .ldp-left { position:sticky; top:68px; }
+
+  /* Product Visual Card */
+  .ldp-visual {
+    border-radius:22px; overflow:hidden; position:relative;
+    min-height:330px; display:flex; margin-bottom:1.4rem;
+  }
+  .ldp-visual-inner {
+    width:100%; display:flex; flex-direction:column;
+    justify-content:flex-end; padding:2rem 1.8rem 1.8rem; position:relative;
+  }
+  .ldp-vbg { position:absolute; inset:0; z-index:0; }
+  .ldp-vcontent { position:relative; z-index:1; }
+  .ldp-vbadge {
+    display:inline-block; background:rgba(255,255,255,0.18);
+    border:1px solid rgba(255,255,255,0.3); color:#fff;
+    font-family:'Outfit',sans-serif; font-weight:700; font-size:0.68rem;
+    padding:0.22rem 0.75rem; border-radius:50px; letter-spacing:0.1em;
+    text-transform:uppercase; margin-bottom:0.85rem;
+  }
+  .ldp-vicon {
+    font-size:3.8rem; display:block; margin-bottom:0.6rem;
+    filter:drop-shadow(0 4px 14px rgba(0,0,0,0.35));
+  }
+  .ldp-vtitle {
+    font-family:'Outfit',sans-serif; font-weight:900; font-size:1.7rem;
+    color:#fff; line-height:1.1; margin-bottom:0.2rem;
+    text-shadow:0 2px 10px rgba(0,0,0,0.4);
+  }
+  .ldp-vamount {
+    font-family:'Outfit',sans-serif; font-weight:900; font-size:2.8rem;
+    line-height:1; margin-bottom:0.15rem;
+    text-shadow:0 2px 14px rgba(0,0,0,0.4);
+  }
+  .ldp-vsublabel {
+    font-size:0.75rem; text-transform:uppercase; letter-spacing:0.12em;
+    opacity:0.75; margin-bottom:1rem;
+  }
+  .ldp-vtags { display:flex; flex-wrap:wrap; gap:0.35rem; }
+  .ldp-vtag {
+    background:rgba(0,0,0,0.28); border:1px solid rgba(255,255,255,0.22);
+    color:rgba(255,255,255,0.9); border-radius:50px;
+    padding:0.18rem 0.65rem; font-size:0.68rem; font-weight:600;
+  }
+  .ldp-vdeco {
+    position:absolute; right:-10px; top:-10px; font-size:7rem;
+    opacity:0.07; z-index:0; line-height:1; pointer-events:none;
+  }
+
+  /* Term selector cards */
+  .ldp-terms-lbl {
+    font-family:'Outfit',sans-serif; font-size:0.7rem; text-transform:uppercase;
+    letter-spacing:0.14em; color:var(--muted); font-weight:700; margin-bottom:0.65rem;
+  }
+  .ldp-terms-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0.5rem; }
+  .ldp-term {
+    border-radius:12px; cursor:pointer; border:2px solid transparent;
+    transition:all 0.18s; position:relative;
+  }
+  .ldp-term-in {
+    background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08);
+    border-radius:10px; padding:0.7rem 0.4rem; text-align:center; transition:all 0.18s;
+  }
+  .ldp-term.sel { border-color:var(--gold); }
+  .ldp-term.sel .ldp-term-in {
+    background:rgba(245,200,66,0.09); border-color:rgba(245,200,66,0.3);
+  }
+  .ldp-term:hover .ldp-term-in { background:rgba(255,255,255,0.08); transform:translateY(-2px); }
+  .ldp-term-emo { font-size:1.35rem; display:block; margin-bottom:0.28rem; }
+  .ldp-term-val { font-family:'Outfit',sans-serif; font-weight:800; font-size:0.83rem; }
+  .ldp-term-sub { font-size:0.61rem; color:var(--muted); margin-top:0.1rem; line-height:1.3; }
+  .ldp-term-tick {
+    position:absolute; top:3px; right:3px; width:15px; height:15px;
+    background:var(--gold); border-radius:50%; display:none;
+    align-items:center; justify-content:center;
+    font-size:0.52rem; color:var(--navy); font-weight:900;
+  }
+  .ldp-term.sel .ldp-term-tick { display:flex; }
+
+  /* Right column */
+  .ldp-brand {
+    font-size:0.68rem; font-weight:700; letter-spacing:0.18em;
+    text-transform:uppercase; color:var(--teal); margin-bottom:0.45rem;
+  }
+  .ldp-name { font-family:'Outfit',sans-serif; font-size:2.1rem; font-weight:900; line-height:1.1; margin-bottom:0.3rem; }
+  .ldp-tagline {
+    color:var(--muted); font-size:0.88rem; line-height:1.65;
+    margin-bottom:1.5rem; border-bottom:1px solid var(--border); padding-bottom:1.3rem;
+  }
+
+  /* Inline Calculator */
+  .ldp-calc {
+    background:linear-gradient(135deg,rgba(245,200,66,0.07),rgba(245,200,66,0.02));
+    border:1px solid rgba(245,200,66,0.18); border-radius:18px;
+    padding:1.45rem; margin-bottom:1.2rem;
+  }
+  .ldp-calc-hd {
+    font-family:'Outfit',sans-serif; font-weight:700; font-size:0.88rem;
+    color:var(--gold); margin-bottom:1.1rem; display:flex; align-items:center; gap:0.4rem;
+  }
+  .ldp-c2 { display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; margin-bottom:0.8rem; }
+  .ldp-cf label {
+    display:block; font-size:0.68rem; text-transform:uppercase;
+    letter-spacing:0.1em; color:var(--muted); font-weight:600; margin-bottom:0.32rem;
+  }
+  .ldp-cf input, .ldp-cf select {
+    width:100%; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1);
+    color:var(--white); border-radius:10px; padding:0.58rem 0.82rem;
+    font-family:'Plus Jakarta Sans',sans-serif; font-size:0.86rem; outline:none;
+    transition:border-color 0.2s;
+  }
+  .ldp-cf input:focus, .ldp-cf select:focus { border-color:rgba(245,200,66,0.4); }
+  .ldp-cf select option { background:#0a0f1e; }
+  .ldp-calc-out {
+    display:grid; grid-template-columns:repeat(3,1fr); gap:0.5rem;
+    background:rgba(0,0,0,0.28); border-radius:12px; padding:1rem 0.75rem;
+  }
+  .ldp-co { text-align:center; }
+  .ldp-co-val { font-family:'Outfit',sans-serif; font-weight:800; font-size:1rem; color:var(--teal); }
+  .ldp-co.main .ldp-co-val { font-size:1.42rem; color:var(--gold); }
+  .ldp-co-lbl { font-size:0.62rem; color:var(--muted); margin-top:0.15rem; text-transform:uppercase; letter-spacing:0.05em; }
+
+  /* Inline Form */
+  .ldp-form {
+    background:rgba(255,255,255,0.03); border:1px solid var(--border);
+    border-radius:18px; padding:1.45rem;
+  }
+  .ldp-form-hd {
+    font-family:'Outfit',sans-serif; font-weight:700; font-size:0.88rem;
+    margin-bottom:1.1rem; display:flex; align-items:center; gap:0.4rem;
+  }
+  .ldp-frow { display:grid; grid-template-columns:1fr 1fr; gap:0.65rem; margin-bottom:0.65rem; }
+  .ldp-ff label {
+    display:block; font-size:0.66rem; text-transform:uppercase;
+    letter-spacing:0.08em; color:var(--muted); font-weight:600; margin-bottom:0.28rem;
+  }
+  .ldp-ff input, .ldp-ff select, .ldp-ff textarea {
+    width:100%; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.09);
+    color:var(--white); border-radius:10px; padding:0.56rem 0.78rem;
+    font-family:'Plus Jakarta Sans',sans-serif; font-size:0.83rem; outline:none;
+    transition:border-color 0.2s;
+  }
+  .ldp-ff input:focus, .ldp-ff select:focus, .ldp-ff textarea:focus { border-color:var(--teal); }
+  .ldp-ff select option { background:#0a0f1e; }
+  .ldp-ff textarea { resize:none; height:66px; }
+  .ldp-ff.full { grid-column:1/-1; }
+  .ldp-submit {
+    width:100%; margin-top:0.85rem; background:var(--gold); color:var(--navy);
+    border:none; padding:0.88rem 1.5rem; border-radius:50px;
+    font-family:'Outfit',sans-serif; font-weight:800; font-size:0.98rem;
+    cursor:pointer; transition:all 0.25s; box-shadow:0 6px 20px rgba(245,200,66,0.3);
+  }
+  .ldp-submit:hover { background:var(--gold-light); transform:translateY(-2px); box-shadow:0 10px 28px rgba(245,200,66,0.45); }
+  .ldp-formnote { color:var(--muted); font-size:0.67rem; text-align:center; margin-top:0.65rem; line-height:1.55; }
+
+  /* Accordion section */
+  .ldp-acc-wrap {
+    max-width:1320px; margin:0 auto;
+    padding:0.5rem 5% 4rem; border-top:1px solid var(--border);
+  }
+  .ldp-acc { border-bottom:1px solid rgba(255,255,255,0.07); }
+  .ldp-acc-hd {
+    display:flex; justify-content:space-between; align-items:center;
+    padding:1.3rem 0; cursor:pointer; user-select:none;
+  }
+  .ldp-acc-ttl {
+    font-family:'Outfit',sans-serif; font-size:0.8rem; font-weight:700;
+    letter-spacing:0.12em; text-transform:uppercase; color:rgba(248,249,255,0.68);
+    transition:color 0.2s;
+  }
+  .ldp-acc:hover .ldp-acc-ttl, .ldp-acc.open .ldp-acc-ttl { color:var(--white); }
+  .ldp-acc-arr {
+    width:26px; height:26px; border-radius:50%;
+    background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1);
+    display:flex; align-items:center; justify-content:center;
+    font-size:0.9rem; color:var(--gold); transition:transform 0.25s, background 0.2s;
+    flex-shrink:0;
+  }
+  .ldp-acc.open .ldp-acc-arr { transform:rotate(45deg); background:rgba(245,200,66,0.12); }
+  .ldp-acc-body { display:none; padding-bottom:1.8rem; }
+  .ldp-acc.open .ldp-acc-body { display:block; animation:accFade 0.22s ease; }
+  @keyframes accFade { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+  /* Mobile */
+  @media (max-width:860px) {
+    .ldp-hero { grid-template-columns:1fr; gap:1.6rem; padding:1.5rem 4% 1rem; }
+    .ldp-left { position:static; }
+    .ldp-c2 { grid-template-columns:1fr; }
+    .ldp-frow { grid-template-columns:1fr; }
+    .ldp-name { font-size:1.7rem; }
+    .ldp-acc-wrap { padding:0.5rem 4% 3rem; }
+  }
+
+
   /* LOAN MODAL — TABBED */
   .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.8); backdrop-filter:blur(8px); z-index:999; display:flex; align-items:center; justify-content:center; padding:1.5rem; opacity:0; pointer-events:none; transition:opacity 0.25s; }
   .modal-overlay.active { opacity:1; pointer-events:all; }
@@ -1030,6 +1254,226 @@
   </div>
 </section>
 
+
+<!-- ===== LOAN PRODUCT DETAIL PAGE ===== -->
+<div class="loan-detail-page" id="loanDetailPage">
+  <!-- Topbar -->
+  <div class="ldp-topbar">
+    <button class="ldp-back" onclick="closeLoanDetail()">&#8592; Back to Loans</button>
+    <span class="ldp-topbar-crumb">Loan Products &rsaquo; <strong id="ldpCrumb">Home Loan</strong></span>
+  </div>
+
+  <!-- Hero Grid -->
+  <div class="ldp-hero">
+    <!-- LEFT: Visual + Term Cards -->
+    <div class="ldp-left">
+      <div class="ldp-visual">
+        <div class="ldp-visual-inner" id="ldpVisualInner">
+          <div class="ldp-vbg" id="ldpVbg"></div>
+          <div class="ldp-vdeco" id="ldpVdeco"></div>
+          <div class="ldp-vcontent">
+            <span class="ldp-vbadge">LoanHub Philippines</span>
+            <span class="ldp-vicon" id="ldpVicon">🏠</span>
+            <div class="ldp-vtitle" id="ldpVtitle">Home Loan</div>
+            <div class="ldp-vamount" id="ldpVamount">Up to &#8369;5M</div>
+            <div class="ldp-vsublabel" id="ldpVsub">As low as 5.5% p.a.</div>
+            <div class="ldp-vtags" id="ldpVtags"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Term Cards -->
+      <div class="ldp-terms-lbl">&#x1f4c5; Select Loan Term</div>
+      <div class="ldp-terms-grid">
+        <div class="ldp-term" data-m="6" onclick="ldpSelectTerm(this,6)">
+          <div class="ldp-term-in">
+            <span class="ldp-term-emo">&#x1f331;</span>
+            <div class="ldp-term-val">6 mos</div>
+            <div class="ldp-term-sub">Short-term<br>Quick payoff</div>
+          </div>
+          <div class="ldp-term-tick">&#10003;</div>
+        </div>
+        <div class="ldp-term sel" data-m="12" onclick="ldpSelectTerm(this,12)">
+          <div class="ldp-term-in">
+            <span class="ldp-term-emo">&#x1f4c5;</span>
+            <div class="ldp-term-val">12 mos</div>
+            <div class="ldp-term-sub">1 Year<br>Most popular</div>
+          </div>
+          <div class="ldp-term-tick">&#10003;</div>
+        </div>
+        <div class="ldp-term" data-m="24" onclick="ldpSelectTerm(this,24)">
+          <div class="ldp-term-in">
+            <span class="ldp-term-emo">&#x1f4c6;</span>
+            <div class="ldp-term-val">24 mos</div>
+            <div class="ldp-term-sub">2 Years<br>Balanced</div>
+          </div>
+          <div class="ldp-term-tick">&#10003;</div>
+        </div>
+        <div class="ldp-term" data-m="36" onclick="ldpSelectTerm(this,36)">
+          <div class="ldp-term-in">
+            <span class="ldp-term-emo">&#x1f3d7;&#xfe0f;</span>
+            <div class="ldp-term-val">36 mos</div>
+            <div class="ldp-term-sub">3 Years<br>Low monthly</div>
+          </div>
+          <div class="ldp-term-tick">&#10003;</div>
+        </div>
+        <div class="ldp-term" data-m="48" onclick="ldpSelectTerm(this,48)">
+          <div class="ldp-term-in">
+            <span class="ldp-term-emo">&#x1f31f;</span>
+            <div class="ldp-term-val">48 mos</div>
+            <div class="ldp-term-sub">4 Years<br>Extended</div>
+          </div>
+          <div class="ldp-term-tick">&#10003;</div>
+        </div>
+        <div class="ldp-term" data-m="60" onclick="ldpSelectTerm(this,60)">
+          <div class="ldp-term-in">
+            <span class="ldp-term-emo">&#x1f3c6;</span>
+            <div class="ldp-term-val">60 mos</div>
+            <div class="ldp-term-sub">5 Years<br>Lowest amort.</div>
+          </div>
+          <div class="ldp-term-tick">&#10003;</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Product info + Calculator + Form -->
+    <div class="ldp-right">
+      <div class="ldp-brand">LoanHub Philippines</div>
+      <div class="ldp-name" id="ldpName">Home Loan</div>
+      <div class="ldp-tagline" id="ldpTagline">Finance your dream home with flexible terms and competitive rates.</div>
+
+      <!-- Loan Calculator -->
+      <div class="ldp-calc">
+        <div class="ldp-calc-hd">&#x1f9ee; Loan Calculator</div>
+        <div class="ldp-c2">
+          <div class="ldp-cf">
+            <label>Loan Amount (&#8369;)</label>
+            <input type="text" id="ldpAmt" value="200,000" oninput="ldpFmtAmt(this)" onblur="ldpCalc()">
+          </div>
+          <div class="ldp-cf">
+            <label>Interest Rate (p.a.)</label>
+            <select id="ldpRate" onchange="ldpCalc()">
+              <option value="5">5% per annum</option>
+              <option value="8">8% per annum</option>
+              <option value="10">10% per annum</option>
+              <option value="12" selected>12% per annum</option>
+              <option value="15">15% per annum</option>
+              <option value="18">18% per annum</option>
+              <option value="24">24% per annum</option>
+              <option value="30">30% per annum</option>
+            </select>
+          </div>
+        </div>
+        <div class="ldp-calc-out">
+          <div class="ldp-co main">
+            <div class="ldp-co-val" id="ldpMonthly">&#8369;17,865</div>
+            <div class="ldp-co-lbl">Monthly Payment</div>
+          </div>
+          <div class="ldp-co">
+            <div class="ldp-co-val" id="ldpTotal">&#8369;214,380</div>
+            <div class="ldp-co-lbl">Total Payment</div>
+          </div>
+          <div class="ldp-co">
+            <div class="ldp-co-val" id="ldpInterest">&#8369;14,380</div>
+            <div class="ldp-co-lbl">Total Interest</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Apply Form -->
+      <div class="ldp-form">
+        <div class="ldp-form-hd">&#x1f4dd; Apply Now &mdash; It&#39;s Free</div>
+        <div class="ldp-frow">
+          <div class="ldp-ff">
+            <label>Full Name *</label>
+            <input type="text" id="ldpFName" placeholder="Juan dela Cruz">
+          </div>
+          <div class="ldp-ff">
+            <label>Mobile Number *</label>
+            <input type="tel" id="ldpFPhone" placeholder="09XX XXX XXXX">
+          </div>
+        </div>
+        <div class="ldp-frow">
+          <div class="ldp-ff">
+            <label>Email Address</label>
+            <input type="email" id="ldpFEmail" placeholder="juan@email.com">
+          </div>
+          <div class="ldp-ff">
+            <label>Employment Status *</label>
+            <select id="ldpFEmp">
+              <option value="">Select status</option>
+              <option>Employed (Private)</option>
+              <option>Employed (Government)</option>
+              <option>Self-Employed</option>
+              <option>Business Owner</option>
+              <option>OFW</option>
+              <option>Freelancer</option>
+            </select>
+          </div>
+        </div>
+        <div class="ldp-frow">
+          <div class="ldp-ff">
+            <label>Monthly Income *</label>
+            <select id="ldpFIncome">
+              <option value="">Select range</option>
+              <option>Below &#8369;10,000</option>
+              <option>&#8369;10,000 &ndash; &#8369;20,000</option>
+              <option>&#8369;20,000 &ndash; &#8369;40,000</option>
+              <option>&#8369;40,000 &ndash; &#8369;80,000</option>
+              <option>Above &#8369;80,000</option>
+            </select>
+          </div>
+          <div class="ldp-ff">
+            <label>Loan Type</label>
+            <input type="text" id="ldpFType" readonly style="opacity:0.65;cursor:default">
+          </div>
+        </div>
+        <div class="ldp-frow">
+          <div class="ldp-ff full">
+            <label>Additional Message (Optional)</label>
+            <textarea id="ldpFMsg" placeholder="Tell us more about your loan purpose..."></textarea>
+          </div>
+        </div>
+        <button class="ldp-submit" onclick="ldpSubmit()">Submit My Application &rarr;</button>
+        <p class="ldp-formnote">&#x1f512; Your information is safe with us. By submitting, you agree to be contacted by a LoanHub Philippines loan specialist.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACCORDION: Benefit Coverage, Availment, Notes, Requirements -->
+  <div class="ldp-acc-wrap">
+    <div class="ldp-acc" id="laccBenefits">
+      <div class="ldp-acc-hd" onclick="ldpToggleAcc('laccBenefits')">
+        <span class="ldp-acc-ttl">Benefit Coverage</span>
+        <span class="ldp-acc-arr">+</span>
+      </div>
+      <div class="ldp-acc-body" id="laccBenefits-body"></div>
+    </div>
+    <div class="ldp-acc" id="laccAvailment">
+      <div class="ldp-acc-hd" onclick="ldpToggleAcc('laccAvailment')">
+        <span class="ldp-acc-ttl">Availment Procedure</span>
+        <span class="ldp-acc-arr">+</span>
+      </div>
+      <div class="ldp-acc-body" id="laccAvailment-body"></div>
+    </div>
+    <div class="ldp-acc" id="laccNotes">
+      <div class="ldp-acc-hd" onclick="ldpToggleAcc('laccNotes')">
+        <span class="ldp-acc-ttl">Important Notes</span>
+        <span class="ldp-acc-arr">+</span>
+      </div>
+      <div class="ldp-acc-body" id="laccNotes-body"></div>
+    </div>
+    <div class="ldp-acc" id="laccReqs">
+      <div class="ldp-acc-hd" onclick="ldpToggleAcc('laccReqs')">
+        <span class="ldp-acc-ttl">Requirements Checklist</span>
+        <span class="ldp-acc-arr">+</span>
+      </div>
+      <div class="ldp-acc-body" id="laccReqs-body"></div>
+    </div>
+  </div>
+</div>
+
+
 <!-- LOAN MODAL — TABBED -->
 <div class="modal-overlay" id="loanModal">
   <div class="modal">
@@ -1127,298 +1571,420 @@
     document.body.style.overflow = '';
   }
 
+
+  // ========================
+  // LOAN DATA
+  // ========================
   const loanData = {
     'Home Loan': {
-      icon: '🏠', subtitle: 'Up to ₱5M | As low as 5.5% p.a.',
-      benefits: [
-        { icon: '🏡', label: 'Purchase or Construction', desc: 'Finance the purchase, construction, or renovation of your dream home — house & lot, condo, or townhouse.' },
-        { icon: '💰', label: 'High Loanable Amount', desc: 'Borrow up to ₱5,000,000 depending on your income, property value, and repayment capacity.' },
-        { icon: '📉', label: 'Competitive Interest Rates', desc: 'Enjoy interest rates as low as 5.5% p.a. with fixed or variable rate options available.' },
-        { icon: '📅', label: 'Long Repayment Terms', desc: 'Choose repayment terms of up to 20 years for smaller and more manageable monthly payments.' },
-        { icon: '🔓', label: 'Refinancing Option', desc: 'Use your existing property as collateral to access additional funds through home equity or refinancing.' },
-        { icon: '⚡', label: 'Fast Processing', desc: 'Our specialists work quickly to process your documents and deliver a decision as fast as possible.' }
+      icon:'🏠', amount:'Up to ₱5M', sublabel:'As low as 5.5% p.a.',
+      tagline:'Finance your dream home — purchase, construction, or renovation — with competitive rates and long repayment terms.',
+      tags:['Purchase','Construction','Renovation','Refinancing'],
+      gradient:'linear-gradient(135deg,#0d2444 0%,#0e3a6a 50%,#155da6 100%)',
+      color:'#4fc3f7',
+      benefits:[
+        {icon:'🏡',label:'Purchase or Construction',desc:'Finance house & lot, condo, townhouse purchase, construction, or major renovation.'},
+        {icon:'💰',label:'Up to ₱5,000,000',desc:'High loanable amount based on income, property value, and repayment capacity.'},
+        {icon:'📉',label:'Rates from 5.5% p.a.',desc:'Competitive fixed or variable rate options with long repayment periods.'},
+        {icon:'📅',label:'Up to 20-Year Terms',desc:'Long terms mean lower monthly payments and easier cash flow management.'},
+        {icon:'🔓',label:'Refinancing Available',desc:'Use existing property equity to access additional funds through refinancing.'},
+        {icon:'⚡',label:'Fast Processing',desc:'Dedicated specialists handle your application from submission to approval.'}
       ],
-      availment: [
-        { title: 'Submit Online Application', desc: 'Fill out the LoanHub Philippines inquiry form with your personal, income, and property details.' },
-        { title: 'Specialist Callback', desc: 'A dedicated loan specialist will call you within the hour to discuss your options and guide you through the process.' },
-        { title: 'Document Submission', desc: 'Prepare and submit all required documents (valid IDs, income proof, property documents) via email or Messenger.' },
-        { title: 'Credit & Property Evaluation', desc: 'Our lending partner will assess your creditworthiness and conduct a property appraisal.' },
-        { title: 'Loan Offer & Approval', desc: 'Receive your loan offer with the approved amount, interest rate, and term. Review and sign the loan agreement.' },
-        { title: 'Fund Release', desc: 'Upon completion of all requirements, funds are released directly to the seller, developer, or your account.' }
+      availment:[
+        {title:'Submit Online Inquiry',desc:'Fill out the LoanHub Philippines form with your personal and property details.'},
+        {title:'Specialist Callback',desc:'A dedicated loan specialist contacts you within the hour to discuss options.'},
+        {title:'Document Submission',desc:'Submit IDs, income proof, and property documents via email or Messenger.'},
+        {title:'Credit & Property Evaluation',desc:'Lending partner assesses creditworthiness and conducts property appraisal.'},
+        {title:'Loan Offer & Approval',desc:'Receive your offer with approved amount, rate, and term. Sign the agreement.'},
+        {title:'Fund Release',desc:'Funds released directly to seller, developer, or your designated account.'}
       ],
-      notes: [
-        { type: 'warning', icon: '⚠️', text: '<strong>Property must be free from encumbrances.</strong> Titles with liens, lis pendens, or mortgages may affect approval.' },
-        { type: 'info', icon: 'ℹ️', text: '<strong>Property appraisal is required.</strong> Loanable amount is based on the appraised value, typically 60–80% of property value.' },
-        { type: 'warning', icon: '⚠️', text: '<strong>Collateral is required.</strong> The property being purchased or an existing owned property is used as collateral.' },
-        { type: 'success', icon: '✅', text: '<strong>Both employed and self-employed applicants are eligible.</strong> Income documentation requirements may differ.' },
-        { type: 'info', icon: 'ℹ️', text: '<strong>Homeowner\'s insurance may be required.</strong> Fire and MRI (Mortgage Redemption Insurance) are standard add-ons.' }
+      notes:[
+        {type:'warning',icon:'⚠️',text:'<strong>Property must be free from encumbrances.</strong> Titles with liens or existing mortgages may affect approval.'},
+        {type:'info',icon:'ℹ️',text:'<strong>Property appraisal is required.</strong> Loanable amount is typically 60–80% of appraised property value.'},
+        {type:'warning',icon:'⚠️',text:'<strong>Collateral is required.</strong> The property being purchased or existing owned property is used as collateral.'},
+        {type:'success',icon:'✅',text:'<strong>Both employed and self-employed applicants are eligible.</strong> Requirements differ by income type.'},
+        {type:'info',icon:'ℹ️',text:'<strong>MRI and Fire Insurance</strong> are standard add-ons for home loans — typically included in monthly amortization.'}
       ],
-      requirements: [
-        { title: 'Basic Requirements', items: ['Valid Government-Issued ID (2 valid IDs)', 'Proof of Billing Address (utility bill within 3 months)', 'Duly accomplished application form', 'Taxpayer Identification Number (TIN)'] },
-        { title: 'Proof of Income', items: ['Latest 3 months payslips (for employed)', 'Certificate of Employment with compensation', 'Latest ITR (BIR Form 2316 or 1701)', 'Bank statements for the last 6 months'] },
-        { title: 'Property Documents', items: ['Certified True Copy of Transfer Certificate of Title (TCT)', 'Tax Declaration of the property', 'Location map / vicinity map of the property', 'Contract to Sell (for new purchases)'] }
+      requirements:[
+        {title:'Basic Requirements',items:['Valid Government-Issued ID (2 valid IDs)','Proof of Billing Address (utility bill within 3 months)','Duly accomplished application form','Taxpayer Identification Number (TIN)']},
+        {title:'Proof of Income',items:['Latest 3 months payslips (for employed)','Certificate of Employment with compensation','Latest ITR (BIR Form 2316 or 1701)','Bank statements for the last 6 months']},
+        {title:'Property Documents',items:['Certified True Copy of Transfer Certificate of Title (TCT)','Tax Declaration of the property','Location map / vicinity map of the property','Contract to Sell (for new purchases)']}
       ]
     },
     'Car Loan': {
-      icon: '🚗', subtitle: 'Up to ₱2M | 12–60 months',
-      benefits: [
-        { icon: '🚘', label: 'Brand New or Used Vehicles', desc: 'Finance brand new cars from any authorized dealer, or quality pre-owned vehicles from reputable sellers.' },
-        { icon: '💰', label: 'High Loanable Amount', desc: 'Borrow up to ₱2,000,000 covering up to 80% of the vehicle\'s selling price.' },
-        { icon: '📅', label: 'Flexible Terms', desc: 'Choose repayment terms from 12 to 60 months — monthly amortization designed to fit your budget.' },
-        { icon: '📉', label: 'Competitive Rates', desc: 'Enjoy competitive add-on and fixed interest rates that keep your monthly payments predictable.' },
-        { icon: '⚡', label: 'Quick Approval', desc: 'Streamlined evaluation process means you can drive your new car sooner than you think.' },
-        { icon: '🔒', label: 'Safe & Secure Process', desc: 'All transactions go through licensed lending partners — your investment is fully protected.' }
+      icon:'🚗', amount:'Up to ₱2M', sublabel:'12–60 months | Competitive rates',
+      tagline:'Drive your dream car today — brand new or pre-owned — with flexible financing terms and fast approval.',
+      tags:['Brand New','Pre-Owned','Low Down Payment','Fast Approval'],
+      gradient:'linear-gradient(135deg,#0a1a0e 0%,#0d3520 50%,#1a6b3c 100%)',
+      color:'#69f0ae',
+      benefits:[
+        {icon:'🚘',label:'Brand New or Pre-Owned',desc:'Finance any brand new car from authorized dealers, or quality used vehicles from reputable sellers.'},
+        {icon:'💰',label:'Up to ₱2,000,000',desc:'Cover up to 80% of the vehicle\'s selling price depending on credit evaluation.'},
+        {icon:'📅',label:'12 to 60 Months',desc:'Choose your preferred term from 1 to 5 years for predictable monthly payments.'},
+        {icon:'📉',label:'Competitive Add-On Rates',desc:'Transparent and competitive interest rates with no hidden charges.'},
+        {icon:'⚡',label:'Fast Dealer Coordination',desc:'We work directly with your chosen dealership to process everything smoothly.'},
+        {icon:'🔒',label:'Secure & Licensed',desc:'All transactions go through BSP-supervised lending institutions.'}
       ],
-      availment: [
-        { title: 'Choose Your Vehicle', desc: 'Select your preferred brand, model, and variant. Get a proforma invoice or quotation from the dealership.' },
-        { title: 'Submit Application', desc: 'Fill out the LoanHub Philippines application form with vehicle and personal details.' },
-        { title: 'Specialist Assistance', desc: 'A loan specialist will contact you to review your documents and confirm loan details.' },
-        { title: 'Credit Evaluation', desc: 'Our lending partner evaluates your credit score, income, and capacity to pay.' },
-        { title: 'Loan Approval & Contract', desc: 'Receive your loan offer. Upon acceptance, sign the chattel mortgage agreement.' },
-        { title: 'Vehicle Release', desc: 'The lender pays the dealer directly. You drive away with your new vehicle.' }
+      availment:[
+        {title:'Choose Your Vehicle',desc:'Select preferred brand, model, and variant. Get a proforma invoice from the dealership.'},
+        {title:'Submit Application',desc:'Fill out the LoanHub form with vehicle and personal details.'},
+        {title:'Specialist Assistance',desc:'Loan specialist reviews your documents and confirms loan details with you.'},
+        {title:'Credit Evaluation',desc:'Lending partner evaluates income, credit score, and repayment capacity.'},
+        {title:'Approval & Contract',desc:'Receive loan offer. Sign the chattel mortgage agreement upon acceptance.'},
+        {title:'Vehicle Release',desc:'Lender pays dealer directly. You drive away with your new vehicle.'}
       ],
-      notes: [
-        { type: 'warning', icon: '⚠️', text: '<strong>Chattel mortgage is required.</strong> The vehicle serves as collateral for the duration of the loan.' },
-        { type: 'info', icon: 'ℹ️', text: '<strong>Comprehensive insurance is mandatory</strong> for the entire loan term — costing approximately 2–3% of vehicle value annually.' },
-        { type: 'warning', icon: '⚠️', text: '<strong>Down payment typically ranges from 20–30%</strong> of the vehicle\'s selling price. Negotiate directly with the dealer.' },
-        { type: 'success', icon: '✅', text: '<strong>Pre-owned vehicles may qualify</strong> if not more than 7 years old and sourced from accredited dealers.' },
-        { type: 'info', icon: 'ℹ️', text: '<strong>Early settlement is allowed</strong> but may involve pre-termination fees. Confirm with your loan specialist.' }
+      notes:[
+        {type:'warning',icon:'⚠️',text:'<strong>Chattel mortgage is required.</strong> The vehicle serves as collateral for the duration of the loan.'},
+        {type:'info',icon:'ℹ️',text:'<strong>Comprehensive insurance is mandatory</strong> for the entire loan term — approximately 2–3% of vehicle value per year.'},
+        {type:'warning',icon:'⚠️',text:'<strong>Down payment ranges from 20–30%</strong> of the vehicle selling price. Confirm with dealer directly.'},
+        {type:'success',icon:'✅',text:'<strong>Pre-owned vehicles may qualify</strong> if not more than 7 years old from accredited dealers.'},
+        {type:'info',icon:'ℹ️',text:'<strong>Early settlement is allowed</strong> but may involve pre-termination fees. Confirm with your specialist.'}
       ],
-      requirements: [
-        { title: 'Basic Requirements', items: ['Valid Government-Issued ID (2 valid IDs)', 'Proof of Billing Address (utility bill within 3 months)', 'Duly accomplished application form', 'Taxpayer Identification Number (TIN)'] },
-        { title: 'Proof of Income', items: ['Latest 3 months payslips (for employed)', 'Certificate of Employment with compensation', 'Latest ITR (BIR Form 2316 or 1701)', 'Bank statements for the last 3–6 months'] },
-        { title: 'Vehicle Documents', items: ['Quotation or Proforma Invoice from dealership', 'Chosen vehicle details (make, model, year, variant)', 'Down payment receipt (if applicable)'] }
+      requirements:[
+        {title:'Basic Requirements',items:['Valid Government-Issued ID (2 valid IDs)','Proof of Billing Address (utility bill within 3 months)','Duly accomplished application form','Taxpayer Identification Number (TIN)']},
+        {title:'Proof of Income',items:['Latest 3 months payslips (for employed)','Certificate of Employment with compensation','Latest ITR (BIR Form 2316 or 1701)','Bank statements for the last 3–6 months']},
+        {title:'Vehicle Documents',items:['Quotation or Proforma Invoice from dealership','Chosen vehicle details (make, model, year, variant)','Down payment receipt (if applicable)']}
       ]
     },
     'Business Loan': {
-      icon: '💼', subtitle: 'Up to ₱3M | Fast processing',
-      benefits: [
-        { icon: '📈', label: 'Business Expansion', desc: 'Fund your business growth — open a new branch, expand operations, purchase equipment, or hire staff.' },
-        { icon: '💰', label: 'High Loanable Amount', desc: 'Access up to ₱3,000,000 depending on your business revenue, assets, and financial standing.' },
-        { icon: '🔄', label: 'Working Capital Support', desc: 'Bridge cash flow gaps, fund inventory restocking, or cover operating expenses during lean seasons.' },
-        { icon: '📅', label: 'Flexible Terms', desc: 'Repayment terms tailored to your business cash flow — monthly, quarterly, or structured payments.' },
-        { icon: '🏪', label: 'Open to All Business Types', desc: 'Sole proprietorships, partnerships, corporations, and cooperatives are all welcome to apply.' },
-        { icon: '⚡', label: 'Fast Turnaround', desc: 'Our team prioritizes business loan processing so your business doesn\'t miss any opportunity.' }
+      icon:'💼', amount:'Up to ₱3M', sublabel:'Fast processing | All business types',
+      tagline:'Fuel your business growth with working capital, expansion funding, or equipment financing — fast and flexible.',
+      tags:['Expansion','Working Capital','Equipment','All Business Types'],
+      gradient:'linear-gradient(135deg,#1a0d00 0%,#3d1f00 50%,#7a3e00 100%)',
+      color:'#ffb74d',
+      benefits:[
+        {icon:'📈',label:'Business Expansion',desc:'Open new branches, expand operations, purchase equipment, or hire additional staff.'},
+        {icon:'💰',label:'Up to ₱3,000,000',desc:'Borrow based on business revenue, assets, and financial standing.'},
+        {icon:'🔄',label:'Working Capital Support',desc:'Bridge cash flow gaps, fund inventory, or cover operating expenses during lean periods.'},
+        {icon:'📅',label:'Flexible Repayment',desc:'Monthly, quarterly, or structured repayment schedules tailored to your cash flow.'},
+        {icon:'🏪',label:'Open to All Business Types',desc:'Sole proprietorships, partnerships, corporations, and cooperatives all welcome.'},
+        {icon:'⚡',label:'Fast Turnaround',desc:'We prioritize business loan processing so you never miss a growth opportunity.'}
       ],
-      availment: [
-        { title: 'Submit Inquiry', desc: 'Complete the LoanHub Philippines form and select Business Loan. Describe your business and purpose of the loan.' },
-        { title: 'Business Assessment', desc: 'A business loan specialist will contact you to review your financial statements and business profile.' },
-        { title: 'Document Submission', desc: 'Submit all required business and financial documents via email or Messenger.' },
-        { title: 'Credit & Business Evaluation', desc: 'Lending partner evaluates business viability, cash flow, and repayment capacity.' },
-        { title: 'Loan Offer', desc: 'Receive your loan offer with the approved amount, rate, and repayment schedule.' },
-        { title: 'Fund Release', desc: 'Upon signing of the loan agreement, funds are credited to your business bank account.' }
+      availment:[
+        {title:'Submit Inquiry',desc:'Complete the LoanHub form. Describe your business and purpose of the loan.'},
+        {title:'Business Assessment',desc:'A business loan specialist reviews your financial statements and business profile.'},
+        {title:'Document Submission',desc:'Submit all required business and financial documents via email or Messenger.'},
+        {title:'Credit & Business Evaluation',desc:'Lending partner evaluates business viability, cash flow, and repayment capacity.'},
+        {title:'Loan Offer',desc:'Receive approved amount, rate, and repayment schedule in your offer letter.'},
+        {title:'Fund Release',desc:'Upon signing the loan agreement, funds are credited to your business account.'}
       ],
-      notes: [
-        { type: 'warning', icon: '⚠️', text: '<strong>Business must be at least 1–2 years in operation.</strong> Startups may require additional documents or collateral.' },
-        { type: 'info', icon: 'ℹ️', text: '<strong>Financial statements must be audited by a CPA</strong> for loan amounts above ₱500,000.' },
-        { type: 'warning', icon: '⚠️', text: '<strong>Collateral may be required</strong> depending on loan amount and business credit profile.' },
-        { type: 'success', icon: '✅', text: '<strong>Online businesses and freelancers may qualify</strong> with sufficient bank statement history and proof of income.' },
-        { type: 'info', icon: 'ℹ️', text: '<strong>Tax compliance is important.</strong> Businesses with updated BIR registrations and filings are prioritized.' }
+      notes:[
+        {type:'warning',icon:'⚠️',text:'<strong>Business must be at least 1–2 years in operation.</strong> Startups may require collateral or co-borrower.'},
+        {type:'info',icon:'ℹ️',text:'<strong>CPA-audited financial statements required</strong> for loan amounts above ₱500,000.'},
+        {type:'warning',icon:'⚠️',text:'<strong>Collateral may be required</strong> depending on loan amount and business credit profile.'},
+        {type:'success',icon:'✅',text:'<strong>Online businesses and freelancers may qualify</strong> with 6+ months of consistent bank statement history.'},
+        {type:'info',icon:'ℹ️',text:'<strong>Updated BIR registration and filings</strong> are important for a strong application — tax compliance matters.'}
       ],
-      requirements: [
-        { title: 'Basic Requirements', items: ['Valid Government-Issued ID (2 valid IDs)', 'Proof of Billing Address (utility bill within 3 months)', 'Duly accomplished application form', 'Taxpayer Identification Number (TIN)'] },
-        { title: 'Business Documents', items: ['DTI Registration or SEC Certificate of Registration', 'Business Permit / Mayor\'s Permit (latest)', 'Articles of Incorporation or Partnership (if corporation)', 'List of officers and stockholders'] },
-        { title: 'Financial Documents', items: ['Latest 2 years Audited Financial Statements', 'Latest ITR with BIR stamp (1701 or 1702)', 'Bank statements for the last 6 months', 'Business profile or company background'] }
+      requirements:[
+        {title:'Basic Requirements',items:['Valid Government-Issued ID (2 valid IDs)','Proof of Billing Address (utility bill within 3 months)','Duly accomplished application form','Taxpayer Identification Number (TIN)']},
+        {title:'Business Documents',items:['DTI Registration or SEC Certificate of Registration','Business Permit / Mayor\'s Permit (latest)','Articles of Incorporation or Partnership (if corporation)','List of officers and stockholders']},
+        {title:'Financial Documents',items:['Latest 2 years Audited Financial Statements','Latest ITR with BIR stamp (1701 or 1702)','Bank statements for the last 6 months','Business profile or company background']}
       ]
     },
     'Medical Loan': {
-      icon: '💊', subtitle: 'Up to ₱500K | Emergency-ready',
-      benefits: [
-        { icon: '🏥', label: 'Hospital & Medical Bills', desc: 'Cover hospitalization fees, surgical procedures, specialist consultations, and ICU charges.' },
-        { icon: '💊', label: 'Medicines & Treatment', desc: 'Fund ongoing medication, chemotherapy, dialysis, or any long-term medical treatment.' },
-        { icon: '⚡', label: 'Emergency-Ready', desc: 'Designed for urgent situations — same-day processing available for qualified applicants.' },
-        { icon: '💰', label: 'Up to ₱500,000', desc: 'Access up to ₱500,000 to cover your medical expenses without depleting your savings.' },
-        { icon: '📅', label: 'Flexible Repayment', desc: 'Choose a repayment schedule that works with your recovery — don\'t let finances slow your healing.' },
-        { icon: '🔒', label: 'Confidential & Secure', desc: 'Your medical information and financial details are handled with strict confidentiality.' }
+      icon:'💊', amount:'Up to ₱500K', sublabel:'Emergency-ready | Same-day processing',
+      tagline:'Cover hospitalization, surgery, medicines, and ongoing treatment — fast cash when your family needs it most.',
+      tags:['Hospitalization','Surgery','Medicines','Emergency'],
+      gradient:'linear-gradient(135deg,#1a0020 0%,#3d0050 50%,#7a0090 100%)',
+      color:'#ce93d8',
+      benefits:[
+        {icon:'🏥',label:'Hospital & Medical Bills',desc:'Cover hospitalization fees, surgical procedures, specialist consultations, and ICU charges.'},
+        {icon:'💊',label:'Medicines & Treatment',desc:'Fund ongoing medication, chemotherapy, dialysis, or any long-term medical treatment.'},
+        {icon:'⚡',label:'Emergency-Ready',desc:'Designed for urgent situations — same-day processing available for qualified applicants.'},
+        {icon:'💰',label:'Up to ₱500,000',desc:'Access substantial funds without depleting your family\'s savings or emergency fund.'},
+        {icon:'📅',label:'Flexible Repayment',desc:'Recover first, pay later — repayment schedules designed around your recovery.'},
+        {icon:'🔒',label:'Confidential & Secure',desc:'Your medical and financial information is handled with strict confidentiality.'}
       ],
-      availment: [
-        { title: 'Submit Application', desc: 'Fill out the LoanHub Philippines form. Select Medical Loan and briefly describe the medical need.' },
-        { title: 'Specialist Contact', desc: 'A loan specialist calls you within the hour to review your situation and expedite processing.' },
-        { title: 'Submit Documents', desc: 'Provide income documents, valid IDs, and medical documents (hospital bill, prescription, treatment plan).' },
-        { title: 'Credit Evaluation', desc: 'Fast-track evaluation of your application by our lending partner.' },
-        { title: 'Approval & Agreement', desc: 'Receive loan offer, review terms, and sign the loan agreement.' },
-        { title: 'Fund Release', desc: 'Funds released to your account or directly to the hospital — as quickly as same day for eligible applicants.' }
+      availment:[
+        {title:'Submit Application',desc:'Fill out the LoanHub form. Select Medical Loan and briefly describe the medical need.'},
+        {title:'Specialist Contact',desc:'A loan specialist calls you within the hour to review your situation and expedite processing.'},
+        {title:'Submit Documents',desc:'Provide income documents, valid IDs, and medical documents (billing statement, prescription).'},
+        {title:'Fast-Track Evaluation',desc:'Priority evaluation by our lending partner for medical emergency cases.'},
+        {title:'Approval & Agreement',desc:'Receive loan offer, review terms, and sign the loan agreement.'},
+        {title:'Fund Release',desc:'Funds released to your account or directly to the hospital — as fast as same-day for eligible applicants.'}
       ],
-      notes: [
-        { type: 'info', icon: 'ℹ️', text: '<strong>A hospital billing statement or medical certificate is required</strong> to establish the purpose of the loan.' },
-        { type: 'success', icon: '✅', text: '<strong>PhilHealth and HMO coverage</strong> does not disqualify you — the loan covers the remaining uncovered balance.' },
-        { type: 'warning', icon: '⚠️', text: '<strong>Pre-existing conditions may affect approval.</strong> Disclose your full medical situation to your specialist for the best recommendation.' },
-        { type: 'success', icon: '✅', text: '<strong>Employed, self-employed, and OFW family members may apply</strong> as long as income and repayment capacity are established.' },
-        { type: 'info', icon: 'ℹ️', text: '<strong>This is a cash loan, not insurance.</strong> It must be repaid in monthly installments according to your agreed schedule.' }
+      notes:[
+        {type:'info',icon:'ℹ️',text:'<strong>Hospital billing statement or medical certificate is required</strong> to establish the loan purpose.'},
+        {type:'success',icon:'✅',text:'<strong>PhilHealth and HMO coverage</strong> does not disqualify you — this loan covers the remaining balance.'},
+        {type:'warning',icon:'⚠️',text:'<strong>Pre-existing conditions may affect approval.</strong> Disclose your full situation to your specialist for the best recommendation.'},
+        {type:'success',icon:'✅',text:'<strong>Employed, self-employed, and OFW family members may apply</strong> as long as income is established.'},
+        {type:'info',icon:'ℹ️',text:'<strong>This is a cash loan, not insurance.</strong> It must be repaid monthly according to your agreed schedule.'}
       ],
-      requirements: [
-        { title: 'Basic Requirements', items: ['Valid Government-Issued ID (2 valid IDs)', 'Proof of Billing Address (utility bill within 3 months)', 'Duly accomplished application form', 'Taxpayer Identification Number (TIN)'] },
-        { title: 'Proof of Income', items: ['Latest 3 months payslips (for employed)', 'Certificate of Employment with compensation', 'Latest ITR or bank statements (for self-employed)', 'Active bank account details'] },
-        { title: 'Medical Documents', items: ['Medical certificate or hospital billing statement', 'Doctor\'s prescription or treatment plan (if available)', 'PhilHealth / HMO coverage documents (if applicable)'] }
+      requirements:[
+        {title:'Basic Requirements',items:['Valid Government-Issued ID (2 valid IDs)','Proof of Billing Address (utility bill within 3 months)','Duly accomplished application form','Taxpayer Identification Number (TIN)']},
+        {title:'Proof of Income',items:['Latest 3 months payslips (for employed)','Certificate of Employment with compensation','Latest ITR or bank statements (for self-employed)','Active bank account details']},
+        {title:'Medical Documents',items:['Medical certificate or hospital billing statement','Doctor\'s prescription or treatment plan (if available)','PhilHealth / HMO coverage documents (if applicable)']}
       ]
     },
     'Professional Loan': {
-      icon: '👔', subtitle: 'Up to ₱1M | For licensed professionals',
-      benefits: [
-        { icon: '🏆', label: 'Designed for Professionals', desc: 'Exclusively tailored for doctors, lawyers, engineers, nurses, CPAs, architects, dentists, and other licensed professionals.' },
-        { icon: '💰', label: 'Up to ₱1,000,000', desc: 'Access up to ₱1,000,000 to fund clinic setup, equipment, continuing education, or any personal/professional need.' },
-        { icon: '📉', label: 'Lower Interest Rates', desc: 'Licensed professionals enjoy preferential rates due to stable income and high creditworthiness.' },
-        { icon: '📋', label: 'Minimal Requirements', desc: 'Fewer documentary requirements than standard business loans — your PRC license is a strong asset.' },
-        { icon: '🔄', label: 'Multi-Purpose Use', desc: 'Use the funds for clinic renovation, medical/dental equipment, law firm setup, professional training, or personal use.' },
-        { icon: '⚡', label: 'Fast & Dedicated Service', desc: 'A specialist is assigned specifically to professional loan applicants for faster, more personalized service.' }
+      icon:'👔', amount:'Up to ₱1M', sublabel:'For licensed professionals | Preferential rates',
+      tagline:'Exclusively designed for doctors, lawyers, engineers, nurses, CPAs, and other licensed professionals.',
+      tags:['Doctors','Lawyers','Engineers','CPAs & Nurses'],
+      gradient:'linear-gradient(135deg,#0a0a1a 0%,#151530 50%,#2a2a6e 100%)',
+      color:'#90caf9',
+      benefits:[
+        {icon:'🏆',label:'For Licensed Professionals',desc:'Exclusively tailored for PRC-licensed doctors, lawyers, engineers, nurses, CPAs, architects, dentists.'},
+        {icon:'💰',label:'Up to ₱1,000,000',desc:'Fund clinic setup, equipment, continuing education, practice expansion, or personal needs.'},
+        {icon:'📉',label:'Preferential Rates',desc:'Lower rates than standard loans — your professional license is a strong credit asset.'},
+        {icon:'📋',label:'Minimal Requirements',desc:'Fewer documents than business loans. Your PRC license simplifies the process significantly.'},
+        {icon:'🔄',label:'Multi-Purpose Use',desc:'Clinic renovation, dental/medical equipment, law firm setup, professional training, or personal use.'},
+        {icon:'⚡',label:'Dedicated Specialist',desc:'A specialist assigned exclusively to professional loan applicants for faster, personalized service.'}
       ],
-      availment: [
-        { title: 'Submit Application', desc: 'Fill out the LoanHub Philippines form and select Professional Loan. Mention your profession and purpose.' },
-        { title: 'Specialist Callback', desc: 'A loan specialist contacts you to confirm your license details and discuss loan terms.' },
-        { title: 'Document Submission', desc: 'Submit your valid PRC ID, professional license, income documents, and IDs.' },
-        { title: 'Credit Evaluation', desc: 'Lending partner verifies your professional standing and assesses repayment capacity.' },
-        { title: 'Loan Offer', desc: 'Receive a tailored loan offer based on your profession and income profile.' },
-        { title: 'Fund Release', desc: 'Funds are released to your account upon signing of the loan agreement.' }
+      availment:[
+        {title:'Submit Application',desc:'Fill out the LoanHub form. Select Professional Loan and mention your profession and purpose.'},
+        {title:'Specialist Callback',desc:'A loan specialist contacts you to confirm license details and discuss personalized loan terms.'},
+        {title:'Document Submission',desc:'Submit your valid PRC ID, professional license, income documents, and government IDs.'},
+        {title:'Credit Evaluation',desc:'Lending partner verifies professional standing and assesses repayment capacity.'},
+        {title:'Tailored Loan Offer',desc:'Receive a loan offer specifically structured for your profession and income profile.'},
+        {title:'Fund Release',desc:'Funds released to your account upon signing of the loan agreement.'}
       ],
-      notes: [
-        { type: 'success', icon: '✅', text: '<strong>Your PRC license is a major asset.</strong> Keeping it active and in good standing strengthens your application.' },
-        { type: 'info', icon: 'ℹ️', text: '<strong>Both employed and self-employed professionals qualify.</strong> Solo practitioners may need to provide clinic/office proof.' },
-        { type: 'warning', icon: '⚠️', text: '<strong>Loan amount is based on income capacity.</strong> Higher monthly income increases your maximum loanable amount.' },
-        { type: 'success', icon: '✅', text: '<strong>No collateral required</strong> for amounts within standard unsecured thresholds — subject to credit evaluation.' },
-        { type: 'info', icon: 'ℹ️', text: '<strong>Certificate of Good Standing</strong> from your professional association may be requested for larger loan amounts.' }
+      notes:[
+        {type:'success',icon:'✅',text:'<strong>Your PRC license is a major asset.</strong> Keeping it active and in good standing greatly strengthens your application.'},
+        {type:'info',icon:'ℹ️',text:'<strong>Both employed and self-employed professionals qualify.</strong> Solo practitioners need to provide clinic/office proof.'},
+        {type:'warning',icon:'⚠️',text:'<strong>Loan amount is based on income capacity.</strong> Higher monthly income = higher maximum loanable amount.'},
+        {type:'success',icon:'✅',text:'<strong>No collateral required</strong> for amounts within standard unsecured thresholds — subject to credit evaluation.'},
+        {type:'info',icon:'ℹ️',text:'<strong>Certificate of Good Standing</strong> from your professional association may be requested for larger amounts.'}
       ],
-      requirements: [
-        { title: 'Basic Requirements', items: ['Valid Government-Issued ID (2 valid IDs)', 'Proof of Billing Address (utility bill within 3 months)', 'Duly accomplished application form', 'Taxpayer Identification Number (TIN)'] },
-        { title: 'Proof of Income', items: ['Latest 3 months payslips (for employed)', 'Certificate of Employment with compensation', 'Latest ITR (BIR Form 2316 or 1701)', 'Bank statements for the last 3 months'] },
-        { title: 'Professional Documents', items: ['Valid Professional Regulation Commission (PRC) ID', 'Professional License (doctor, lawyer, engineer, nurse, CPA, etc.)', 'Certificate of Good Standing from professional association (if applicable)', 'Clinic or office address proof (for solo practitioners)'] }
+      requirements:[
+        {title:'Basic Requirements',items:['Valid Government-Issued ID (2 valid IDs)','Proof of Billing Address (utility bill within 3 months)','Duly accomplished application form','Taxpayer Identification Number (TIN)']},
+        {title:'Proof of Income',items:['Latest 3 months payslips (for employed)','Certificate of Employment with compensation','Latest ITR (BIR Form 2316 or 1701)','Bank statements for the last 3 months']},
+        {title:'Professional Documents',items:['Valid Professional Regulation Commission (PRC) ID','Professional License (doctor, lawyer, engineer, nurse, CPA, etc.)','Certificate of Good Standing from professional association (if applicable)','Clinic or office address proof (for solo practitioners)']}
       ]
     },
     'Sangla OR/CR': {
-      icon: '🚘', subtitle: 'Up to ₱500K | Fast cash using your vehicle',
-      benefits: [
-        { icon: '🚗', label: 'Keep Your Vehicle', desc: 'You keep and continue using your vehicle — only the OR and CR documents are surrendered as collateral.' },
-        { icon: '⚡', label: 'Fast Cash Release', desc: 'One of the fastest loan products available — same-day processing possible for complete documents.' },
-        { icon: '💰', label: 'Up to ₱500,000', desc: 'Borrow up to ₱500,000 depending on your vehicle\'s appraised market value.' },
-        { icon: '📋', label: 'Minimal Requirements', desc: 'Simple requirements — primarily your vehicle\'s OR/CR, valid IDs, and proof of income.' },
-        { icon: '📅', label: 'Flexible Terms', desc: 'Repayment terms from 6 to 24 months, with monthly amortization structured to your income.' },
-        { icon: '🔓', label: 'Multiple Uses', desc: 'Use the funds for any purpose — medical, business capital, tuition, home improvement, or emergencies.' }
+      icon:'🚘', amount:'Up to ₱500K', sublabel:'Fast cash | Keep your vehicle',
+      tagline:'Use your vehicle\'s OR/CR as collateral and get fast cash — you keep driving while your loan is being paid.',
+      tags:['Keep Your Car','Same-Day','OR/CR Collateral','Fast Cash'],
+      gradient:'linear-gradient(135deg,#1a0808 0%,#3d1010 50%,#7a2020 100%)',
+      color:'#ef9a9a',
+      benefits:[
+        {icon:'🚗',label:'Keep Your Vehicle',desc:'You continue using your vehicle throughout the loan — only the OR and CR documents are surrendered.'},
+        {icon:'⚡',label:'Same-Day Processing',desc:'One of the fastest loan products available — same-day cash release possible with complete documents.'},
+        {icon:'💰',label:'Up to ₱500,000',desc:'Borrow based on your vehicle\'s appraised current market value.'},
+        {icon:'📋',label:'Simple Requirements',desc:'Primarily your OR/CR, valid IDs, and proof of income. Minimal paperwork.'},
+        {icon:'📅',label:'6 to 24 Months',desc:'Short to medium repayment terms with manageable monthly amortization.'},
+        {icon:'🔓',label:'Any Purpose',desc:'Use funds for medical emergencies, business capital, tuition, home improvement, or anything.'}
       ],
-      availment: [
-        { title: 'Submit Application', desc: 'Fill out the LoanHub form. Select Sangla OR/CR and provide details of your vehicle (make, model, year, plate).' },
-        { title: 'Specialist Callback', desc: 'A specialist contacts you to confirm vehicle details and discuss loanable amount based on appraised value.' },
-        { title: 'Vehicle Inspection', desc: 'Our lending partner conducts a quick inspection or photo evaluation of your vehicle.' },
-        { title: 'Document Submission', desc: 'Submit your OR, CR, valid IDs, and income documents.' },
-        { title: 'Loan Offer & Signing', desc: 'Receive loan offer based on vehicle value. Sign the chattel mortgage agreement upon acceptance.' },
-        { title: 'Fund Release', desc: 'Funds are released to your account — as fast as same day for eligible applicants.' }
+      availment:[
+        {title:'Submit Application',desc:'Fill out the LoanHub form. Provide vehicle details (make, model, year, plate number).'},
+        {title:'Specialist Callback',desc:'Specialist contacts you to confirm vehicle details and discuss loanable amount.'},
+        {title:'Vehicle Inspection',desc:'Quick vehicle inspection or photo evaluation conducted by our lending partner.'},
+        {title:'Document Submission',desc:'Submit original OR, CR, valid IDs, and income documents.'},
+        {title:'Loan Offer & Signing',desc:'Receive offer based on vehicle value. Sign chattel mortgage upon acceptance.'},
+        {title:'Fund Release',desc:'Funds released to your account — as fast as same-day for eligible applicants.'}
       ],
-      notes: [
-        { type: 'warning', icon: '⚠️', text: '<strong>Vehicle must be fully paid.</strong> Vehicles with existing chattel mortgage or financing will not qualify.' },
-        { type: 'warning', icon: '⚠️', text: '<strong>Vehicle must be registered under your name.</strong> OR/CR in another person\'s name requires additional legal documentation.' },
-        { type: 'info', icon: 'ℹ️', text: '<strong>Vehicle must not be more than 10 years old</strong> from year of manufacture at time of application.' },
-        { type: 'success', icon: '✅', text: '<strong>You continue driving your vehicle</strong> throughout the loan period — only the OR/CR is held by the lender.' },
-        { type: 'warning', icon: '⚠️', text: '<strong>Non-payment may result in vehicle seizure.</strong> Always ensure timely monthly payments to protect your asset.' }
+      notes:[
+        {type:'warning',icon:'⚠️',text:'<strong>Vehicle must be fully paid.</strong> Vehicles with existing chattel mortgage or financing will not qualify.'},
+        {type:'warning',icon:'⚠️',text:'<strong>Vehicle must be registered under your name.</strong> OR/CR in another name requires additional legal documentation.'},
+        {type:'info',icon:'ℹ️',text:'<strong>Vehicle must not be more than 10 years old</strong> from year of manufacture at time of application.'},
+        {type:'success',icon:'✅',text:'<strong>You continue driving your vehicle</strong> throughout the loan period — only OR/CR is held by the lender.'},
+        {type:'warning',icon:'⚠️',text:'<strong>Non-payment may result in vehicle seizure.</strong> Always ensure timely payments to protect your asset.'}
       ],
-      requirements: [
-        { title: 'Basic Requirements', items: ['Valid Government-Issued ID (2 valid IDs)', 'Proof of Billing Address (utility bill within 3 months)', 'Duly accomplished application form', 'Taxpayer Identification Number (TIN)'] },
-        { title: 'Vehicle Documents', items: ['Original Official Receipt (OR) of the vehicle', 'Original Certificate of Registration (CR) of the vehicle', 'Vehicle must be fully paid (no existing chattel mortgage)', 'Vehicle must be under the applicant\'s name'] },
-        { title: 'Additional Requirements', items: ['Latest photos of the vehicle (front, back, sides)', 'Vehicle must not be more than 10 years old', 'Proof of Income (payslip, ITR, or bank statements)', 'Active bank account or e-wallet for fund release'] }
+      requirements:[
+        {title:'Basic Requirements',items:['Valid Government-Issued ID (2 valid IDs)','Proof of Billing Address (utility bill within 3 months)','Duly accomplished application form','Taxpayer Identification Number (TIN)']},
+        {title:'Vehicle Documents',items:['Original Official Receipt (OR) of the vehicle','Original Certificate of Registration (CR) of the vehicle','Vehicle must be fully paid (no existing chattel mortgage)','Vehicle must be under the applicant\'s name']},
+        {title:'Additional Requirements',items:['Latest photos of the vehicle (front, back, sides)','Vehicle must not be more than 10 years old','Proof of Income (payslip, ITR, or bank statements)','Active bank account or e-wallet for fund release']}
       ]
     },
     'OFW Loan': {
-      icon: '✈️', subtitle: 'Up to ₱500K | Designed for OFWs & their families',
-      benefits: [
-        { icon: '🌍', label: 'Apply from Abroad', desc: 'OFWs can apply while overseas through a family representative using a Special Power of Attorney (SPA).' },
-        { icon: '💰', label: 'Up to ₱500,000', desc: 'Borrow up to ₱500,000 to support your family\'s needs, investments, or emergency expenses back home.' },
-        { icon: '🏠', label: 'Multiple Uses', desc: 'Fund a home purchase or renovation, business capital for your family, education, emergency expenses, or savings.' },
-        { icon: '⚡', label: 'Fast Processing', desc: 'Our team understands the urgency of OFW needs — we prioritize quick evaluation and approval.' },
-        { icon: '👨‍👩‍👧', label: 'Family Representative Allowed', desc: 'Your family member can transact on your behalf with a valid, notarized or consularized SPA.' },
-        { icon: '🔒', label: 'Trusted & Secure', desc: 'All transactions are processed through licensed lending partners — safe, legal, and fully compliant.' }
+      icon:'✈️', amount:'Up to ₱500K', sublabel:'For OFWs & families | Apply from abroad',
+      tagline:'Designed for Overseas Filipino Workers — apply from anywhere in the world through your trusted family representative.',
+      tags:['Land-Based','Sea-Based','Family Representative','POEA Verified'],
+      gradient:'linear-gradient(135deg,#001a1a 0%,#00333a 50%,#005566 100%)',
+      color:'#80deea',
+      benefits:[
+        {icon:'🌍',label:'Apply from Abroad',desc:'OFWs overseas can apply through a family representative using a notarized Special Power of Attorney.'},
+        {icon:'💰',label:'Up to ₱500,000',desc:'Fund family needs, home investment, business capital, education, or emergency expenses back home.'},
+        {icon:'🏠',label:'Multi-Purpose',desc:'Home purchase/renovation, business capital for family, education, emergency, or savings investment.'},
+        {icon:'⚡',label:'Fast Priority Processing',desc:'We understand OFW urgency — your application receives priority evaluation and faster approval.'},
+        {icon:'👨‍👩‍👧',label:'Family Rep Allowed',desc:'Your trusted family member can transact on your behalf with a valid, notarized SPA.'},
+        {icon:'🔒',label:'Secure & Compliant',desc:'All transactions processed through licensed institutions — safe, legal, and BSP-regulated.'}
       ],
-      availment: [
-        { title: 'Submit Application', desc: 'OFW or family representative fills out the LoanHub Philippines form, selecting OFW Loan as the product.' },
-        { title: 'Specialist Callback', desc: 'A specialist contacts the OFW or representative to review employment details and loan purpose.' },
-        { title: 'Prepare SPA (if abroad)', desc: 'If OFW is overseas, a Special Power of Attorney must be notarized at the Philippine Embassy or Consulate.' },
-        { title: 'Document Submission', desc: 'Submit all required OFW employment, identification, and income documents.' },
-        { title: 'Evaluation & Approval', desc: 'Lending partner evaluates remittance history, employment contract, and repayment capacity.' },
-        { title: 'Fund Release', desc: 'Funds are released to the OFW\'s designated account or to the authorized family representative.' }
+      availment:[
+        {title:'Submit Application',desc:'OFW or family representative fills out the LoanHub form and selects OFW Loan.'},
+        {title:'Specialist Callback',desc:'Specialist contacts the OFW or representative to review employment details and loan purpose.'},
+        {title:'Prepare SPA (if abroad)',desc:'If OFW is overseas, a Special Power of Attorney must be notarized at the Philippine Embassy or Consulate.'},
+        {title:'Document Submission',desc:'Submit all required OFW employment, identification, and income documents.'},
+        {title:'Evaluation & Approval',desc:'Lending partner evaluates remittance history, employment contract, and repayment capacity.'},
+        {title:'Fund Release',desc:'Funds released to the OFW\'s designated account or authorized family representative.'}
       ],
-      notes: [
-        { type: 'info', icon: 'ℹ️', text: '<strong>SPA must be notarized in the Philippines or consularized</strong> at the Philippine Embassy/Consulate in the OFW\'s host country.' },
-        { type: 'warning', icon: '⚠️', text: '<strong>Employment contract must be POEA-verified or government-to-government.</strong> Irregular employment documents may cause delays.' },
-        { type: 'success', icon: '✅', text: '<strong>Land-based and sea-based OFWs are both eligible.</strong> Seamen should provide their POEA-approved contract or CBA.' },
-        { type: 'info', icon: 'ℹ️', text: '<strong>Remittance records strengthen your application.</strong> Regular remittances to Philippine accounts demonstrate stable income.' },
-        { type: 'warning', icon: '⚠️', text: '<strong>OFW\'s passport must be valid</strong> and contain proof of active deployment (entry/exit stamps or working visa).' }
+      notes:[
+        {type:'info',icon:'ℹ️',text:'<strong>SPA must be notarized in the Philippines or consularized</strong> at the Philippine Embassy/Consulate in the host country.'},
+        {type:'warning',icon:'⚠️',text:'<strong>Employment contract must be POEA-verified.</strong> Irregular employment documents may cause processing delays.'},
+        {type:'success',icon:'✅',text:'<strong>Land-based and sea-based OFWs both eligible.</strong> Seamen must provide POEA-approved contract or CBA.'},
+        {type:'info',icon:'ℹ️',text:'<strong>Regular remittance records strengthen your application.</strong> Consistent bank deposits demonstrate stable income.'},
+        {type:'warning',icon:'⚠️',text:'<strong>OFW\'s passport must be valid</strong> and contain proof of active deployment (entry/exit stamps or working visa).'}
       ],
-      requirements: [
-        { title: 'Basic Requirements', items: ['Valid Government-Issued ID (2 valid IDs — passport required)', 'Proof of Billing Address in the Philippines', 'Duly accomplished application form', 'Taxpayer Identification Number (TIN)'] },
-        { title: 'OFW Employment Documents', items: ['Valid Overseas Employment Certificate (OEC) or e-OEC', 'POEA-verified Employment Contract', 'Proof of Deployment or Visa (copy of passport with entry stamp)', 'Latest 3–6 months remittance records or bank statements'] },
-        { title: 'For Family Representatives (if OFW is abroad)', items: ['Special Power of Attorney (SPA) — notarized or consularized', 'Valid ID of the authorized representative', 'Proof of relationship to OFW (if required)', 'Contact details of OFW for verification'] }
+      requirements:[
+        {title:'Basic Requirements',items:['Valid Government-Issued ID (2 valid IDs — passport required)','Proof of Billing Address in the Philippines','Duly accomplished application form','Taxpayer Identification Number (TIN)']},
+        {title:'OFW Employment Documents',items:['Valid Overseas Employment Certificate (OEC) or e-OEC','POEA-verified Employment Contract','Proof of Deployment or Visa (copy of passport with entry stamp)','Latest 3–6 months remittance records or bank statements']},
+        {title:'For Family Representatives (if OFW is abroad)',items:['Special Power of Attorney (SPA) — notarized or consularized','Valid ID of the authorized representative','Proof of relationship to OFW (if required)','Contact details of OFW for verification']}
       ]
     }
   };
 
-  function switchTab(btn, panelId) {
-    const modal = btn.closest('.modal');
-    modal.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
-    modal.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById(panelId).classList.add('active');
-    modal.querySelector('.modal-body').scrollTop = 0;
-  }
-
+  // ========================
+  // DETAIL PAGE: Open/Close
+  // ========================
   function selectLoan(type) {
-    const data = loanData[type];
-    document.getElementById('modalIcon').textContent = data.icon;
-    document.getElementById('modalTitle').textContent = type;
-    document.getElementById('modalSubtitle').textContent = data.subtitle;
+    const d = loanData[type];
+    if (!d) return;
 
-    // Benefits tab
-    let bHtml = '';
-    data.benefits.forEach(b => {
-      bHtml += `<div class="benefit-item"><div class="benefit-icon">${b.icon}</div><div><div class="benefit-label">${b.label}</div><div class="benefit-desc">${b.desc}</div></div></div>`;
+    // Update topbar
+    document.getElementById('ldpCrumb').textContent = type;
+    document.getElementById('ldpFType').value = type;
+
+    // Update visual card
+    document.getElementById('ldpVicon').textContent = d.icon;
+    document.getElementById('ldpVtitle').textContent = type;
+    document.getElementById('ldpVamount').textContent = d.amount;
+    document.getElementById('ldpVsub').textContent = d.sublabel;
+    document.getElementById('ldpVbg').style.background = d.gradient;
+    document.getElementById('ldpVdeco').textContent = d.icon;
+    document.getElementById('ldpVamount').style.color = d.color;
+    document.getElementById('ldpVsub').style.color = d.color;
+
+    // Tags
+    const tagsEl = document.getElementById('ldpVtags');
+    tagsEl.innerHTML = d.tags.map(t => `<span class="ldp-vtag">${t}</span>`).join('');
+
+    // Right side
+    document.getElementById('ldpName').textContent = type;
+    document.getElementById('ldpTagline').textContent = d.tagline;
+
+    // Calc
+    ldpCalc();
+
+    // Accordion: Benefits
+    const bHtml = d.benefits.map(b =>
+      `<div class="benefit-item"><div class="benefit-icon">${b.icon}</div><div><div class="benefit-label">${b.label}</div><div class="benefit-desc">${b.desc}</div></div></div>`
+    ).join('');
+    document.getElementById('laccBenefits-body').innerHTML = bHtml;
+
+    // Accordion: Availment
+    let aHtml = '';
+    d.availment.forEach((s, i) => {
+      if (i > 0) aHtml += '<div class="avail-connector"></div>';
+      aHtml += `<div class="avail-step"><div class="avail-num">${i+1}</div><div class="avail-content"><div class="avail-title">${s.title}</div><div class="avail-desc">${s.desc}</div></div></div>`;
     });
-    document.getElementById('tab-benefits').innerHTML = bHtml;
+    document.getElementById('laccAvailment-body').innerHTML = aHtml;
 
-    // Requirements tab
+    // Accordion: Notes
+    const nHtml = d.notes.map(n =>
+      `<div class="note-item ${n.type}"><div class="note-icon">${n.icon}</div><div class="note-text">${n.text}</div></div>`
+    ).join('');
+    document.getElementById('laccNotes-body').innerHTML = nHtml;
+
+    // Accordion: Requirements
     let rHtml = '';
-    data.requirements.forEach((sec, i) => {
+    d.requirements.forEach((sec, i) => {
       if (i > 0) rHtml += '<div class="modal-divider"></div>';
       rHtml += `<div class="req-section"><div class="req-section-title">${sec.title}</div><ul class="req-list">`;
       sec.items.forEach(item => { rHtml += `<li>${item}</li>`; });
       rHtml += '</ul></div>';
     });
-    document.getElementById('tab-requirements').innerHTML = rHtml;
+    document.getElementById('laccReqs-body').innerHTML = rHtml;
 
-    // Availment tab
-    let aHtml = '';
-    data.availment.forEach((step, i) => {
-      if (i > 0) aHtml += '<div class="avail-connector"></div>';
-      aHtml += `<div class="avail-step"><div class="avail-num">${i+1}</div><div class="avail-content"><div class="avail-title">${step.title}</div><div class="avail-desc">${step.desc}</div></div></div>`;
-    });
-    document.getElementById('tab-availment').innerHTML = aHtml;
+    // Close all accordions
+    document.querySelectorAll('.ldp-acc').forEach(a => a.classList.remove('open'));
 
-    // Notes tab
-    let nHtml = '';
-    data.notes.forEach(note => {
-      nHtml += `<div class="note-item ${note.type}"><div class="note-icon">${note.icon}</div><div class="note-text">${note.text}</div></div>`;
-    });
-    document.getElementById('tab-notes').innerHTML = nHtml;
-
-    // Reset to first tab
-    document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    document.querySelector('.modal-tab').classList.add('active');
-    document.getElementById('tab-benefits').classList.add('active');
-
-    document.getElementById('modalApplyBtn').onclick = () => {
-      closeModal();
-      const select = document.querySelector('#apply select');
-      for (let opt of select.options) { if (opt.text === type) { opt.selected = true; break; } }
-      document.getElementById('apply').scrollIntoView({behavior:'smooth'});
-    };
-    document.getElementById('loanModal').classList.add('active');
+    // Show page
+    const page = document.getElementById('loanDetailPage');
+    page.classList.add('active');
+    page.scrollTop = 0;
     document.body.style.overflow = 'hidden';
   }
 
-  function closeModal() {
-    document.getElementById('loanModal').classList.remove('active');
+  function closeLoanDetail() {
+    document.getElementById('loanDetailPage').classList.remove('active');
     document.body.style.overflow = '';
   }
 
-  document.getElementById('loanModal').addEventListener('click', function(e) {
-    if (e.target === this) closeModal();
-  });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  // ========================
+  // TERM SELECTOR
+  // ========================
+  let ldpCurrentTerm = 12;
+  function ldpSelectTerm(el, months) {
+    document.querySelectorAll('#loanDetailPage .ldp-term').forEach(t => t.classList.remove('sel'));
+    el.classList.add('sel');
+    ldpCurrentTerm = months;
+    ldpCalc();
+  }
+
+  // ========================
+  // INLINE CALCULATOR
+  // ========================
+  function ldpFmtAmt(input) {
+    // Format with commas as user types
+    let raw = input.value.replace(/[^0-9]/g, '');
+    if (raw === '') { input.value = ''; return; }
+    let num = parseInt(raw, 10);
+    input.value = num.toLocaleString('en-PH');
+    ldpCalc();
+  }
+
+  function ldpCalc() {
+    const amtEl = document.getElementById('ldpAmt');
+    const raw = amtEl ? amtEl.value.replace(/[^0-9]/g, '') : '200000';
+    const P = parseFloat(raw) || 200000;
+    const n = ldpCurrentTerm || 12;
+    const annualRate = parseFloat(document.getElementById('ldpRate')?.value || 12);
+    const r = annualRate / 100 / 12;
+    let monthly;
+    if (r === 0) {
+      monthly = P / n;
+    } else {
+      monthly = P * r * Math.pow(1+r,n) / (Math.pow(1+r,n) - 1);
+    }
+    const total = monthly * n;
+    const interest = total - P;
+    const fmt = v => '₱' + Math.round(v).toLocaleString('en-PH');
+    const mEl = document.getElementById('ldpMonthly');
+    const tEl = document.getElementById('ldpTotal');
+    const iEl = document.getElementById('ldpInterest');
+    if (mEl) mEl.textContent = fmt(monthly);
+    if (tEl) tEl.textContent = fmt(total);
+    if (iEl) iEl.textContent = fmt(interest);
+  }
+
+  // ========================
+  // ACCORDION
+  // ========================
+  function ldpToggleAcc(id) {
+    const acc = document.getElementById(id);
+    const wasOpen = acc.classList.contains('open');
+    document.querySelectorAll('.ldp-acc').forEach(a => a.classList.remove('open'));
+    if (!wasOpen) acc.classList.add('open');
+  }
+
+  // ========================
+  // FORM SUBMIT
+  // ========================
+  function ldpSubmit() {
+    const name = document.getElementById('ldpFName').value.trim();
+    const phone = document.getElementById('ldpFPhone').value.trim();
+    const emp = document.getElementById('ldpFEmp').value;
+    const income = document.getElementById('ldpFIncome').value;
+    if (!name || !phone || !emp || !income) {
+      alert('Please fill in all required fields (Name, Mobile, Employment, Income) before submitting.');
+      return;
+    }
+    const type = document.getElementById('ldpFType').value;
+    alert('Thank you, ' + name + '! 🎉\n\nYour application for a ' + type + ' has been received.\n\nOur loan specialist will contact you at ' + phone + ' within the hour.\n\nYou can also reach us on Facebook Messenger.');
+    document.getElementById('ldpFName').value = '';
+    document.getElementById('ldpFPhone').value = '';
+    document.getElementById('ldpFEmail').value = '';
+    document.getElementById('ldpFEmp').value = '';
+    document.getElementById('ldpFIncome').value = '';
+    document.getElementById('ldpFMsg').value = '';
+  }
+
+  // Old modal functions kept for backward compat (no-op)
+  function switchTab() {}
+  function closeModal() {
+    const m = document.getElementById('loanModal');
+    if (m) { m.classList.remove('active'); document.body.style.overflow = ''; }
+  }
 
   document.querySelectorAll('.faq-q').forEach(q => {
     q.addEventListener('click', () => {
