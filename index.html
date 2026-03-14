@@ -153,15 +153,139 @@
 
   /* LOAN TYPES */
   .loans { background: var(--deep); }
-  .loans-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1.2rem; margin-top:3rem; }
-  .loan-card { background:linear-gradient(135deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01)); border:1px solid var(--border); border-radius:16px; padding:1.8rem 1.5rem; text-align:center; transition:all 0.25s; cursor:pointer; text-decoration:none; display:block; color:inherit; }
-  .loan-card:hover { border-color:var(--teal); transform:translateY(-4px); box-shadow: 0 8px 30px rgba(0,194,168,0.15); }
-  .loan-card:active { transform:translateY(-1px) scale(0.98); box-shadow:0 3px 12px rgba(0,194,168,0.2); }
-  .loan-card .icon { font-size:2.2rem; margin-bottom:1rem; }
-  .loan-card h4 { font-family:'Outfit',sans-serif; font-weight:700; font-size:1rem; margin-bottom:0.4rem; }
-  .loan-card p { color:var(--muted); font-size:0.82rem; }
-  .loan-card .apply-hint { display:inline-block; margin-top:0.9rem; font-size:0.78rem; color:var(--teal); font-weight:600; opacity:0; transform:translateY(4px); transition:opacity 0.2s, transform 0.2s; }
-  .loan-card:hover .apply-hint { opacity:1; transform:translateY(0); }
+  .loans-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.1rem;
+    margin-top: 2.8rem;
+  }
+
+  /* PhilCare-style card */
+  .loan-card {
+    position: relative;
+    background: #ffffff;
+    border-radius: 18px;
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    height: 110px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.18), 0 1px 4px rgba(0,0,0,0.12);
+    transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.22s;
+    border: none;
+  }
+  .loan-card:hover {
+    transform: translateY(-5px) scale(1.015);
+    box-shadow: 0 14px 36px rgba(0,0,0,0.28), 0 2px 8px rgba(0,0,0,0.18);
+  }
+  .loan-card:active {
+    transform: translateY(-1px) scale(0.99);
+  }
+
+  /* Dot pattern top-right */
+  .loan-card::before {
+    content: '';
+    position: absolute;
+    top: 8px; right: 10px;
+    width: 56px; height: 44px;
+    background-image: radial-gradient(circle, rgba(0,0,0,0.12) 1.2px, transparent 1.2px);
+    background-size: 7px 7px;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Colored wave swoosh bottom-left via SVG background */
+  .loan-card .lc-wave {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 55%; height: 75%;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Icon area */
+  .loan-card .lc-icon {
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+    width: 80px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.18));
+  }
+
+  /* Text area */
+  .loan-card .lc-text {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    padding: 0 1rem 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .loan-card .lc-name {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 900;
+    font-style: italic;
+    font-size: 1.18rem;
+    line-height: 1.15;
+    margin: 0 0 0.2rem;
+    letter-spacing: -0.01em;
+  }
+  .loan-card .lc-sub {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    opacity: 0.72;
+    margin: 0;
+  }
+  .loan-card .lc-arrow {
+    position: absolute;
+    bottom: 8px; right: 10px;
+    z-index: 3;
+    font-size: 0.75rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .loan-card:hover .lc-arrow { opacity: 1; transform: translateX(0); }
+
+  /* Per-card color themes */
+  .loan-card[data-theme="blue"] .lc-name { color: #0d47a1; }
+  .loan-card[data-theme="blue"] .lc-sub { color: #1565c0; }
+  .loan-card[data-theme="blue"] .lc-arrow { color: #0d47a1; }
+
+  .loan-card[data-theme="green"] .lc-name { color: #1b5e20; }
+  .loan-card[data-theme="green"] .lc-sub { color: #2e7d32; }
+  .loan-card[data-theme="green"] .lc-arrow { color: #1b5e20; }
+
+  .loan-card[data-theme="orange"] .lc-name { color: #bf360c; }
+  .loan-card[data-theme="orange"] .lc-sub { color: #d84315; }
+  .loan-card[data-theme="orange"] .lc-arrow { color: #bf360c; }
+
+  .loan-card[data-theme="purple"] .lc-name { color: #4a148c; }
+  .loan-card[data-theme="purple"] .lc-sub { color: #6a1b9a; }
+  .loan-card[data-theme="purple"] .lc-arrow { color: #4a148c; }
+
+  .loan-card[data-theme="navy"] .lc-name { color: #0d1b5e; }
+  .loan-card[data-theme="navy"] .lc-sub { color: #1a2a80; }
+  .loan-card[data-theme="navy"] .lc-arrow { color: #0d1b5e; }
+
+  .loan-card[data-theme="red"] .lc-name { color: #b71c1c; }
+  .loan-card[data-theme="red"] .lc-sub { color: #c62828; }
+  .loan-card[data-theme="red"] .lc-arrow { color: #b71c1c; }
+
+  .loan-card[data-theme="teal"] .lc-name { color: #004d40; }
+  .loan-card[data-theme="teal"] .lc-sub { color: #00695c; }
+  .loan-card[data-theme="teal"] .lc-arrow { color: #004d40; }
 
   /* LOAN PRODUCT DETAIL PAGE */
   .loan-detail-page {
@@ -655,7 +779,7 @@
 
     .notify-wrapper { grid-template-columns:1fr; gap:2rem; }
 
-    .loans-grid { grid-template-columns:1fr 1fr; gap:1rem; }
+    .loans-grid { grid-template-columns:1fr; gap:0.85rem; }
 
     .apply-wrapper { grid-template-columns:1fr; gap:2rem; }
     .form-row { grid-template-columns:1fr; }
@@ -694,7 +818,7 @@
 
   @media (max-width:480px) {
     .steps { grid-template-columns:1fr; }
-    .loans-grid { grid-template-columns:1fr 1fr; }
+    .loans-grid { grid-template-columns:1fr; }
     .result-breakdown { flex-direction:column; gap:1rem; }
     .nav-cta { padding:0.55rem 1.1rem; font-size:0.82rem; }
     .badge { font-size:0.72rem; }
@@ -706,7 +830,7 @@
 
   @media (min-width:1200px) {
     .features-grid { grid-template-columns: repeat(3, 1fr); }
-    .loans-grid { grid-template-columns: repeat(7, 1fr); }
+    .loans-grid { grid-template-columns: repeat(2, 1fr); max-width: 860px; margin-left: auto; margin-right: auto; }
   }
   .reveal { opacity:0; transform:translateY(30px); transition:opacity 0.6s ease, transform 0.6s ease; }
   .reveal.visible { opacity:1; transform:translateY(0); }
@@ -880,13 +1004,112 @@
   <div class="section-label">What We Offer</div>
   <h2 class="section-title">Loan Products for <em>Every Need</em></h2>
   <div class="loans-grid reveal">
-    <a class="loan-card" onclick="selectLoan('Home Loan')"><div class="icon">🏠</div><h4>Home Loan</h4><p>Up to ₱5M | As low as 5.5% p.a.</p></a>
-    <a class="loan-card" onclick="selectLoan('Car Loan')"><div class="icon">🚗</div><h4>Car Loan</h4><p>Up to ₱2M | 12–60 months</p></a>
-    <a class="loan-card" onclick="selectLoan('Business Loan')"><div class="icon">💼</div><h4>Business Loan</h4><p>Up to ₱3M | Fast processing</p></a>
-    <a class="loan-card" onclick="selectLoan('Medical Loan')"><div class="icon">💊</div><h4>Medical Loan</h4><p>Up to ₱500K | Emergency-ready</p></a>
-    <a class="loan-card" onclick="selectLoan('Professional Loan')"><div class="icon">👔</div><h4>Professional Loan</h4><p>Up to ₱1M | For licensed pros</p></a>
-    <a class="loan-card" onclick="selectLoan('Sangla OR/CR')"><div class="icon">🚘</div><h4>Sangla OR/CR</h4><p>Up to ₱500K | Fast cash</p></a>
-    <a class="loan-card" onclick="selectLoan('OFW Loan')"><div class="icon">✈️</div><h4>OFW Loan</h4><p>Up to ₱500K | For OFWs & families</p></a>
+
+    <!-- Home Loan — Blue -->
+    <a class="loan-card" data-theme="blue" onclick="selectLoan('Home Loan')">
+      <svg class="lc-wave" viewBox="0 0 220 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,110 L0,55 Q30,20 70,38 Q110,56 160,30 Q190,16 220,28 L220,110 Z" fill="#1565c0" opacity="0.18"/>
+        <path d="M0,110 L0,70 Q40,40 85,55 Q130,70 175,48 Q200,36 220,44 L220,110 Z" fill="#1565c0" opacity="0.28"/>
+        <path d="M0,110 L0,85 Q50,62 95,72 Q145,84 190,65 L220,58 L220,110 Z" fill="#1976d2" opacity="0.45"/>
+      </svg>
+      <div class="lc-icon">🏠</div>
+      <div class="lc-text">
+        <div class="lc-name">Home Loan</div>
+        <div class="lc-sub">Up to ₱5M &nbsp;·&nbsp; 5.5% p.a.</div>
+      </div>
+      <div class="lc-arrow">View Details →</div>
+    </a>
+
+    <!-- Car Loan — Green -->
+    <a class="loan-card" data-theme="green" onclick="selectLoan('Car Loan')">
+      <svg class="lc-wave" viewBox="0 0 220 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,110 L0,55 Q30,20 70,38 Q110,56 160,30 Q190,16 220,28 L220,110 Z" fill="#2e7d32" opacity="0.18"/>
+        <path d="M0,110 L0,70 Q40,40 85,55 Q130,70 175,48 Q200,36 220,44 L220,110 Z" fill="#2e7d32" opacity="0.28"/>
+        <path d="M0,110 L0,85 Q50,62 95,72 Q145,84 190,65 L220,58 L220,110 Z" fill="#388e3c" opacity="0.45"/>
+      </svg>
+      <div class="lc-icon">🚗</div>
+      <div class="lc-text">
+        <div class="lc-name">Car Loan</div>
+        <div class="lc-sub">Up to ₱2M &nbsp;·&nbsp; 12–60 months</div>
+      </div>
+      <div class="lc-arrow">View Details →</div>
+    </a>
+
+    <!-- Business Loan — Orange -->
+    <a class="loan-card" data-theme="orange" onclick="selectLoan('Business Loan')">
+      <svg class="lc-wave" viewBox="0 0 220 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,110 L0,55 Q30,20 70,38 Q110,56 160,30 Q190,16 220,28 L220,110 Z" fill="#e65100" opacity="0.18"/>
+        <path d="M0,110 L0,70 Q40,40 85,55 Q130,70 175,48 Q200,36 220,44 L220,110 Z" fill="#e65100" opacity="0.28"/>
+        <path d="M0,110 L0,85 Q50,62 95,72 Q145,84 190,65 L220,58 L220,110 Z" fill="#f57c00" opacity="0.45"/>
+      </svg>
+      <div class="lc-icon">💼</div>
+      <div class="lc-text">
+        <div class="lc-name">Business Loan</div>
+        <div class="lc-sub">Up to ₱3M &nbsp;·&nbsp; Fast processing</div>
+      </div>
+      <div class="lc-arrow">View Details →</div>
+    </a>
+
+    <!-- Medical Loan — Red/Maroon -->
+    <a class="loan-card" data-theme="red" onclick="selectLoan('Medical Loan')">
+      <svg class="lc-wave" viewBox="0 0 220 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,110 L0,55 Q30,20 70,38 Q110,56 160,30 Q190,16 220,28 L220,110 Z" fill="#c62828" opacity="0.18"/>
+        <path d="M0,110 L0,70 Q40,40 85,55 Q130,70 175,48 Q200,36 220,44 L220,110 Z" fill="#c62828" opacity="0.28"/>
+        <path d="M0,110 L0,85 Q50,62 95,72 Q145,84 190,65 L220,58 L220,110 Z" fill="#d32f2f" opacity="0.45"/>
+      </svg>
+      <div class="lc-icon">💊</div>
+      <div class="lc-text">
+        <div class="lc-name">Medical Loan</div>
+        <div class="lc-sub">Up to ₱500K &nbsp;·&nbsp; Emergency-ready</div>
+      </div>
+      <div class="lc-arrow">View Details →</div>
+    </a>
+
+    <!-- Professional Loan — Navy -->
+    <a class="loan-card" data-theme="navy" onclick="selectLoan('Professional Loan')">
+      <svg class="lc-wave" viewBox="0 0 220 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,110 L0,55 Q30,20 70,38 Q110,56 160,30 Q190,16 220,28 L220,110 Z" fill="#1a237e" opacity="0.18"/>
+        <path d="M0,110 L0,70 Q40,40 85,55 Q130,70 175,48 Q200,36 220,44 L220,110 Z" fill="#1a237e" opacity="0.28"/>
+        <path d="M0,110 L0,85 Q50,62 95,72 Q145,84 190,65 L220,58 L220,110 Z" fill="#283593" opacity="0.45"/>
+      </svg>
+      <div class="lc-icon">👔</div>
+      <div class="lc-text">
+        <div class="lc-name">Professional Loan</div>
+        <div class="lc-sub">Up to ₱1M &nbsp;·&nbsp; Licensed pros</div>
+      </div>
+      <div class="lc-arrow">View Details →</div>
+    </a>
+
+    <!-- Sangla OR/CR — Purple -->
+    <a class="loan-card" data-theme="purple" onclick="selectLoan('Sangla OR/CR')">
+      <svg class="lc-wave" viewBox="0 0 220 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,110 L0,55 Q30,20 70,38 Q110,56 160,30 Q190,16 220,28 L220,110 Z" fill="#6a1b9a" opacity="0.18"/>
+        <path d="M0,110 L0,70 Q40,40 85,55 Q130,70 175,48 Q200,36 220,44 L220,110 Z" fill="#6a1b9a" opacity="0.28"/>
+        <path d="M0,110 L0,85 Q50,62 95,72 Q145,84 190,65 L220,58 L220,110 Z" fill="#7b1fa2" opacity="0.45"/>
+      </svg>
+      <div class="lc-icon">🚘</div>
+      <div class="lc-text">
+        <div class="lc-name">Sangla OR/CR</div>
+        <div class="lc-sub">Up to ₱500K &nbsp;·&nbsp; Fast cash</div>
+      </div>
+      <div class="lc-arrow">View Details →</div>
+    </a>
+
+    <!-- OFW Loan — Teal -->
+    <a class="loan-card" data-theme="teal" onclick="selectLoan('OFW Loan')">
+      <svg class="lc-wave" viewBox="0 0 220 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,110 L0,55 Q30,20 70,38 Q110,56 160,30 Q190,16 220,28 L220,110 Z" fill="#00695c" opacity="0.18"/>
+        <path d="M0,110 L0,70 Q40,40 85,55 Q130,70 175,48 Q200,36 220,44 L220,110 Z" fill="#00695c" opacity="0.28"/>
+        <path d="M0,110 L0,85 Q50,62 95,72 Q145,84 190,65 L220,58 L220,110 Z" fill="#00796b" opacity="0.45"/>
+      </svg>
+      <div class="lc-icon">✈️</div>
+      <div class="lc-text">
+        <div class="lc-name">OFW Loan</div>
+        <div class="lc-sub">Up to ₱500K &nbsp;·&nbsp; OFWs & families</div>
+      </div>
+      <div class="lc-arrow">View Details →</div>
+    </a>
+
   </div>
 </section>
 
