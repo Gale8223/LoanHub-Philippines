@@ -832,6 +832,305 @@
     .features-grid { grid-template-columns: repeat(3, 1fr); }
     .loans-grid { grid-template-columns: repeat(2, 1fr); max-width: 860px; margin-left: auto; margin-right: auto; }
   }
+
+  /* ===== TOP LOAN PRODUCTS SECTION (PhilCare style) ===== */
+  .top-products-section {
+    padding: 5rem 5%;
+    background: var(--deep);
+  }
+  .top-products-section .section-label { margin-bottom: 0.5rem; }
+  .top-products-section .section-title { margin-bottom: 0.5rem; }
+  .top-products-sub {
+    color: var(--muted); font-size: 0.9rem; margin-bottom: 2.8rem;
+  }
+  .top-products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.2rem;
+  }
+  .tp-card {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.14);
+    transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.22s;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+  }
+  .tp-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.22);
+  }
+  /* Product image area */
+  .tp-img {
+    position: relative;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    background: #f0f4ff;
+  }
+  .tp-img-visual {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    align-items: flex-start; justify-content: flex-end;
+    padding: 1.2rem 1rem 1rem;
+    position: relative; overflow: hidden;
+  }
+  /* Corner badge (ADULTS / FAMILY / etc) */
+  .tp-corner-badge {
+    position: absolute; top: 0; right: 0;
+    width: 80px; height: 80px; overflow: hidden; z-index: 5;
+  }
+  .tp-corner-badge span {
+    position: absolute; top: 18px; right: -22px;
+    background: #2e7d32; color: #fff;
+    font-family: 'Outfit', sans-serif; font-weight: 900;
+    font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0.2rem 2rem;
+    transform: rotate(45deg); display: block;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  }
+  .tp-corner-badge.badge-blue span { background: #1565c0; }
+  .tp-corner-badge.badge-orange span { background: #e65100; }
+  .tp-corner-badge.badge-red span { background: #b71c1c; }
+  .tp-corner-badge.badge-purple span { background: #6a1b9a; }
+  .tp-corner-badge.badge-teal span { background: #00695c; }
+  .tp-corner-badge.badge-navy span { background: #1a237e; }
+  /* Big amount on image */
+  .tp-img-amount {
+    font-family: 'Outfit', sans-serif; font-weight: 900;
+    font-size: 1.5rem; line-height: 1; color: #fff;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5); margin-bottom: 0.15rem;
+  }
+  .tp-img-desc {
+    font-size: 0.62rem; color: rgba(255,255,255,0.9);
+    font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.04em; line-height: 1.4; margin-bottom: 0.5rem;
+  }
+  .tp-img-card {
+    background: rgba(255,255,255,0.18); backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 8px; padding: 0.4rem 0.7rem;
+    font-family: 'Outfit', sans-serif; font-weight: 800;
+    font-size: 0.8rem; color: #fff; display: inline-block;
+    margin-bottom: 0.5rem;
+  }
+  .tp-age-row {
+    display: flex; justify-content: space-between; align-items: center;
+    width: 100%;
+  }
+  .tp-age {
+    font-size: 0.6rem; color: rgba(255,255,255,0.9);
+    font-style: italic; font-weight: 600;
+    line-height: 1.3;
+  }
+  .tp-shop-btn {
+    background: #fff; color: #1a1a2e;
+    font-family: 'Outfit', sans-serif; font-weight: 800;
+    font-size: 0.68rem; padding: 0.28rem 0.75rem;
+    border-radius: 50px; text-transform: uppercase;
+    letter-spacing: 0.06em; white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+  /* Bottom info area (white) */
+  .tp-info {
+    padding: 0.95rem 1rem 1rem;
+    border-top: 1px solid #f0f0f0;
+    flex: 1; display: flex; flex-direction: column;
+  }
+  .tp-info-name {
+    font-family: 'Outfit', sans-serif; font-weight: 700;
+    font-size: 0.88rem; color: #1a1a2e;
+    margin-bottom: 0.35rem; line-height: 1.35;
+  }
+  .tp-info-amount {
+    font-family: 'Outfit', sans-serif; font-weight: 900;
+    font-size: 1.05rem; color: #1a1a2e; margin-bottom: 0.8rem;
+  }
+  .tp-info-amount .tp-peso { font-size: 0.8rem; }
+  .tp-avail-btn {
+    margin-top: auto; width: 100%; background: #4caf7d;
+    color: #fff; border: none; border-radius: 50px;
+    padding: 0.65rem; font-family: 'Outfit', sans-serif;
+    font-weight: 700; font-size: 0.88rem; cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .tp-avail-btn:hover { background: #3d9e6c; transform: translateY(-1px); }
+
+  /* ===== UPGRADED TERM CARDS with product image style ===== */
+  .ldp-terms-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+  }
+  .ldp-term-in {
+    background: #fff !important;
+    border: none !important;
+    border-radius: 12px !important;
+    overflow: hidden;
+    padding: 0 !important;
+    display: flex; flex-direction: column;
+  }
+  .ldp-term-img {
+    width: 100%; aspect-ratio: 4/3;
+    display: flex; flex-direction: column;
+    align-items: flex-start; justify-content: flex-end;
+    padding: 0.6rem 0.55rem 0.55rem;
+    position: relative; overflow: hidden;
+  }
+  .ldp-term-img-bg {
+    position: absolute; inset: 0; z-index: 0;
+  }
+  .ldp-term-img-content { position: relative; z-index: 1; width: 100%; }
+  .ldp-term-img-months {
+    font-family: 'Outfit', sans-serif; font-weight: 900;
+    font-size: 1rem; color: #fff; line-height: 1;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.5); margin-bottom: 0.1rem;
+  }
+  .ldp-term-img-age {
+    font-size: 0.55rem; color: rgba(255,255,255,0.9);
+    font-style: italic; font-weight: 600; line-height: 1.3;
+    margin-bottom: 0.3rem;
+  }
+  .ldp-term-img-row {
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .ldp-term-img-label {
+    font-family: 'Outfit', sans-serif; font-weight: 800;
+    font-size: 0.62rem; color: #fff;
+    background: rgba(255,255,255,0.2); padding: 0.12rem 0.4rem;
+    border-radius: 50px;
+  }
+  .ldp-term-img-btn {
+    background: #fff; color: #1a1a2e;
+    font-family: 'Outfit', sans-serif; font-weight: 800;
+    font-size: 0.52rem; padding: 0.18rem 0.5rem;
+    border-radius: 50px; text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  /* Term card corner badge */
+  .ldp-term-badge {
+    position: absolute; top: 0; right: 0;
+    width: 52px; height: 52px; overflow: hidden; z-index: 5;
+  }
+  .ldp-term-badge span {
+    position: absolute; top: 11px; right: -16px;
+    font-family: 'Outfit', sans-serif; font-weight: 900;
+    font-size: 0.44rem; letter-spacing: 0.06em; text-transform: uppercase;
+    color: #fff; padding: 0.12rem 1.4rem;
+    transform: rotate(45deg); display: block;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+    background: #2e7d32;
+  }
+  /* Term text below image */
+  .ldp-term-bottom {
+    padding: 0.4rem 0.5rem;
+    text-align: center;
+  }
+  .ldp-term-bottom-val {
+    font-family: 'Outfit', sans-serif; font-weight: 800;
+    font-size: 0.78rem; color: #1a1a2e;
+  }
+  .ldp-term-bottom-sub {
+    font-size: 0.6rem; color: #888; margin-top: 0.1rem;
+  }
+  .ldp-term.sel .ldp-term-in {
+    box-shadow: 0 0 0 3px var(--gold) !important;
+  }
+  .ldp-term:hover .ldp-term-in {
+    box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+    transform: translateY(-2px);
+  }
+
+  /* ===== YOU MAY ALSO LIKE ===== */
+  .also-like-wrap {
+    max-width: 1320px; margin: 0 auto;
+    padding: 2rem 5% 3rem; border-top: 1px solid var(--border);
+  }
+  .also-like-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1.2rem; font-weight: 500;
+    color: rgba(248,249,255,0.7); margin-bottom: 1.5rem;
+  }
+  .also-like-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+  }
+  .al-card {
+    cursor: pointer; text-decoration: none; color: inherit;
+    transition: transform 0.2s;
+  }
+  .al-card:hover { transform: translateY(-4px); }
+  .al-img {
+    aspect-ratio: 1/1; border-radius: 12px; overflow: hidden;
+    margin-bottom: 0.7rem; position: relative;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  }
+  .al-img-inner {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    align-items: flex-start; justify-content: flex-end;
+    padding: 1rem 0.9rem 0.9rem; position: relative; overflow: hidden;
+  }
+  .al-corner {
+    position: absolute; top: 0; right: 0;
+    width: 70px; height: 70px; overflow: hidden; z-index: 5;
+  }
+  .al-corner span {
+    position: absolute; top: 14px; right: -18px;
+    font-family: 'Outfit', sans-serif; font-weight: 900;
+    font-size: 0.55rem; letter-spacing: 0.07em; text-transform: uppercase;
+    color: #fff; padding: 0.18rem 1.8rem;
+    transform: rotate(45deg); display: block;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.25); background: #1565c0;
+  }
+  .al-img-amount {
+    font-family: 'Outfit', sans-serif; font-weight: 900;
+    font-size: 1.1rem; color: #fff;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.5); margin-bottom: 0.1rem;
+    position: relative; z-index: 1;
+  }
+  .al-img-sub {
+    font-size: 0.55rem; color: rgba(255,255,255,0.85);
+    font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em;
+    margin-bottom: 0.4rem; position: relative; z-index: 1;
+  }
+  .al-img-row {
+    display: flex; justify-content: space-between; align-items: center;
+    width: 100%; position: relative; z-index: 1;
+  }
+  .al-img-age {
+    font-size: 0.52rem; color: rgba(255,255,255,0.85);
+    font-style: italic; font-weight: 600;
+  }
+  .al-shop {
+    background: #fff; color: #1a1a2e;
+    font-family: 'Outfit', sans-serif; font-weight: 800;
+    font-size: 0.55rem; padding: 0.18rem 0.6rem;
+    border-radius: 50px; text-transform: uppercase;
+    letter-spacing: 0.05em; white-space: nowrap;
+  }
+  .al-info { padding: 0 0.1rem; }
+  .al-info-name {
+    font-size: 0.82rem; color: rgba(248,249,255,0.8);
+    font-weight: 500; margin-bottom: 0.25rem; line-height: 1.35;
+  }
+  .al-info-rate {
+    font-family: 'Outfit', sans-serif; font-weight: 800;
+    font-size: 0.95rem; color: var(--teal);
+  }
+
+  @media (max-width: 900px) {
+    .top-products-grid { grid-template-columns: repeat(2, 1fr); }
+    .also-like-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .top-products-grid { grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+    .also-like-grid { grid-template-columns: 1fr 1fr; }
+    .ldp-terms-grid { grid-template-columns: repeat(3, 1fr); gap: 0.4rem; }
+  }
+
   .reveal { opacity:0; transform:translateY(30px); transition:opacity 0.6s ease, transform 0.6s ease; }
   .reveal.visible { opacity:1; transform:translateY(0); }
 </style>
@@ -1001,8 +1300,8 @@
 
 <!-- LOAN TYPES -->
 <section class="loans" id="loans">
-  <div class="section-label">What We Offer</div>
-  <h2 class="section-title">Loan Products for <em>Every Need</em></h2>
+  <div class="section-label">Browse Our Products</div>
+  <h2 class="section-title">Loan Now <em>by Category</em></h2>
   <div class="loans-grid reveal">
 
     <!-- Home Loan — Blue -->
@@ -1110,6 +1409,96 @@
       <div class="lc-arrow">View Details →</div>
     </a>
 
+
+</section>
+
+<!-- TOP LOAN PRODUCTS SECTION -->
+<section class="top-products-section" id="top-products">
+  <div class="section-label">Most Availed</div>
+  <h2 class="section-title">Top Loan <em>Products</em></h2>
+  <p class="top-products-sub">Browse our most popular loan products and find the one that fits your needs.</p>
+  <div class="top-products-grid reveal">
+
+    <div class="tp-card" onclick="selectLoan('Home Loan')">
+      <div class="tp-img">
+        <div class="tp-img-visual" style="background:linear-gradient(145deg,#0d2444 0%,#1565c0 70%,#1976d2 100%)">
+          <div class="tp-corner-badge "><span>PURCHASE</span></div>
+          <div style="position:absolute;right:-10px;top:-10px;font-size:5.5rem;opacity:0.13;z-index:0;line-height:1">🏠</div>
+          <div class="tp-img-amount" style="position:relative;z-index:1">UP TO ₱5,000,000</div>
+          <div class="tp-img-desc" style="position:relative;z-index:1">FLEXIBLE TERMS & LOW RATES</div>
+          <div class="tp-img-card" style="position:relative;z-index:1">🏠 HOME LOAN</div>
+          <div class="tp-age-row" style="position:relative;z-index:1">
+            <div class="tp-age">For ages 21 to 65 years old</div>
+            <div class="tp-shop-btn">APPLY NOW</div>
+          </div>
+        </div>
+      </div>
+      <div class="tp-info">
+        <div class="tp-info-name">Home Loan</div>
+        <div class="tp-info-amount"><span class="tp-peso">₱</span> 5.5% p.a. Interest Rate</div>
+        <button class="tp-avail-btn">View & Apply</button>
+      </div>
+    </div>
+    <div class="tp-card" onclick="selectLoan('Car Loan')">
+      <div class="tp-img">
+        <div class="tp-img-visual" style="background:linear-gradient(145deg,#0a1a0e 0%,#1b5e20 60%,#2e7d32 100%)">
+          <div class="tp-corner-badge badge-green"><span>NEW CAR</span></div>
+          <div style="position:absolute;right:-10px;top:-10px;font-size:5.5rem;opacity:0.13;z-index:0;line-height:1">🚗</div>
+          <div class="tp-img-amount" style="position:relative;z-index:1">UP TO ₱2,000,000</div>
+          <div class="tp-img-desc" style="position:relative;z-index:1">FINANCE ANY BRAND NEW VEHICLE</div>
+          <div class="tp-img-card" style="position:relative;z-index:1">🚗 CAR LOAN</div>
+          <div class="tp-age-row" style="position:relative;z-index:1">
+            <div class="tp-age">For ages 21 to 65 years old</div>
+            <div class="tp-shop-btn">APPLY NOW</div>
+          </div>
+        </div>
+      </div>
+      <div class="tp-info">
+        <div class="tp-info-name">Car Loan</div>
+        <div class="tp-info-amount"><span class="tp-peso">₱</span> 12–60 Months Term</div>
+        <button class="tp-avail-btn">View & Apply</button>
+      </div>
+    </div>
+    <div class="tp-card" onclick="selectLoan('Business Loan')">
+      <div class="tp-img">
+        <div class="tp-img-visual" style="background:linear-gradient(145deg,#1a0800 0%,#bf360c 60%,#e64a19 100%)">
+          <div class="tp-corner-badge badge-orange"><span>BUSINESS</span></div>
+          <div style="position:absolute;right:-10px;top:-10px;font-size:5.5rem;opacity:0.13;z-index:0;line-height:1">💼</div>
+          <div class="tp-img-amount" style="position:relative;z-index:1">UP TO ₱3,000,000</div>
+          <div class="tp-img-desc" style="position:relative;z-index:1">GROW YOUR BUSINESS FAST</div>
+          <div class="tp-img-card" style="position:relative;z-index:1">💼 BUSINESS LOAN</div>
+          <div class="tp-age-row" style="position:relative;z-index:1">
+            <div class="tp-age">For ages 21 to 65 years old</div>
+            <div class="tp-shop-btn">APPLY NOW</div>
+          </div>
+        </div>
+      </div>
+      <div class="tp-info">
+        <div class="tp-info-name">Business Loan</div>
+        <div class="tp-info-amount"><span class="tp-peso">₱</span> Fast Processing</div>
+        <button class="tp-avail-btn">View & Apply</button>
+      </div>
+    </div>
+    <div class="tp-card" onclick="selectLoan('OFW Loan')">
+      <div class="tp-img">
+        <div class="tp-img-visual" style="background:linear-gradient(145deg,#001a1a 0%,#004d40 60%,#00695c 100%)">
+          <div class="tp-corner-badge badge-teal"><span>OFW</span></div>
+          <div style="position:absolute;right:-10px;top:-10px;font-size:5.5rem;opacity:0.13;z-index:0;line-height:1">✈️</div>
+          <div class="tp-img-amount" style="position:relative;z-index:1">UP TO ₱500,000</div>
+          <div class="tp-img-desc" style="position:relative;z-index:1">DESIGNED FOR OFWs & FAMILIES</div>
+          <div class="tp-img-card" style="position:relative;z-index:1">✈️ OFW LOAN</div>
+          <div class="tp-age-row" style="position:relative;z-index:1">
+            <div class="tp-age">For ages 21 to 60 years old</div>
+            <div class="tp-shop-btn">APPLY NOW</div>
+          </div>
+        </div>
+      </div>
+      <div class="tp-info">
+        <div class="tp-info-name">OFW Loan</div>
+        <div class="tp-info-amount"><span class="tp-peso">₱</span> Apply from Abroad</div>
+        <button class="tp-avail-btn">View & Apply</button>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1505,54 +1894,132 @@
         </div>
       </div>
 
-      <!-- Term Cards -->
+      <!-- Term Cards with Images -->
       <div class="ldp-terms-lbl">&#x1f4c5; Select Loan Term</div>
-      <div class="ldp-terms-grid">
+      <div class="ldp-terms-grid" id="ldpTermsGrid">
         <div class="ldp-term" data-m="6" onclick="ldpSelectTerm(this,6)">
           <div class="ldp-term-in">
-            <span class="ldp-term-emo">&#x1f331;</span>
-            <div class="ldp-term-val">6 mos</div>
-            <div class="ldp-term-sub">Short-term<br>Quick payoff</div>
+            <div class="ldp-term-img" style="background:linear-gradient(145deg,#1a0800,#e65100,#ff7043)">
+              <div class="ldp-term-badge"><span style="background:#f57c00">SHORT</span></div>
+              <div style="position:absolute;right:4px;top:4px;font-size:2.8rem;opacity:0.15;z-index:0;line-height:1">🌱</div>
+              <div class="ldp-term-img-content">
+                <div class="ldp-term-img-months">6 mos</div>
+                <div class="ldp-term-img-age">For ages 21–35</div>
+                <div class="ldp-term-img-row">
+                  <div class="ldp-term-img-label">Quick Payoff</div>
+                  <div class="ldp-term-img-btn">SELECT</div>
+                </div>
+              </div>
+            </div>
+            <div class="ldp-term-bottom">
+              <div class="ldp-term-bottom-val">6 Months</div>
+              <div class="ldp-term-bottom-sub">For ages 21–35</div>
+            </div>
           </div>
           <div class="ldp-term-tick">&#10003;</div>
         </div>
         <div class="ldp-term sel" data-m="12" onclick="ldpSelectTerm(this,12)">
           <div class="ldp-term-in">
-            <span class="ldp-term-emo">&#x1f4c5;</span>
-            <div class="ldp-term-val">12 mos</div>
-            <div class="ldp-term-sub">1 Year<br>Most popular</div>
+            <div class="ldp-term-img" style="background:linear-gradient(145deg,#0a1a0e,#1b5e20,#388e3c)">
+              <div class="ldp-term-badge"><span style="background:#2e7d32">POPULAR</span></div>
+              <div style="position:absolute;right:4px;top:4px;font-size:2.8rem;opacity:0.15;z-index:0;line-height:1">📅</div>
+              <div class="ldp-term-img-content">
+                <div class="ldp-term-img-months">12 mos</div>
+                <div class="ldp-term-img-age">For ages 21–45</div>
+                <div class="ldp-term-img-row">
+                  <div class="ldp-term-img-label">1 Year Term</div>
+                  <div class="ldp-term-img-btn">SELECT</div>
+                </div>
+              </div>
+            </div>
+            <div class="ldp-term-bottom">
+              <div class="ldp-term-bottom-val">12 Months</div>
+              <div class="ldp-term-bottom-sub">For ages 21–45</div>
+            </div>
           </div>
           <div class="ldp-term-tick">&#10003;</div>
         </div>
         <div class="ldp-term" data-m="24" onclick="ldpSelectTerm(this,24)">
           <div class="ldp-term-in">
-            <span class="ldp-term-emo">&#x1f4c6;</span>
-            <div class="ldp-term-val">24 mos</div>
-            <div class="ldp-term-sub">2 Years<br>Balanced</div>
+            <div class="ldp-term-img" style="background:linear-gradient(145deg,#0d2444,#0d47a1,#1976d2)">
+              <div class="ldp-term-badge"><span style="background:#1565c0">2 YEARS</span></div>
+              <div style="position:absolute;right:4px;top:4px;font-size:2.8rem;opacity:0.15;z-index:0;line-height:1">🗓️</div>
+              <div class="ldp-term-img-content">
+                <div class="ldp-term-img-months">24 mos</div>
+                <div class="ldp-term-img-age">For ages 21–50</div>
+                <div class="ldp-term-img-row">
+                  <div class="ldp-term-img-label">Balanced</div>
+                  <div class="ldp-term-img-btn">SELECT</div>
+                </div>
+              </div>
+            </div>
+            <div class="ldp-term-bottom">
+              <div class="ldp-term-bottom-val">24 Months</div>
+              <div class="ldp-term-bottom-sub">For ages 21–50</div>
+            </div>
           </div>
           <div class="ldp-term-tick">&#10003;</div>
         </div>
         <div class="ldp-term" data-m="36" onclick="ldpSelectTerm(this,36)">
           <div class="ldp-term-in">
-            <span class="ldp-term-emo">&#x1f3d7;&#xfe0f;</span>
-            <div class="ldp-term-val">36 mos</div>
-            <div class="ldp-term-sub">3 Years<br>Low monthly</div>
+            <div class="ldp-term-img" style="background:linear-gradient(145deg,#1a0020,#4a148c,#7b1fa2)">
+              <div class="ldp-term-badge"><span style="background:#6a1b9a">3 YEARS</span></div>
+              <div style="position:absolute;right:4px;top:4px;font-size:2.8rem;opacity:0.15;z-index:0;line-height:1">🏗️</div>
+              <div class="ldp-term-img-content">
+                <div class="ldp-term-img-months">36 mos</div>
+                <div class="ldp-term-img-age">For ages 21–55</div>
+                <div class="ldp-term-img-row">
+                  <div class="ldp-term-img-label">Low Monthly</div>
+                  <div class="ldp-term-img-btn">SELECT</div>
+                </div>
+              </div>
+            </div>
+            <div class="ldp-term-bottom">
+              <div class="ldp-term-bottom-val">36 Months</div>
+              <div class="ldp-term-bottom-sub">For ages 21–55</div>
+            </div>
           </div>
           <div class="ldp-term-tick">&#10003;</div>
         </div>
         <div class="ldp-term" data-m="48" onclick="ldpSelectTerm(this,48)">
           <div class="ldp-term-in">
-            <span class="ldp-term-emo">&#x1f31f;</span>
-            <div class="ldp-term-val">48 mos</div>
-            <div class="ldp-term-sub">4 Years<br>Extended</div>
+            <div class="ldp-term-img" style="background:linear-gradient(145deg,#001a1a,#004d40,#00796b)">
+              <div class="ldp-term-badge"><span style="background:#00695c">4 YEARS</span></div>
+              <div style="position:absolute;right:4px;top:4px;font-size:2.8rem;opacity:0.15;z-index:0;line-height:1">⭐</div>
+              <div class="ldp-term-img-content">
+                <div class="ldp-term-img-months">48 mos</div>
+                <div class="ldp-term-img-age">For ages 21–58</div>
+                <div class="ldp-term-img-row">
+                  <div class="ldp-term-img-label">Extended</div>
+                  <div class="ldp-term-img-btn">SELECT</div>
+                </div>
+              </div>
+            </div>
+            <div class="ldp-term-bottom">
+              <div class="ldp-term-bottom-val">48 Months</div>
+              <div class="ldp-term-bottom-sub">For ages 21–58</div>
+            </div>
           </div>
           <div class="ldp-term-tick">&#10003;</div>
         </div>
         <div class="ldp-term" data-m="60" onclick="ldpSelectTerm(this,60)">
           <div class="ldp-term-in">
-            <span class="ldp-term-emo">&#x1f3c6;</span>
-            <div class="ldp-term-val">60 mos</div>
-            <div class="ldp-term-sub">5 Years<br>Lowest amort.</div>
+            <div class="ldp-term-img" style="background:linear-gradient(145deg,#1a0808,#b71c1c,#e53935)">
+              <div class="ldp-term-badge"><span style="background:#b71c1c">BEST DEAL</span></div>
+              <div style="position:absolute;right:4px;top:4px;font-size:2.8rem;opacity:0.15;z-index:0;line-height:1">🏆</div>
+              <div class="ldp-term-img-content">
+                <div class="ldp-term-img-months">60 mos</div>
+                <div class="ldp-term-img-age">For ages 21–60</div>
+                <div class="ldp-term-img-row">
+                  <div class="ldp-term-img-label">Lowest Amort</div>
+                  <div class="ldp-term-img-btn">SELECT</div>
+                </div>
+              </div>
+            </div>
+            <div class="ldp-term-bottom">
+              <div class="ldp-term-bottom-val">60 Months</div>
+              <div class="ldp-term-bottom-sub">For ages 21–60</div>
+            </div>
           </div>
           <div class="ldp-term-tick">&#10003;</div>
         </div>
@@ -1692,6 +2159,14 @@
         <span class="ldp-acc-arr">+</span>
       </div>
       <div class="ldp-acc-body" id="laccReqs-body"></div>
+    </div>
+  </div>
+
+  <!-- YOU MAY ALSO LIKE -->
+  <div class="also-like-wrap">
+    <div class="also-like-title">You may also like</div>
+    <div class="also-like-grid" id="alsoLikeGrid">
+      <!-- Populated by JS -->
     </div>
   </div>
 </div>
@@ -2110,6 +2585,43 @@
 
     // Close all accordions
     document.querySelectorAll('.ldp-acc').forEach(a => a.classList.remove('open'));
+
+    // You May Also Like
+    const allTypes = Object.keys(loanData);
+    const otherTypes = allTypes.filter(t => t !== type);
+    // Shuffle and pick 4
+    const shuffled = otherTypes.sort(() => 0.5 - Math.random()).slice(0, 4);
+    const alGrid = document.getElementById('alsoLikeGrid');
+    if (alGrid) {
+      alGrid.innerHTML = shuffled.map(lt => {
+        const ld = loanData[lt];
+        const badgeColors = {
+          'Home Loan':'#1565c0','Car Loan':'#2e7d32','Business Loan':'#e65100',
+          'Medical Loan':'#b71c1c','Professional Loan':'#1a237e',
+          'Sangla OR/CR':'#6a1b9a','OFW Loan':'#00695c'
+        };
+        const bc = badgeColors[lt] || '#333';
+        const badgeText = lt === 'Sangla OR/CR' ? 'OR/CR' : lt.split(' ')[0].toUpperCase();
+        return `<div class="al-card" onclick="selectLoan('${lt}')">
+          <div class="al-img">
+            <div class="al-img-inner" style="background:${ld.gradient}">
+              <div class="al-corner"><span style="background:${bc}">${badgeText}</span></div>
+              <div style="position:absolute;right:8px;top:8px;font-size:4.5rem;opacity:0.12;z-index:0;line-height:1">${ld.icon}</div>
+              <div class="al-img-amount" >${ld.amount}</div>
+              <div class="al-img-sub">${ld.sublabel}</div>
+              <div class="al-img-row">
+                <div class="al-img-age">For ages 21–65</div>
+                <div class="al-shop">APPLY NOW</div>
+              </div>
+            </div>
+          </div>
+          <div class="al-info">
+            <div class="al-info-name">${lt}</div>
+            <div class="al-info-rate">${ld.sublabel.split('|')[0].trim()}</div>
+          </div>
+        </div>`;
+      }).join('');
+    }
 
     // Show page
     const page = document.getElementById('loanDetailPage');
